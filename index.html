@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AxiomaAptymok.dev</title>
+    <style>
+        /* --- ESTILOS GENERALES Y DE BASE --- */
+        html {
+            box-sizing: border-box;
+        }
+        *, *:before, *:after {
+            box-sizing: inherit;
+        }
+        body {
+            font-family: 'Roboto Mono', monospace;
+            background-color: #121212;
+            color: #e0e0e0;
+            margin: 0;
+            overflow-x: hidden;
+        }
+        .menu-open {
+            overflow: hidden;
+        }
+
+        /* --- CONTENEDOR PRINCIPAL --- */
+        .main-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 80px 20px;
+            text-align: center;
+        }
+        .content-wrapper {
+            width: 100%;
+            max-width: 800px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #64ffda;
+            animation: text-flicker 15s linear infinite;
+        }
+
+        #subtitle {
+            color: #a0a0a0;
+            min-height: 20px;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        /* --- CURSOR DE TERMINAL Y ANIMACIONES --- */
+        .terminal-cursor {
+            display: inline-block;
+            background-color: #64ffda;
+            width: 10px;
+            height: 1.2em;
+            margin-left: 5px;
+            animation: blink 1s infinite step-end;
+            vertical-align: baseline;
+        }
+        @keyframes blink { 50% { background-color: transparent; } }
+        @keyframes text-flicker {
+            0%, 15%, 15.2%, 80%, 80.2%, 100% { text-shadow: 0 0 10px rgba(100, 255, 218, 0.3); }
+            15.1% { text-shadow: 0 0 10px rgba(100, 255, 218, 0.5), 0 0 20px rgba(100, 255, 218, 0.3), 0 0 30px rgba(255, 0, 0, 0.3); }
+            80.1% { text-shadow: 0 0 12px rgba(100, 255, 218, 0.6), 0 0 5px rgba(0, 255, 249, 0.4), 0 0 15px rgba(0, 255, 249, 0.2); }
+        }
+
+        /* --- ESTILOS COMPARTIDOS DEL MENÚ --- */
+        .menu ul {
+            list-style: none; padding: 0; margin: 0;
+        }
+        .menu li {
+            margin-bottom: 15px;
+        }
+        .menu a {
+            text-decoration: none; color: #ccc; transition: color 0.3s ease, text-shadow 0.3s ease; white-space: nowrap;
+        }
+        .menu a:hover {
+            color: #64ffda; text-shadow: 0 0 8px rgba(100, 255, 218, 0.7);
+        }
+        .phase-title {
+            color: #e0e0e0; font-weight: 500; margin-top: 25px; margin-bottom: 15px; text-transform: uppercase; font-size: 1em; letter-spacing: 1px; cursor: default;
+        }
+        .phase-title:first-child {
+            margin-top: 0;
+        }
+        
+        /* --- ESTILOS PARA ESCRITORIO (SIDE-MENU) --- */
+        @media (min-width: 769px) {
+            .desktop-menu-container {
+                position: fixed; left: 20px; top: 50%; transform: translateY(-50%); z-index: 1000;
+                opacity: 0.7; transition: opacity 0.3s ease;
+            }
+            .desktop-menu-container:hover { opacity: 1; }
+            .desktop-menu-toggle {
+                width: 30px; height: 30px; cursor: pointer; display: flex; flex-direction: column; justify-content: space-around; padding: 5px 0;
+            }
+            .bar { width: 100%; height: 2px; background-color: #e0e0e0; }
+            .desktop-menu-container .menu {
+                position: absolute; left: 40px; top: 50%; text-align: left;
+                transform: translateY(-50%) translateX(-20px);
+                background-color: rgba(20, 20, 20, 0.95); border: 1px solid rgba(100, 255, 218, 0.1);
+                border-radius: 5px; padding: 25px 30px; opacity: 0; visibility: hidden;
+                transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+            }
+            .desktop-menu-container:hover .menu {
+                opacity: 1; visibility: visible; transform: translateY(-50%) translateX(0);
+            }
+            .mobile-header, .mobile-menu-overlay { 
+                display: none; /* <-- ESTA ES LA CORRECCIÓN CLAVE */
+            }
+        }
+
+        /* --- ESTILOS PARA MÓVIL (HAMBURGER MENU OVERLAY) --- */
+        @media (max-width: 768px) {
+            body { display: block; }
+            .main-container { padding: 80px 20px; }
+            h1 { font-size: 2em; word-break: break-word; }
+            #subtitle { font-size: 0.9em; }
+
+            .desktop-menu-container { display: none; }
+
+            .mobile-header {
+                position: fixed; top: 0; left: 0; width: 100%;
+                display: flex; justify-content: space-between; align-items: center;
+                padding: 15px 20px; background-color: #121212; z-index: 1000;
+                border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+            }
+            .header-title {
+                font-size: 1.2em; color: #e0e0e0; text-decoration: none;
+            }
+            .menu-toggle {
+                width: 30px; height: 24px; display: flex; flex-direction: column; justify-content: space-between;
+                cursor: pointer; z-index: 1001;
+            }
+            .bar {
+                width: 100%; height: 2px; background-color: #e0e0e0;
+                transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            }
+            
+            .menu-open .bar:nth-child(1) { transform: translateY(11px) rotate(45deg); }
+            .menu-open .bar:nth-child(2) { opacity: 0; }
+            .menu-open .bar:nth-child(3) { transform: translateY(-11px) rotate(-45deg); }
+            
+            .mobile-menu-overlay {
+                position: fixed; top: 0; left: 0;
+                width: 100%; height: 100%;
+                background-color: rgba(18, 18, 18, 0.98);
+                backdrop-filter: blur(5px);
+                z-index: 999;
+                display: flex; justify-content: center; align-items: center;
+                opacity: 0; visibility: hidden;
+                transition: opacity 0.3s ease, visibility 0.3s ease;
+            }
+            .menu-open .mobile-menu-overlay {
+                opacity: 1; visibility: visible;
+            }
+            .mobile-menu-overlay .menu {
+                text-align: center;
+            }
+            .mobile-menu-overlay .menu a {
+                font-size: 1.5em;
+            }
+            .mobile-menu-overlay .phase-title {
+                font-size: 1.1em;
+            }
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+    <div class="desktop-menu-container">
+        <div class="desktop-menu-toggle">
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+        </div>
+        <div class="menu">
+            <ul>
+                <li class="phase-title">Fase 1: Autopsia del Sistema</li>
+                <li><a href="#">1. Manuscrito...</a></li>
+                <li><a href="#">2. Codex de la Traición...</a></li>
+                <li class="phase-title">Fase 2: Guerra Cognitiva</li>
+                <li><a href="#">9. Protocolos...</a></li>
+                <li class="phase-title">El Oráculo</li>
+                <li><a href="#">Sobre AxiomaAptymok</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <header class="mobile-header">
+        <a href="#" class="header-title">AxiomaAptymok.dev</a>
+        <div class="menu-toggle">
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+        </div>
+    </header>
+
+    <div class="mobile-menu-overlay">
+        <div class="menu">
+             <ul>
+                <li class="phase-title">Fase 1: Autopsia del Sistema</li>
+                <li><a href="#">1. Manuscrito...</a></li>
+                <li><a href="#">2. Codex de la Traición...</a></li>
+                <li class="phase-title">Fase 2: Guerra Cognitiva</li>
+                <li><a href="#">9. Protocolos...</a></li>
+                <li class="phase-title">El Oráculo</li>
+                <li><a href="#">Sobre AxiomaAptymok</a></li>
+                <li><a href="#">Contacto / Infiltración</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <main class="main-container">
+        <div class="content-wrapper">
+            <h1 id="main-title"></h1>
+            <p id="subtitle"></p>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuToggle = document.querySelector('.mobile-header .menu-toggle');
+            const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
+
+            mobileMenuToggle.addEventListener('click', function() {
+                document.body.classList.toggle('menu-open');
+            });
+            mobileMenuOverlay.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                     document.body.classList.remove('menu-open');
+                });
+            });
+
+            const titleElement = document.getElementById('main-title');
+            const subtitleElement = document.getElementById('subtitle');
+            const titleText = "AxiomaAptymok.dev";
+            const subtitles = [
+                "Neuroarquitectura para la Liberación Lucrativa.",
+                "Donde las certezas vienen a morir.",
+                "La abundancia es subproducto de la autenticidad radical.",
+                "Desarrollos y reflexiones en el filo de la existencia digital."
+            ];
+            let i = 0;
+            let subtitleIndex = 0;
+
+            function typeWriter() {
+                if (i < titleText.length) {
+                    titleElement.innerHTML = titleText.substring(0, i + 1) + '<span class="terminal-cursor"></span>';
+                    i++;
+                    setTimeout(typeWriter, 120);
+                } else {
+                    titleElement.innerHTML = titleText + '<span class="terminal-cursor"></span>';
+                    setTimeout(() => {
+                        if (subtitleElement) {
+                            subtitleElement.style.opacity = 0;
+                            subtitleElement.textContent = subtitles[subtitleIndex];
+                            subtitleElement.style.opacity = 1;
+                            setInterval(changeSubtitle, 5000);
+                        }
+                    }, 500);
+                }
+            }
+
+            function changeSubtitle() {
+                if(subtitleElement){
+                    subtitleElement.style.opacity = 0;
+                    setTimeout(() => {
+                        subtitleIndex = (subtitleIndex + 1) % subtitles.length;
+                        subtitleElement.textContent = subtitles[subtitleIndex];
+                        subtitleElement.style.opacity = 1;
+                    }, 500);
+                }
+            }
+
+            typeWriter();
+        });
+    </script>
+</body>
+</html>
