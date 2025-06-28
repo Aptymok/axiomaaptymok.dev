@@ -2,7 +2,7 @@ version: "1.0"
 
 # Configuración básica del despliegue
 deployments:
-  - name: axiomaaptymok.dev	# Nombre del despliegue
+  - name: axiomaaptymok-prod	# Nombre del despliegue
     type: static              # Tipo de sitio (estático)
     path: /                   # Ruta donde están tus archivos
     branch: main              # Rama que se desplegará automáticamente
