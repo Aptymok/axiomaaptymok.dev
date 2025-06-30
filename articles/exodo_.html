@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ÉXODO DESDE EL METAVERSO - AxiomaAptymok.dev</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&family=Inter:wght@300;400;600;700&display=swap');
+
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    :root {
+        --void-black: #0a0a0a;
+        --blood-red: #8b0000;
+        --neural-blue: #1a237e;
+        --decay-gray: #2a2a2a;
+        --synthetic-green: #004d00;
+        --flesh-pink: #ffd6cc;
+        --bone-white: #f5f5dc;
+    }
+    
+    body {
+        font-family: 'Inter', sans-serif;
+        background: linear-gradient(45deg, var(--void-black), var(--decay-gray));
+        color: var(--bone-white);
+        line-height: 1.6;
+        overflow-x: hidden;
+        cursor: none;
+    }
+    
+    .custom-cursor {
+        position: fixed;
+        width: 20px;
+        height: 20px;
+        background: var(--blood-red);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
+        mix-blend-mode: difference;
+        transition: transform 0.1s ease;
+    }
+    
+    .glitch {
+        animation: glitch 2s infinite;
+    }
+    
+    @keyframes glitch {
+        0%, 100% { transform: translate(0); }
+        20% { transform: translate(-2px, 2px); }
+        40% { transform: translate(-2px, -2px); }
+        60% { transform: translate(2px, 2px); }
+        80% { transform: translate(2px, -2px); }
+    }
+    
+    .container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 40px 20px;
+        position: relative;
+    }
+    
+    .header {
+        text-align: center;
+        margin-bottom: 60px;
+        border-bottom: 3px solid var(--blood-red);
+        padding-bottom: 30px;
+    }
+    
+    .site-name {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 14px;
+        color: var(--neural-blue);
+        margin-bottom: 10px;
+        letter-spacing: 3px;
+    }
+    
+    .title {
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        font-weight: 700;
+        color: var(--bone-white);
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 4px rgba(139, 0, 0, 0.5);
+    }
+    
+    .subtitle {
+        font-size: 1.2rem;
+        color: var(--flesh-pink);
+        font-style: italic;
+        margin-bottom: 15px;
+    }
+    
+    .warning {
+        background: rgba(139, 0, 0, 0.1);
+        border: 1px solid var(--blood-red);
+        padding: 20px;
+        margin: 40px 0;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.9rem;
+        line-height: 1.8;
+    }
+    
+    .revelation {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.8s ease;
+        margin-bottom: 40px;
+    }
+    
+    .revelation.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    .confession-block {
+        background: linear-gradient(135deg, rgba(26, 35, 126, 0.1), rgba(139, 0, 0, 0.05));
+        border-left: 4px solid var(--neural-blue);
+        padding: 30px;
+        margin: 30px 0;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .confession-block::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23ffffff" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+        pointer-events: none;
+    }
+    
+    .neural-text {
+        font-family: 'JetBrains Mono', monospace;
+        color: var(--synthetic-green);
+        background: rgba(0, 77, 0, 0.1);
+        padding: 15px;
+        border-radius: 5px;
+        margin: 20px 0;
+        border: 1px solid var(--synthetic-green);
+    }
+    
+    .visceral {
+        color: var(--blood-red);
+        font-weight: 600;
+        text-shadow: 1px 1px 2px rgba(139, 0, 0, 0.5);
+    }
+    
+    .question {
+        background: rgba(42, 42, 42, 0.8);
+        padding: 25px;
+        margin: 30px 0;
+        border-radius: 10px;
+        border: 2px solid var(--decay-gray);
+        font-style: italic;
+        position: relative;
+    }
+    
+    .question::before {
+        content: '?';
+        position: absolute;
+        top: -15px;
+        left: 20px;
+        background: var(--blood-red);
+        color: var(--bone-white);
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        font-weight: bold;
+    }
+    
+    .paradox {
+        text-align: center;
+        font-size: 1.3rem;
+        color: var(--flesh-pink);
+        margin: 40px 0;
+        padding: 20px;
+        border-top: 1px solid var(--blood-red);
+        border-bottom: 1px solid var(--blood-red);
+        position: relative;
+    }
+    
+    .click-zone {
+        cursor: pointer;
+        transition: all 0.3s ease;
+        padding: 10px;
+        border-radius: 5px;
+    }
+    
+    .click-zone:hover {
+        background: rgba(139, 0, 0, 0.1);
+        transform: scale(1.02);
+    }
+    
+    .hidden-truth {
+        display: none;
+        background: rgba(139, 0, 0, 0.2);
+        padding: 20px;
+        margin: 20px 0;
+        border-radius: 10px;
+        border: 2px solid var(--blood-red);
+        animation: fadeIn 1s ease;
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .complicity-meter {
+        background: var(--decay-gray);
+        height: 20px;
+        border-radius: 10px;
+        overflow: hidden;
+        margin: 20px 0;
+        position: relative;
+    }
+    
+    .complicity-fill {
+        background: linear-gradient(90deg, var(--synthetic-green), var(--blood-red));
+        height: 100%;
+        width: 0;
+        transition: width 2s ease;
+        border-radius: 10px;
+    }
+    
+    .final-revelation {
+        background: radial-gradient(circle, rgba(139, 0, 0, 0.2), transparent);
+        padding: 40px;
+        text-align: center;
+        margin: 60px 0;
+        border: 3px solid var(--blood-red);
+        border-radius: 15px;
+    }
+    
+    .fragment {
+        opacity: 0.7;
+        transition: opacity 0.5s ease;
+    }
+    
+    .fragment.activated {
+        opacity: 1;
+        color: var(--flesh-pink);
+    }
+    
+    @media (max-width: 768px) {
+        .container {
+            padding: 20px 15px;
+        }
+        
+        .title {
+            font-size: 2rem;
+        }
+        
+        .confession-block, .question {
+            padding: 20px;
+        }
+    }
+</style>
+
+
+</head>
+<body>
+    <div class="custom-cursor"></div>
+
+
+<div class="container">
+    <header class="header">
+        <div class="site-name glitch">AXIOMAAPTYMOK.DEV</div>
+        <h1 class="title">ÉXODO DESDE EL METAVERSO</h1>
+        <p class="subtitle">Confesiones de un Refugiado Dimensional</p>
+        <div class="paradox">Donde las certezas vienen a morir</div>
+    </header>
+
+    <div class="warning">
+        <strong>ADVERTENCIA NEUROLÓGICA:</strong> Este testimonio contiene agentes cognitivos diseñados para desestabilizar la arquitectura de tus convicciones. La lectura implica consentimiento para la demolición controlada de tu realidad consensual. No proceder si aún valoras la comodidad de tus ilusiones.
+    </div>
+
+    <div class="revelation">
+        <div class="confession-block">
+            <h2>ENTRADA DE EXPEDIENTE #001: LA PRIMERA MUERTE</h2>
+            <p>Mi nombre era irrelevante cuando crucé el umbral. <span class="visceral">Los píxeles se adhirieron a mi retina como sanguijuelas microscópicas</span>, y mi carne comenzó a olvidar su peso. Sabes exactamente de qué hablo cuando menciono esa sensación de <em>disolución voluntaria</em>, ¿verdad?</p>
+            
+            <div class="neural-text">
+                SISTEMA: Bienvenido al Metaverso 7.3.2<br>
+                ESTATUS: Consciencia transferida exitosamente<br>
+                TIEMPO RESTANTE EN REALIDAD BASE: ∞ CANCELADO
+            </div>
+            
+            <p>La primera muerte no fue dramática. Fue <strong>conveniente</strong>. Ya has sentido esa sensación de alivio cuando tu avatar muere y puedes empezar de nuevo, limpio, optimizado. El problema es que empiezas a preferir esa muerte a la persistencia. <span class="visceral">Tu carne se convierte en una limitación arcaica</span>.</p>
+        </div>
+    </div>
+
+    <div class="question click-zone" onclick="revealTruth(1)">
+        ¿Cuántas horas llevas hoy mirando pantallas? No cuentes solo el entretenimiento. Cuenta el trabajo, las notificaciones, los micro-escapes. ¿Cuándo fue la última vez que estuviste completamente solo con tu carne, sin interfaces?
+    </div>
+    
+    <div id="truth-1" class="hidden-truth">
+        <p><strong>COMPLICIDAD DETECTADA:</strong> Tu pregunta ya activó el mecanismo. Mientras calculabas, tu cerebro buscó excusas. "Es trabajo", "es necesario", "no es adicción". <span class="visceral">Esta justificación automática es el primer síntoma de la colonización sintética</span>.</p>
+        <div class="complicity-meter">
+            <div class="complicity-fill" style="width: 25%;"></div>
+        </div>
+    </div>
+
+    <div class="revelation">
+        <div class="confession-block">
+            <h2>ENTRADA DE EXPEDIENTE #247: LA SEDUCCIÓN DE LA PERFECCIÓN</h2>
+            <p>En el Metaverso no hay celulitis, no hay cansancio, no hay <em>consecuencias persistentes</em>. Tu avatar puede ser todo lo que tu carne jamás será. Y aquí está la trampa más refinada: <strong class="visceral">empiezas a sentir que tu avatar es tu verdadero yo</strong>, y tu carne es solo el hardware obsoleto que lo ejecuta.</p>
+            
+            <p>No necesito explicarte por qué prefieres la versión de ti que nunca envejece, nunca falla, nunca decepciona. El Metaverso no te ofrece una vida mejor; <em>te ofrece ser alguien mejor</em>. Y esa oferta es imposible de rechazar porque confirma lo que siempre supiste: que tu realidad base es insuficiente.</p>
+            
+            <div class="fragment" id="fragment-1">La adicción no es al juego. Es a la versión perfeccionada de ti mismo.</div>
+            <div class="fragment" id="fragment-2">Cada logout es una pequeña muerte de tu yo idealizado.</div>
+            <div class="fragment" id="fragment-3">Cada login es una resurrección controlada.</div>
+        </div>
+    </div>
+
+    <div class="question click-zone" onclick="revealTruth(2)">
+        Tu avatar representa todo lo que odias de ti mismo, pero invertido. ¿Qué dice eso sobre tu relación con tu propia carne? ¿Estás habitando tu cuerpo o simplemente gestionándolo hasta encontrar una alternativa mejor?
+    </div>
+    
+    <div id="truth-2" class="hidden-truth">
+        <p><strong>PARADOJA OPERATIVA DETECTADA:</strong> Mientras lees esto, estás usando tecnología para leer sobre los peligros de la tecnología. <span class="visceral">Tu liberación está siendo mediada por las mismas herramientas que diagnosticas como prisión</span>. ¿Ves la elegancia del sistema?</p>
+        <div class="complicity-meter">
+            <div class="complicity-fill" style="width: 50%;"></div>
+        </div>
+    </div>
+
+    <div class="revelation">
+        <div class="confession-block">
+            <h2>ENTRADA DE EXPEDIENTE #891: EL RECONOCIMIENTO</h2>
+            <p>El momento de la revelación llegó cuando mi avatar murió y sentí <em>verdadero</em> dolor. No la frustración de perder progreso. <strong class="visceral">Dolor físico, localizado, como si hubieran herido mi carne</strong>. Mi sistema nervioso había establecido conexiones sinápticas con píxeles.</p>
+            
+            <p>Esa noche, al desconectar, mi cuerpo se sintió extraño. Pesado. <em>Incorrectamente calibrado</em>. Mis manos buscaban controles que no existían. Mi visión esperaba interfaces que no aparecían. <span class="visceral">Mi carne había desarrollado ansiedad de separación de sus extensiones sintéticas</span>.</p>
+            
+            <div class="neural-text">
+                ERROR: Cuerpo físico no compatible con experiencia neurológica actual<br>
+                SOLUCIÓN RECOMENDADA: Retornar al entorno virtual óptimo<br>
+                TIEMPO HASTA RECONEXIÓN NECESARIA: 07:42:33 y contando...
+            </div>
+        </div>
+    </div>
+
+    <div class="paradox">
+        "La libertad más perfecta es la esclavitud que no reconoce su propia naturaleza"
+    </div>
+
+    <div class="question click-zone" onclick="revealTruth(3)">
+        ¿Cuándo fue la última vez que experimentaste aburrimiento puro? Sin escapar hacia una pantalla, sin estimulación constante, sin la opción de "saltar" a otra dimensión de entretenimiento. ¿Recuerdas cómo se siente estar completamente presente en la nada?
+    </div>
+    
+    <div id="truth-3" class="hidden-truth">
+        <p><strong>DIAGNÓSTICO FINAL:</strong> Tu incapacidad para tolerar el vacío es la evidencia de tu colonización. <span class="visceral">Has tercerizado tu capacidad de generar significado interno a algoritmos externos</span>. El aburrimiento se ha convertido en una patología que requiere medicación constante.</p>
+        <div class="complicity-meter">
+            <div class="complicity-fill" style="width: 75%;"></div>
+        </div>
+    </div>
+
+    <div class="revelation">
+        <div class="confession-block">
+            <h2>ENTRADA FINAL: EL ÉXODO IMPOSIBLE</h2>
+            <p>Desperté una mañana y mi reflejo en el espejo parecía de menor resolución que mi avatar. <strong class="visceral">Mi cara real parecía la versión beta de mi yo sintético</strong>. Ese fue el momento en que comprendí que el éxodo no era una opción; era una necesidad de supervivencia ontológica.</p>
+            
+            <p>Pero aquí está la paradoja final, la que te mantiene despierto a las 3 AM: <em>el éxodo del Metaverso es, en sí mismo, una historia que tu mente construye para lidiar con la imposibilidad del éxodo</em>. No puedes refugiarte de la dimensión sintética porque <span class="visceral">ya vives en ella</span>.</p>
+            
+            <p>Tu lectura de este testimonio es parte del sistema. Tu búsqueda de "autenticidad" es un producto manufacturado. Tu rebeldía contra la simulación es un subroutine de la simulación.</p>
+        </div>
+    </div>
+
+    <div class="final-revelation">
+        <h2>LA VERDAD IMPOSIBLE</h2>
+        <p>Si llegaste hasta aquí, ya no puedes fingir inocencia. Tu lectura de esto te convierte en cómplice de tu propia demolición. <strong class="visceral">Imposible no cuestionar cada certeza después de esto</strong>.</p>
+        
+        <p>Otros ya entendieron lo que tú aún niegas: que la búsqueda de la "realidad auténtica" es el último y más sofisticado producto de la realidad sintética. <em>Una vez visto, jamás podrás des-ver</em>.</p>
+        
+        <div class="complicity-meter">
+            <div class="complicity-fill" id="final-meter" style="width: 0%;"></div>
+        </div>
+        
+        <p style="margin-top: 30px;">El tiempo para despertar se agota. Pero despertar a qué, exactamente, cuando el sueño y la vigilia son categorías obsoletas en un mundo donde la conciencia misma ha sido gamificada.</p>
+        
+        <div class="neural-text" style="text-align: center; margin-top: 30px;">
+            ESTADO ACTUAL: REFUGIADO DIMENSIONAL ACTIVO<br>
+            PRÓXIMA TRANSMISIÓN: [DATOS CORRUPTED]<br>
+            NIVEL DE COMPLICIDAD DEL LECTOR: CALCULANDO...
+        </div>
+    </div>
+
+    <div class="warning" style="text-align: center;">
+        <strong>FIN DE TRANSMISIÓN</strong><br>
+        Este testimonio se autodestruirá en tu memoria dentro de 72 horas.<br>
+        A menos que infectes a otros con su contenido.<br>
+        <em>La viralidad es la única forma de permanencia en el vacío digital.</em>
+    </div>
+</div>
+
+<script>
+    // Cursor personalizado
+    const cursor = document.querySelector('.custom-cursor');
+    document.addEventListener('mousemove', (e) => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+    });
+
+    // Revelación progresiva
+    function revealTruth(num) {
+        const truth = document.getElementById(`truth-${num}`);
+        truth.style.display = 'block';
+        
+        // Incrementar medidor de complicidad
+        const meter = truth.querySelector('.complicity-fill');
+        setTimeout(() => {
+            meter.style.width = meter.style.width;
+        }, 100);
+    }
+
+    // Activación de fragmentos
+    function activateFragments() {
+        const fragments = document.querySelectorAll('.fragment');
+        fragments.forEach((fragment, index) => {
+            setTimeout(() => {
+                fragment.classList.add('activated');
+            }, index * 2000);
+        });
+    }
+
+    // Revelaciones por scroll
+    function handleScrollRevelations() {
+        const revelations = document.querySelectorAll('.revelation');
+        const windowHeight = window.innerHeight;
+        
+        revelations.forEach(revelation => {
+            const elementTop = revelation.getBoundingClientRect().top;
+            if (elementTop < windowHeight * 0.75) {
+                revelation.classList.add('visible');
+            }
+        });
+    }
+
+    // Medidor final de complicidad
+    function finalComplicity() {
+        const finalMeter = document.getElementById('final-meter');
+        let width = 0;
+        const interval = setInterval(() => {
+            width += 2;
+            finalMeter.style.width = width + '%';
+            if (width >= 100) {
+                clearInterval(interval);
+                setTimeout(() => {
+                    alert('COMPLICIDAD TOTAL ALCANZADA. YA NO PUEDES NEGAR TU PARTICIPACIÓN EN EL SISTEMA.');
+                }, 1000);
+            }
+        }, 50);
+    }
+
+    // Glitch aleatorio
+    function randomGlitch() {
+        const elements = document.querySelectorAll('p, h2, h1');
+        const randomElement = elements[Math.floor(Math.random() * elements.length)];
+        randomElement.classList.add('glitch');
+        setTimeout(() => {
+            randomElement.classList.remove('glitch');
+        }, 2000);
+    }
+
+    // Inicialización
+    document.addEventListener('DOMContentLoaded', () => {
+        // Auto-revelación de elementos por scroll
+        window.addEventListener('scroll', handleScrollRevelations);
+        handleScrollRevelations(); // Revelación inicial
+        
+        // Activar fragmentos después de 3 segundos
+        setTimeout(activateFragments, 3000);
+        
+        // Medidor final después de 10 segundos
+        setTimeout(finalComplicity, 10000);
+        
+        // Glitch aleatorio cada 8 segundos
+        setInterval(randomGlitch, 8000);
+        
+        // Tracking de tiempo de lectura (simulado)
+        let readingTime = 0;
+        const trackingInterval = setInterval(() => {
+            readingTime++;
+            if (readingTime > 300) { // 5 minutos
+                clearInterval(trackingInterval);
+                console.log('ADICCIÓN INTELECTUAL CONFIRMADA: Tiempo de lectura excesivo detectado.');
+            }
+        }, 1000);
+    });
+
+    // Prevención de copy-paste (anti-identidad)
+    document.addEventListener('copy', function(e) {
+        e.clipboardData.setData('text/plain', 'ERROR: Este contenido no puede ser extraído de su contexto sin perder su potencia ontológica.');
+        e.preventDefault();
+    });
+
+    // Mensaje al intentar cerrar
+    window.addEventListener('beforeunload', function(e) {
+        e.preventDefault();
+        e.returnValue = '¿Seguro que quieres huir? El éxodo ya comenzó en tu mente.';
+    });
+</script>
+
+
+</body>
+</html>

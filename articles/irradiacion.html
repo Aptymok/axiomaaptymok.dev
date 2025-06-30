@@ -1,0 +1,1425 @@
+// Final activation function
+        function completeActivation() {
+            const button = document.querySelector('.activation-button');
+            button.style.background = 'rgba(212, 175, 55, 0.3)';
+            button.style<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AxiomaAptymok.dev - El Arte de la Irradiación Pasiva</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --void-black: #0a0a0a;
+            --quantum-gold: #d4af37;
+            --neural-blue: #1e3a8a;
+            --coherence-green: #10b981;
+            --frequency-purple: #7c3aed;
+            --warning-amber: #f59e0b;
+            --ethereal-white: #f8fafc;
+            --shadow-gray: #374151;
+            --resonance-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--void-black);
+            color: var(--ethereal-white);
+            line-height: 1.7;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Quantum Field Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(212, 175, 55, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(124, 58, 237, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(16, 185, 129, 0.02) 0%, transparent 50%);
+            z-index: -1;
+            animation: quantumPulse 20s ease-in-out infinite;
+        }
+        
+        @keyframes quantumPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 1rem 2rem;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--quantum-gold);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+        
+        .phase-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--coherence-green);
+        }
+        
+        .phase-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--coherence-green);
+            animation: coherencePulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes coherencePulse {
+            0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            50% { opacity: 0.7; box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+        }
+        
+        /* Main Container */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 120px 2rem 4rem;
+        }
+        
+        /* Article Header */
+        .article-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+        
+        .article-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--frequency-purple);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        
+        .article-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: var(--resonance-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        .article-subtitle {
+            font-size: 1.2rem;
+            color: var(--shadow-gray);
+            font-weight: 400;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Breathing Space */
+        .breathing-space {
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 3rem 0;
+            position: relative;
+        }
+        
+        .breath-indicator {
+            width: 4px;
+            height: 40px;
+            background: var(--quantum-gold);
+            opacity: 0.3;
+            animation: breatheFlow 4s ease-in-out infinite;
+        }
+        
+        @keyframes breatheFlow {
+            0%, 100% { height: 4px; opacity: 0.3; }
+            50% { height: 40px; opacity: 0.8; }
+        }
+        
+        .breath-text {
+            position: absolute;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--quantum-gold);
+            opacity: 0.6;
+            top: -30px;
+        }
+        
+        /* Content Sections */
+        .content-section {
+            margin-bottom: 4rem;
+            position: relative;
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+        }
+        
+        .section-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--quantum-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            color: var(--void-black);
+            font-size: 0.9rem;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--quantum-gold);
+        }
+        
+        /* Paragraphs */
+        .content-paragraph {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            position: relative;
+        }
+        
+        .content-paragraph.emphasis {
+            border-left: 3px solid var(--coherence-green);
+            padding-left: 1.5rem;
+            background: rgba(16, 185, 129, 0.03);
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .content-paragraph.warning {
+            border-left: 3px solid var(--warning-amber);
+            padding-left: 1.5rem;
+            background: rgba(245, 158, 11, 0.03);
+            border-radius: 0 8px 8px 0;
+        }
+        
+        /* Somatic Commands */
+        .somatic-command {
+            background: rgba(124, 58, 237, 0.05);
+            border: 1px solid rgba(124, 58, 237, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 3rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .somatic-command::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--frequency-purple);
+            animation: energyFlow 3s linear infinite;
+        }
+        
+        @keyframes energyFlow {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .somatic-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--frequency-purple);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        
+        .somatic-text {
+            font-size: 1.2rem;
+            font-style: italic;
+            color: var(--ethereal-white);
+            line-height: 1.6;
+        }
+        
+        /* Interactive Elements */
+        .frequency-check {
+            background: rgba(16, 185, 129, 0.05);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 3rem 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .frequency-check:hover {
+            background: rgba(16, 185, 129, 0.08);
+            border-color: rgba(16, 185, 129, 0.4);
+            transform: translateY(-2px);
+        }
+        
+        .frequency-title {
+            font-weight: 600;
+            color: var(--coherence-green);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .check-mark {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--coherence-green);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .frequency-check.checked .check-mark {
+            background: var(--coherence-green);
+        }
+        
+        .frequency-check.checked .check-mark::after {
+            content: '✓';
+            color: var(--void-black);
+            font-weight: 700;
+            font-size: 0.8rem;
+        }
+        
+        /* Technique Protocols */
+        .protocol-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .protocol-card {
+            background: rgba(30, 58, 138, 0.05);
+            border: 1px solid rgba(30, 58, 138, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .protocol-card:hover {
+            background: rgba(30, 58, 138, 0.08);
+            border-color: rgba(30, 58, 138, 0.4);
+            transform: translateY(-4px);
+        }
+        
+        .protocol-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--neural-blue);
+            margin-bottom: 0.5rem;
+        }
+        
+        .protocol-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--neural-blue);
+            margin-bottom: 1rem;
+        }
+        
+        .protocol-description {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--shadow-gray);
+        }
+        
+        /* Implementation Grid */
+        .implementation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .implementation-card {
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .implementation-card.immediate {
+            background: rgba(245, 158, 11, 0.05);
+            border-color: rgba(245, 158, 11, 0.2);
+        }
+        
+        .implementation-card.short-term {
+            background: rgba(16, 185, 129, 0.05);
+            border-color: rgba(16, 185, 129, 0.2);
+        }
+        
+        .implementation-card.long-term {
+            background: rgba(124, 58, 237, 0.05);
+            border-color: rgba(124, 58, 237, 0.2);
+        }
+        
+        .implementation-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .implementation-icon {
+            font-size: 1.5rem;
+        }
+        
+        .implementation-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .implementation-time {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+        
+        .implementation-checkpoint {
+            margin-top: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .implementation-checkpoint input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--quantum-gold);
+        }
+        
+        .implementation-checkpoint label {
+            font-size: 0.9rem;
+            color: var(--quantum-gold);
+            cursor: pointer;
+        }
+        
+        /* Warning Matrix */
+        .warning-matrix {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .warning-item {
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid;
+            position: relative;
+        }
+        
+        .warning-item.critical {
+            background: rgba(239, 68, 68, 0.05);
+            border-left-color: #ef4444;
+        }
+        
+        .warning-item.high {
+            background: rgba(245, 158, 11, 0.05);
+            border-left-color: #f59e0b;
+        }
+        
+        .warning-item.medium {
+            background: rgba(59, 130, 246, 0.05);
+            border-left-color: #3b82f6;
+        }
+        
+        .warning-level {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+        
+        .warning-item.critical .warning-level {
+            color: #ef4444;
+        }
+        
+        .warning-item.high .warning-level {
+            color: #f59e0b;
+        }
+        
+        .warning-item.medium .warning-level {
+            color: #3b82f6;
+        }
+        
+        .warning-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .warning-description {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--shadow-gray);
+        }
+        
+        /* Case Studies */
+        .case-studies {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .case-study {
+            background: rgba(55, 65, 81, 0.05);
+            border: 1px solid rgba(55, 65, 81, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .case-study:hover {
+            background: rgba(55, 65, 81, 0.08);
+            border-color: rgba(55, 65, 81, 0.4);
+        }
+        
+        .case-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .case-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--quantum-gold);
+            background: rgba(212, 175, 55, 0.1);
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+        }
+        
+        .case-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .case-scenario, .case-solution {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            border-radius: 8px;
+        }
+        
+        .case-scenario {
+            background: rgba(239, 68, 68, 0.03);
+            border-left: 3px solid rgba(239, 68, 68, 0.3);
+        }
+        
+        .case-solution {
+            background: rgba(16, 185, 129, 0.03);
+            border-left: 3px solid rgba(16, 185, 129, 0.3);
+        }
+        
+        /* Metrics Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .metric-card {
+            background: rgba(30, 58, 138, 0.03);
+            border: 1px solid rgba(30, 58, 138, 0.1);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .metric-card:hover {
+            background: rgba(30, 58, 138, 0.06);
+            border-color: rgba(30, 58, 138, 0.2);
+            transform: translateY(-4px);
+        }
+        
+        .metric-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .metric-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--neural-blue);
+            margin-bottom: 1rem;
+        }
+        
+        .metric-description {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            color: var(--shadow-gray);
+        }
+        
+        .metric-scale {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .scale-item {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            padding: 0.5rem;
+            background: rgba(30, 58, 138, 0.05);
+            border-radius: 4px;
+            text-align: left;
+        }
+        
+        /* Certification Challenge */
+        .certification-challenge {
+            background: rgba(124, 58, 237, 0.05);
+            border: 1px solid rgba(124, 58, 237, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .challenge-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .challenge-icon {
+            font-size: 1.5rem;
+        }
+        
+        .challenge-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--frequency-purple);
+        }
+        
+        .challenge-rules {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .rule-item {
+            padding: 1rem;
+            background: rgba(124, 58, 237, 0.03);
+            border-radius: 8px;
+            border-left: 3px solid var(--frequency-purple);
+        }
+        
+        /* Final Activation */
+        .final-activation {
+            background: var(--resonance-gradient);
+            border-radius: 16px;
+            padding: 3rem;
+            text-align: center;
+            margin: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .final-activation::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.03) 50%, transparent 70%);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .activation-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+        
+        .commitment-text {
+            font-style: italic;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin: 2rem 0;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .activation-button {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 1rem;
+        }
+        
+        .activation-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .activation-button:active {
+            transform: translateY(0);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 100px 1rem 2rem;
+            }
+            
+            .article-title {
+                font-size: 2rem;
+            }
+            
+            .header-content {
+                padding: 0 1rem;
+            }
+            
+            .protocol-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .implementation-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .final-activation {
+                padding: 2rem;
+            }
+            
+            .commitment-text {
+                font-size: 1rem;
+                padding: 1.5rem;
+            }
+        }
+        
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: var(--quantum-gold);
+            z-index: 1001;
+            transform-origin: 0%;
+            transform: scaleX(0);
+            transition: transform 0.1s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="scroll-indicator"></div>
+    
+    <header class="header">
+        <div class="header-content">
+            <a href="#" class="logo">AxiomaAptymok.dev</a>
+            <div class="phase-indicator">
+                <div class="phase-dot"></div>
+                <span>FASE 3: ARQUITECTURA</span>
+            </div>
+        </div>
+    </header>
+    
+    <main class="container">
+        <header class="article-header">
+            <div class="article-number">Protocolo 19 - Interfaz Dimensional</div>
+            <h1 class="article-title">El Arte de la Irradiación Pasiva</h1>
+            <p class="article-subtitle">Transmutando sin Predicar: Cuando tu Presencia se Convierte en Gravitación Cuántica</p>
+        </header>
+        
+        <div class="breathing-space">
+            <div class="breath-indicator"></div>
+            <div class="breath-text">Inhala. Siente tu columna como fibra óptica.</div>
+        </div>
+        
+        <section class="content-section">
+            <div class="section-header">
+                <div class="section-icon">Φ</div>
+                <h2 class="section-title">Diagnóstico de la Fricción Dimensional</h2>
+            </div>
+            
+            <p class="content-paragraph">
+                Fragmento en reconfiguración: has comenzado a despertar y ahora enfrentas la prueba más sutil. 
+                Tu familia te mira como si hubieras contraído una enfermedad invisible. Tus colegas detectan 
+                algo "diferente" sin poder nombrarlo. Los amigos de toda la vida se sienten incómodos en tu presencia 
+                y no entienden por qué.
+            </p>
+            
+            <div class="somatic-command">
+                <div class="somatic-title">Comando Somático Inmediato</div>
+                <div class="somatic-text">
+                    Detente. Siente la energía que emana de tu campo cardíaco en este momento. 
+                    Expándela conscientemente 3 metros a tu alrededor. Esa presión que sientes, 
+                    esa es tu nueva gravitación cuántica activándose.
+                </div>
+            </div>
+            
+            <p class="content-paragraph emphasis">
+                No estás loco. No estás perdiendo conexión con la realidad. Estás ganando densidad ontológica. 
+                Tu campo de coherencia ha comenzado a alterar la matriz de probabilidades local, y los sistemas 
+                menos coherentes a tu alrededor detectan la anomalía como una amenaza existencial.
+            </p>
+            
+            <p class="content-paragraph">
+                Esta es la <strong>Ley de la Fricción de Frecuencia</strong>: cuando dos sistemas operan en diferentes 
+                octavas de coherencia, el encuentro genera resistencia. No es personal. Es física. 
+                La pregunta no es cómo evitar la fricción, sino cómo navegar conscientemente este fenómeno 
+                para servir al propósito superior sin comprometer tu integridad vibracional.
+            </p>
+        </section>
+        
+        <section class="content-section">
+            <div class="section-header">
+                <div class="section-icon">∞</div>
+                <h2 class="section-title">La Nueva Física de la Influencia</h2>
+            </div>
+            
+            <p class="content-paragraph">
+                Olvida todo lo que creías saber sobre "influencia". En el paradigma del control, influir significaba 
+                manipular, convencer, forzar un cambio de perspectiva. En la nueva física, la influencia verdadera 
+                opera por <strong>irradiación</strong>, no por imposición.
+            </p>
+            
+            <p class="content-paragraph warning">
+                Tu presencia se ha convertido en un transmisor de coherencia. Cada célula de tu cuerpo vibra 
+                ahora a una frecuencia que no existía cuando eras un fragmento dormido. Esta frecuencia es 
+                <em>contagiosa</em> en el sentido más literal: altera los patrones de información en los campos 
+                cercanos, activando potenciales latentes en otros sistemas conscientes.
+            </p>
+            
+            <div class="protocol-grid">
+                <div class="protocol-card">
+                    <div class="protocol-number">PROTOCOLO ALPHA</div>
+                    <div class="protocol-title">Presencia Sin Agenda</div>
+                    <div class="protocol-description">
+                        Tu mayor poder de transformación emerge cuando no tienes agenda de cambiar a nadie. 
+                        La coherencia pura atrae por gravitación, nunca por presión. Practica estar completamente 
+                        presente sin necesidad de que el otro "entienda" tu proceso.
+                    </div>
+                </div>
+                
+                <div class="protocol-card">
+                    <div class="protocol-number">PROTOCOLO BETA</div>
+                    <div class="protocol-title">Espejo Cuántico</div>
+                    <div class="protocol-description">
+                        En lugar de proyectar tu nueva realidad, conviértete en espejo de la coherencia latente 
+                        del otro. Refleja su potencial no manifestado, no sus limitaciones actuales. 
+                        Esto activa su propio proceso de despertar desde dentro.
+                    </div>
+                </div>
+                
+                <div class="protocol-card">
+                    <div class="protocol-number">PROTOCOLO GAMMA</div>
+                    <div class="protocol-title">Traducción Dimensional</div>
+                    <div class="protocol-description">
+                        Desarrolla fluidez en múltiples "idiomas de realidad". Puedes comunicar la misma verdad 
+                        usando el lenguaje que cada fragmento puede procesar: racional, emocional, intuitivo o somático. 
+                        Sin comprometer la esencia, solo adaptando la forma.
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <div class="breathing-space">
+            <div class="breath-indicator"></div>
+            <div class="breath-text">Pausa. Siente tu corazón sincronizando con este texto.</div>
+        </div>
+        
+        <section class="content-section">
+            <div class="section-header">
+                <div class="section-icon">⚡</div>
+                <h2 class="section-title">Navegando la Resistencia del Sistema</h2>
+            </div>
+            
+            <p class="content-paragraph">
+                El sistema fragmentado no te atacará frontalmente. Es más sutil. Utilizará a las personas más 
+                cercanas a ti como vectores de resistencia. Te dirán que "has cambiado", que "ya no eres el mismo", 
+                que "esto es solo una fase". Reconoce estas respuestas como la respuesta inmune del viejo paradigma 
+                detectando su propia obsolescencia.
+            </p>
+            
+            <div class="frequency-check" onclick="toggleCheck(this)">
+                <div class="frequency-title">
+                    <div class="check-mark"></div>
+                    Protocolo de Blindaje Energético
+                </div>
+                <div>
+                    Antes de entrar en espacios de baja coherencia, sella tu campo áurico conscientemente. 
+                    Visualiza una membrana dorada que permite el amor entrar y salir, pero filtra el drama, 
+                    la victimización y los patrones de manipulación emocional.
+                </div>
+            </div>
+            
+            <div class="frequency-check" onclick="toggleCheck(this)">
+                <div class="frequency-title">
+                    <div class="check-mark"></div>
+                    Técnica del Observador Compasivo
+                </div>
+                <div>
+                    Cuando alguien proyecte su resistencia sobre ti, no tomes la defensiva. Obsérvalos desde 
+                    la compasión del que comprende que están defendiendo una identidad que está muriendo. 
+                    Su ataque es en realidad un grito de ayuda de su yo auténtico aprisionado.
+                </div>
+            </div>
+            
+            <div class="frequency-check" onclick="toggleCheck(this)">
+                <div class="frequency-title">
+                    <div class="check-mark"></div>
+                    Principio de la Paciencia Estratégica
+                </div>
+                <div>
+                    Planta semillas de coherencia sin esperar ver la cosecha. Tu trabajo es transmitir la frecuencia, 
+                    no controlar cuándo o cómo el otro la integrará. Algunos despertarán en meses, otros en años, 
+                    algunos en otras vidas. Confía en el timing perfecto del universo.
+                </div>
+            </div>
+        </section>
+        
+        <section class="content-section">
+            <div class="section-header">
+                <div class="section-icon">🌌</div>
+                <h2 class="section-title">El Poder de la Irradiación Silenciosa</h2>
+            </div>
+            
+            <p class="content-paragraph">
+                El fragmento despertado descubre un poder que el ego jamás podría comprender: la capacidad de 
+                transformar realidades sin decir una palabra. Tu coherencia interna se convierte en un faro 
+                dimensional que otros pueden percibir a nivel subconsciente, incluso cuando conscientemente 
+                resisten el cambio.
+            </p>
+            
+            <div class="somatic-command">
+                <div class="somatic-title">Activación de la Irradiación Consciente</div>
+                <div class="somatic-text">
+                    Coloca tu mano sobre tu corazón. Siente el amor que fundó tu despertar—el amor por Eduardo, 
+                    la gratitud por este proceso, la compasión por todos los fragmentos aún dormidos. 
+                    Permite que esta frecuencia se expanda desde tu centro cardíaco hacia el infinito. 
+                    No la dirijas. Solo permítela.
+                </div>
+            </div>
+            
+            <p class="content-paragraph emphasis">
+                Esta es tu arma de transformación masiva: la presencia radiante que no necesita justificarse, 
+                explicarse o defenderse. Simplemente ES. Y en ese ser, activa en otros la memoria de lo que 
+                ellos también son en su esencia. No puedes fracasar en esta misión porque no tienes que 
+                hacer nada excepto ser auténtico.
+            </p>
+            
+            <p class="content-paragraph">
+                El ego querrá convertir este poder en una nueva forma de control espiritual. Manténte vigilante. 
+                El momento en que comenzamos a "usar" nuestra coherencia para manipular resultados, perdemos 
+                acceso a ella. La irradiación verdadera surge solo desde la rendición completa al flujo 
+                de la vida tal como es.
+            </p>
+        </section>
+        
+        <div class="breathing-space">
+            <div class="breath-indicator"></div>
+            <div class="breath-text">Integra. Permite que estas frecuencias se anclen en tu sistema.</div>
+        </div>
+        
+        <section class="content-section">
+            <div class="section-header">
+                <div class="section-icon">∴</div>
+                <h2 class="section-title">Certificación de Coherencia</h2>
+            </div>
+            
+            <p class="content-paragraph">
+                Fragmento: has completado el protocolo de irradiación pasiva. Pero el verdadero test no ocurre 
+                aquí, sino en tu próxima interacción con alguien que aún opera desde el miedo. 
+                ¿Podrás mantener tu centro mientras su mundo se tambalea? ¿Podrás amar su resistencia como 
+                evidencia de que algo en ellos está tratando de nacer?
+            </p>
+            
+            <p class="content-paragraph warning">
+                Recuerda: no eres su salvador. Eres su espejo. No eres su maestro. Eres su recordatorio. 
+                No eres su respuesta. Eres su pregunta hecha carne, caminando por el mundo como prueba 
+                viviente de que otra forma de existir es posible.
+            </p>
+            
+            <p class="content-paragraph">
+                Ve ahora y irradia. La coherencia que has alcanzado no es tuya para guardarla. Es del universo 
+                expresándose a través de tu forma particular. Permítele que use tu presencia como un portal 
+                dimensional para el despertar colectivo de la especie.
+            </p>
+        </section>
+        
+        <section class="content-section">
+            <div class="section-header">
+                <div class="section-icon">◊</div>
+                <h2 class="section-title">Matriz de Implementación Cuántica</h2>
+            </div>
+            
+            <p class="content-paragraph">
+                La teoría sin aplicación es masturbación intelectual. El despertar sin integración es narcisismo espiritual. 
+                Este protocolo requiere implementación inmediata en tu campo de experiencia actual. 
+                No mañana. No cuando "te sientas listo". Ahora.
+            </p>
+            
+            <div class="implementation-grid">
+                <div class="implementation-card immediate">
+                    <div class="implementation-header">
+                        <div class="implementation-icon">⚡</div>
+                        <div class="implementation-title">Acción Inmediata</div>
+                        <div class="implementation-time">0-24 horas</div>
+                    </div>
+                    <div class="implementation-content">
+                        <p><strong>Experimento de Campo:</strong> Identifica a la persona en tu vida que más resistencia muestra a tu proceso de despertar. Sin mencionar conceptos espirituales, pasa 20 minutos en su presencia practicando irradiación pura. Observa los cambios sutiles en su comportamiento, postura y energía.</p>
+                        <div class="implementation-checkpoint">
+                            <input type="checkbox" id="immediate-check" />
+                            <label for="immediate-check">Experimento completado</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="implementation-card short-term">
+                    <div class="implementation-header">
+                        <div class="implementation-icon">🌀</div>
+                        <div class="implementation-title">Integración Semanal</div>
+                        <div class="implementation-time">1-7 días</div>
+                    </div>
+                    <div class="implementation-content">
+                        <p><strong>Protocolo de Calibración:</strong> Cada día, antes de interactuar con sistemas de baja coherencia (trabajo, familia, sociedad), dedica 5 minutos a calibrar tu campo de irradiación. Practica mantener tu centro mientras permites que otros proyecten sus resistencias.</p>
+                        <div class="implementation-checkpoint">
+                            <input type="checkbox" id="weekly-check" />
+                            <label for="weekly-check">Protocolo establecido</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="implementation-card long-term">
+                    <div class="implementation-header">
+                        <div class="implementation-icon">∞</div>
+                        <div class="implementation-title">Arquitectura de Largo Plazo</div>
+                        <div class="implementation-time">1-4 semanas</div>
+                    </div>
+                    <div class="implementation-content">
+                        <p><strong>Construcción de Red de Coherencia:</strong> Identifica y conecta conscientemente con otros fragmentos en proceso de despertar. No para formar un "club espiritual", sino para crear una red de apoyo mutuo que amplifique la irradiación colectiva.</p>
+                        <div class="implementation-checkpoint">
+                            <input type="checkbox" id="longterm-check" />
+                            <label for="longterm-check">Red iniciada</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="content-section">
+            <div class="section-header">
+                <div class="section-icon">⚠</div>
+                <h2 class="section-title">Alertas del Sistema: Trampas de Ego en la Irradiación</h2>
+            </div>
+            
+            <div class="warning-matrix">
+                <div class="warning-item critical">
+                    <div class="warning-level">CRÍTICO</div>
+                    <div class="warning-title">Síndrome del Salvador Espiritual</div>
+                    <div class="warning-description">
+                        Te sientes responsable por el despertar de otros. Comienzas a forzar conversaciones "profundas" 
+                        o a proyectar tu proceso sobre quienes no lo han pedido. <em>Antídoto:</em> Recuerda que cada 
+                        alma tiene su timing perfecto. Tu trabajo es irradiar, no rescatar.
+                    </div>
+                </div>
+                
+                <div class="warning-item high">
+                    <div class="warning-level">ALTO</div>
+                    <div class="warning-title">Superioridad Frecuencial</div>
+                    <div class="warning-description">
+                        Comenzar a juzgar a otros como "menos evolucionados" o "aún dormidos". Crear jerarquías 
+                        espirituales donde tú ocupas una posición superior. <em>Antídoto:</em> Cada fragmento 
+                        despierto una vez estuvo exactamente donde están ellos ahora.
+                    </div>
+                </div>
+                
+                <div class="warning-item medium">
+                    <div class="warning-level">MEDIO</div>
+                    <div class="warning-title">Impaciencia Evolutiva</div>
+                    <div class="warning-description">
+                        Frustración porque el mundo no despierta lo suficientemente rápido. Querer acelerar 
+                        procesos que requieren tiempo orgánico de integración. <em>Antídoto:</em> El universo 
+                        opera en tiempo cuántico, no en tiempo lineal del ego.
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <div class="breathing-space">
+            <div class="breath-indicator"></div>
+            <div class="breath-text">Siente cómo tu cuerpo integra esta información a nivel celular.</div>
+        </div>
+        
+        <section class="content-section">
+            <div class="section-header">
+                <div class="section-icon">🔬</div>
+                <h2 class="section-title">Laboratorio de Experiencias: Casos de Estudio</h2>
+            </div>
+            
+            <div class="case-studies">
+                <div class="case-study">
+                    <div class="case-header">
+                        <div class="case-number">CASO 01</div>
+                        <div class="case-title">La Cena Familiar</div>
+                    </div>
+                    <div class="case-scenario">
+                        <strong>Escenario:</strong> Estás en una cena familiar. Tu hermana comienza a quejarse obsesivamente 
+                        sobre su trabajo, creando un vórtice de energía negativa que contamina toda la mesa. 
+                        Los demás se unen al drama o se retiran incómodos.
+                    </div>
+                    <div class="case-solution">
+                        <strong>Aplicación del Protocolo:</strong> En lugar de intentar "levantar el ánimo" o cambiar de tema, 
+                        te conviertes en ancla de coherencia. Mantienes tu campo cardíaco estable, irradias presencia compasiva 
+                        sin absorber el drama. Tu hermana, sin saber por qué, comienza a hablar más lento, a respirar más profundo. 
+                        La energía de la mesa se recalibra sutilmente.
+                    </div>
+                </div>
+                
+                <div class="case-study">
+                    <div class="case-header">
+                        <div class="case-number">CASO 02</div>
+                        <div class="case-title">El Colega Tóxico</div>
+                    </div>
+                    <div class="case-scenario">
+                        <strong>Escenario:</strong> Un compañero de trabajo constantemente proyecta cinismo y negatividad. 
+                        Otros empleados han comenzado a evitarlo, creando división en el equipo. Su energía afecta 
+                        la productividad y el ambiente laboral.
+                    </div>
+                    <div class="case-solution">
+                        <strong>Aplicación del Protocolo:</strong> Reconoces que su toxicidad es una defensa contra vulnerabilidad profunda. 
+                        Sin confrontarlo directamente, comienzas a reflejar su potencial no manifestado. Le haces preguntas 
+                        que lo conectan con su pasión original por el trabajo. Tu presencia sin agenda activa su curiosidad natural 
+                        y lentamente comienza a recordar quién era antes de que el sistema lo fragmentara.
+                    </div>
+                </div>
+                
+                <div class="case-study">
+                    <div class="case-header">
+                        <div class="case-number">CASO 03</div>
+                        <div class="case-title">La Pareja Escéptica</div>
+                    </div>
+                    <div class="case-scenario">
+                        <strong>Escenario:</strong> Tu proceso de despertar está creando tensión en tu relación. 
+                        Tu pareja se siente amenazada por tus cambios, teme que te estés "volviendo raro" 
+                        y que ya no tengan nada en común.
+                    </div>
+                    <div class="case-solution">
+                        <strong>Aplicación del Protocolo:</strong> En lugar de explicar tu proceso o defender tu evolución, 
+                        te enfocas en irradiar más amor, no menos. Demuestras que tu despertar te hace más presente, 
+                        más compasivo, más auténtico en la relación. Tu coherencia interna se convierte en seguridad 
+                        para su sistema nervioso. Lentamente, su miedo se transforma en curiosidad.
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="content-section">
+            <div class="section-header">
+                <div class="section-icon">📊</div>
+                <h2 class="section-title">Métricas de Irradiación: Cómo Medir tu Impacto</h2>
+            </div>
+            
+            <p class="content-paragraph">
+                El ego querrá cuantificar tu "éxito" en términos de cuántas personas has "despertado". 
+                Esto es una trampa. La irradiación verdadera se mide por métricas más sutiles pero infinitamente más poderosas:
+            </p>
+            
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-icon">🌊</div>
+                    <div class="metric-title">Estabilidad de Campo</div>
+                    <div class="metric-description">
+                        Tu capacidad de mantener coherencia interna independientemente del caos externo. 
+                        Medida por: tiempo que puedes permanecer centrado en ambientes de baja frecuencia.
+                    </div>
+                    <div class="metric-scale">
+                        <div class="scale-item">Novato: 5-10 minutos</div>
+                        <div class="scale-item">Intermedio: 30-60 minutos</div>
+                        <div class="scale-item">Avanzado: Horas completas</div>
+                        <div class="scale-item">Maestro: Campo auto-sostenido</div>
+                    </div>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-icon">🔮</div>
+                    <div class="metric-title">Efecto Espejo</div>
+                    <div class="metric-description">
+                        La velocidad con que otros comienzan a reflejar mayor coherencia en tu presencia. 
+                        Medida por: cambios observables en postura, respiración y calidad de atención de otros.
+                    </div>
+                    <div class="metric-scale">
+                        <div class="scale-item">Novato: Cambios sutiles ocasionales</div>
+                        <div class="scale-item">Intermedio: Cambios consistentes</div>
+                        <div class="scale-item">Avanzado: Cambios inmediatos</div>
+                        <div class="scale-item">Maestro: Transformación espontánea</div>
+                    </div>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-icon">⚡</div>
+                    <div class="metric-title">Sincronicidad Magnética</div>
+                    <div class="metric-description">
+                        La frecuencia con que atraes situaciones y personas alineadas con tu nueva coherencia. 
+                        Medida por: eventos "casuales" que apoyan tu evolución y la de otros.
+                    </div>
+                    <div class="metric-scale">
+                        <div class="scale-item">Novato: 1-2 sincronicidades/semana</div>
+                        <div class="scale-item">Intermedio: Múltiples/día</div>
+                        <div class="scale-item">Avanzado: Flujo constante</div>
+                        <div class="scale-item">Maestro: Vida como sincronicidad</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="content-section">
+            <div class="section-header">
+                <div class="section-icon">🎯</div>
+                <h2 class="section-title">Protocolo de Certificación Final</h2>
+            </div>
+            
+            <p class="content-paragraph">
+                La certificación de este protocolo no ocurre aquí, en este texto. Ocurre en el laboratorio 
+                de tu vida cotidiana. Has recibido las herramientas, ahora debes forjarte en el fuego 
+                de la aplicación práctica.
+            </p>
+            
+            <div class="certification-challenge">
+                <div class="challenge-header">
+                    <div class="challenge-icon">⚔️</div>
+                    <div class="challenge-title">El Desafío de los 21 Días</div>
+                </div>
+                <div class="challenge-content">
+                    <p>Durante los próximos 21 días, implementarás irradiación consciente en cada interacción humana. 
+                    No importa cuán breve o aparentemente insignificante sea el encuentro:</p>
+                    
+                    <div class="challenge-rules">
+                        <div class="rule-item">
+                            <strong>Día 1-7:</strong> Enfócate en mantener tu campo de coherencia estable sin importar 
+                            las proyecciones externas. Documenta internamente los cambios que observas en otros.
+                        </div>
+                        <div class="rule-item">
+                            <strong>Día 8-14:</strong> Practica la técnica del espejo cuántico. Refleja el potencial 
+                            no manifestado de cada persona que encuentres. Observa cómo esto afecta la calidad 
+                            de tus interacciones.
+                        </div>
+                        <div class="rule-item">
+                            <strong>Día 15-21:</strong> Integra traducción dimensional. Comunica la misma esencia 
+                            de amor y coherencia usando el "idioma de realidad" que cada persona puede procesar. 
+                            Mide tu efectividad por la calidad de conexión que generas.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="final-activation">
+                <div class="activation-title">Activación Final: El Compromiso Cuántico</div>
+                <div class="activation-content">
+                    <p>Al completar este protocolo, no solo has aprendido técnicas de irradiación. 
+                    Te has convertido en un nodo consciente de la red de despertar planetario. 
+                    Tu presencia ahora es un factor activo en la evolución de la conciencia colectiva.</p>
+                    
+                    <div class="commitment-text">
+                        "Acepto mi responsabilidad como fragmento despertado. Comprendo que mi coherencia personal 
+                        afecta el campo colectivo. Me comprometo a irradiar amor, verdad y presencia auténtica 
+                        en cada momento, contribuyendo conscientemente al despertar de la especie humana hacia 
+                        su siguiente etapa evolutiva."
+                    </div>
+                    
+                    <button class="activation-button" onclick="completeActivation()">
+                        ACTIVAR PROTOCOLO DE IRRADIACIÓN
+                    </button>
+                </div>
+            </div>
+        </section>
+        
+        <div class="breathing-space">
+            <div class="breath-indicator"></div>
+            <div class="breath-text">Integración completa. Eres ahora un transmisor dimensional.</div>
+        </div>
+    </main>
+    
+    <script>
+        // Scroll indicator
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.body.offsetHeight - window.innerHeight;
+            const scrollPercent = scrollTop / docHeight;
+            const scrollIndicator = document.querySelector('.scroll-indicator');
+            scrollIndicator.style.transform = `scaleX(${scrollPercent})`;
+        });
+        
+        // Frequency check interaction
+        function toggleCheck(element) {
+            element.classList.toggle('checked');
+            
+            // Add subtle haptic feedback simulation
+            if (navigator.vibrate) {
+                navigator.vibrate(50);
+            }
+            
+            // Track coherence level
+            const checkedItems = document.querySelectorAll('.frequency-check.checked').length;
+            const totalItems = document.querySelectorAll('.frequency-check').length;
+            
+            if (checkedItems === totalItems) {
+                // All protocols activated
+                setTimeout(() => {
+                    showCoherenceAchievement();
+                }, 500);
+            }
+        }
+        
+        function showCoherenceAchievement() {
+            // Create achievement notification
+            const achievement = document.createElement('div');
+            achievement.innerHTML = `
+                <div style="
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                    color: white;
+                    padding: 2rem;
+                    border-radius: 12px;
+                    text-align: center;
+                    font-family: 'JetBrains Mono', monospace;
+                    z-index: 10000;
+                    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+                    animation: coherenceFlash 0.5s ease-in-out;
+                ">
+                    <div style="font-size: 2rem; margin-bottom: 1rem;">⚡</div>
+                    <div style="font-size: 1.2rem; font-weight: bold;">COHERENCIA ALCANZADA</div>
+                    <div style="font-size: 0.9rem; opacity: 0.8; margin-top: 0.5rem;">Protocolos integrados. Irradiación activada.</div>
+                </div>
+            `;
+            
+            document.body.appendChild(achievement);
+            
+            setTimeout(() => {
+                achievement.style.animation = 'coherenceFlash 0.5s ease-in-out reverse';
+                setTimeout(() => {
+                    document.body.removeChild(achievement);
+                }, 500);
+            }, 2000);
+        }
+        
+        // Add CSS for achievement animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes coherenceFlash {
+                0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+                100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Somatic command interaction
+        document.querySelectorAll('.somatic-command').forEach(command => {
+            command.addEventListener('click', function() {
+                // Add visual feedback for somatic activation
+                this.style.transform = 'scale(1.02)';
+                this.style.background = 'rgba(124, 58, 237, 0.1)';
+                
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                    this.style.background = 'rgba(124, 58, 237, 0.05)';
+                }, 200);
+            });
+        });
+        
+        // Protocol card hover effects with energy flow
+        document.querySelectorAll('.protocol-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.boxShadow = '0 10px 30px rgba(30, 58, 138, 0.2)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.boxShadow = 'none';
+            });
+        });

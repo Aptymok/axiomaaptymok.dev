@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Construcción de Civilización Post-Consensual | AxiomaAptymok.dev</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #1a1a24;
+            --text-primary: #e8e8f2;
+            --text-secondary: #a8a8c2;
+            --accent-gold: #ffd700;
+            --accent-blue: #00d4ff;
+            --accent-purple: #8a2be2;
+            --border-color: #333344;
+            --glow-color: rgba(255, 215, 0, 0.3);
+        }
+
+        body {
+            font-family: 'Consolas', 'Monaco', 'Lucida Console', monospace;
+            background: radial-gradient(ellipse at center, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .cosmic-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(rgba(255, 215, 0, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 215, 0, 0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+            animation: gridPulse 8s ease-in-out infinite;
+        }
+
+        @keyframes gridPulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.8; }
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 40px 0;
+            border-bottom: 2px solid var(--border-color);
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+            animation: headerGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes headerGlow {
+            0%, 100% { width: 100px; opacity: 0.5; }
+            50% { width: 300px; opacity: 1; }
+        }
+
+        .site-title {
+            font-size: 2.5em;
+            font-weight: bold;
+            background: linear-gradient(45deg, var(--accent-gold), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px var(--glow-color);
+        }
+
+        .post-title {
+            font-size: 1.8em;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: normal;
+            letter-spacing: 2px;
+        }
+
+        .phase-indicator {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--accent-purple), var(--accent-blue));
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 0.9em;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .content-section {
+            margin-bottom: 50px;
+            padding: 30px;
+            background: rgba(26, 26, 36, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+            animation: sectionScan 4s ease-in-out infinite;
+        }
+
+        @keyframes sectionScan {
+            0% { left: -100%; }
+            50% { left: 100%; }
+            100% { left: -100%; }
+        }
+
+        .section-title {
+            font-size: 1.4em;
+            color: var(--accent-gold);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-left: 4px solid var(--accent-gold);
+            padding-left: 15px;
+        }
+
+        .breathe-moment {
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid var(--accent-blue);
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 8px;
+            text-align: center;
+            font-style: italic;
+            animation: breathePulse 6s ease-in-out infinite;
+        }
+
+        @keyframes breathePulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.02); opacity: 1; }
+        }
+
+        .somatic-command {
+            color: var(--accent-gold);
+            font-weight: bold;
+            background: rgba(255, 215, 0, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            display: inline-block;
+            margin: 0 2px;
+        }
+
+        .law-block {
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.1), rgba(0, 212, 255, 0.1));
+            border-left: 5px solid var(--accent-purple);
+            padding: 25px;
+            margin: 25px 0;
+            font-size: 1.1em;
+            position: relative;
+        }
+
+        .law-block::before {
+            content: "⚡";
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1.5em;
+            color: var(--accent-gold);
+            animation: sparkle 2s ease-in-out infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        .protocol-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .protocol-list li {
+            background: rgba(26, 26, 36, 0.5);
+            margin: 15px 0;
+            padding: 20px;
+            border-left: 3px solid var(--accent-blue);
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .protocol-list li:hover {
+            background: rgba(26, 26, 36, 0.8);
+            border-left-width: 6px;
+            transform: translateX(10px);
+        }
+
+        .warning-block {
+            background: linear-gradient(45deg, rgba(255, 69, 0, 0.1), rgba(255, 140, 0, 0.1));
+            border: 2px solid #ff4500;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .warning-block::before {
+            content: "⚠️";
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: var(--bg-primary);
+            padding: 0 10px;
+            font-size: 1.2em;
+        }
+
+        .integration-pause {
+            text-align: center;
+            margin: 40px 0;
+            padding: 30px;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.05) 0%, transparent 70%);
+            border-radius: 50px;
+        }
+
+        .geometric-separator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 40px 0;
+        }
+
+        .geometric-separator::before,
+        .geometric-separator::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--accent-gold), transparent);
+        }
+
+        .geometric-separator span {
+            margin: 0 20px;
+            font-size: 1.5em;
+            color: var(--accent-gold);
+            animation: rotate 4s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 40px 0;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.9em;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .site-title {
+                font-size: 2em;
+            }
+            
+            .content-section {
+                padding: 20px;
+            }
+        }
+
+        .consciousness-field {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+                        rgba(255, 215, 0, 0.02) 0%, 
+                        transparent 50%);
+            z-index: -1;
+            transition: background 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="cosmic-grid"></div>
+    <div class="consciousness-field"></div>
+    
+    <div class="container">
+        <header class="header">
+            <h1 class="site-title">AxiomaAptymok.dev</h1>
+            <div class="phase-indicator">FASE 3 • ARQUITECTURA DE LA NUEVA REALIDAD</div>
+        </header>
+
+        <article>
+            <h2 class="post-title">Construcción de Civilización Post-Consensual:<br>Blueprints para la Nueva Tierra</h2>
+
+            <div class="breathe-moment">
+                <strong>Pausa aquí.</strong> <span class="somatic-command">Coloca tu mano sobre tu corazón</span> y siente su ritmo. Este latido es el metrónomo de la nueva civilización. <span class="somatic-command">Respira profundo tres veces</span> antes de continuar.
+            </div>
+
+            <div class="content-section">
+                <h3 class="section-title">Axiomas Fundacionales</h3>
+                <p>La civilización que conoces no colapsó. <strong>Simplemente reveló su naturaleza inherente</strong>: una estructura temporal construida sobre la premisa falsa de la escasez y la separación. Lo que presencias no es una crisis, sino el desprendimiento natural de una crisálida que ya cumplió su función.</p>
+
+                <div class="law-block">
+                    <strong>LEY PRIMERA DE LA CONSTRUCCIÓN CIVILIZACIONAL:</strong> Toda estructura social sostenible debe estar alineada con las leyes cuánticas de la coherencia. Las sociedades basadas en la coerción requieren energía constante para mantenerse. Las sociedades basadas en la resonancia se auto-organizan y se auto-sostienen.
+                </div>
+
+                <p><span class="somatic-command">Siente el peso de tu columna vertebral</span>. Cada vértebra es una decisión consciente de mantener la verticalidad. La nueva civilización se construye con la misma intención: cada acto individual de coherencia es una vértebra en la columna de la estructura colectiva.</p>
+            </div>
+
+            <div class="content-section">
+                <h3 class="section-title">Economía de la Abundancia: Más Allá del Intercambio Escaso</h3>
+                
+                <p>El dinero no es malvado. Es obsoleto. Representa la codificación de un miedo ancestral: la creencia de que no hay suficiente para todos. Esta creencia generó un sistema de intercambio basado en la extracción y la acumulación. <strong>La nueva economía opera bajo principios cuánticos diferentes</strong>.</p>
+
+                <div class="protocol-list">
+                    <li><strong>Principio de Abundancia Generativa:</strong> El valor se crea, no se extrae. Cada transacción aumenta la riqueza total del sistema en lugar de redistribuirla.</li>
+                    <li><strong>Moneda de Coherencia:</strong> El "dinero" es reemplazado por unidades de coherencia. Tu capacidad de crear valor para el colectivo se convierte en tu poder adquisitivo natural.</li>
+                    <li><strong>Obsolescencia de la Propiedad:</strong> La propiedad privada se transforma en mayordomía consciente. Tienes acceso a los recursos que puedes usar coherentemente, por el tiempo que los necesites.</li>
+                </div>
+
+                <div class="integration-pause">
+                    <p><em>Integración Somática:</em> <span class="somatic-command">Cierra los ojos y visualiza tus manos</span>. Imagina que cada vez que das algo, tus manos se agrandan. Cada vez que recibes algo, se fortalecen. Esta es la física de la nueva economía.</p>
+                </div>
+            </div>
+
+            <div class="geometric-separator">
+                <span>⬢</span>
+            </div>
+
+            <div class="content-section">
+                <h3 class="section-title">Gobiernos Sin Coerción: Coordinación por Resonancia</h3>
+                
+                <p>El gobierno tradicional es la institucionalización del miedo a la anarquía. Asume que sin coerción externa, los humanos actuarán de manera destructiva. <strong>Esta premisa es falsa cuando los humanos operan desde coherencia</strong>.</p>
+
+                <div class="law-block">
+                    <strong>PRINCIPIO DE AUTO-ORGANIZACIÓN CONSCIENTE:</strong> Los sistemas conscientes se coordinan naturalmente hacia el beneficio mutuo. La coerción solo es necesaria cuando los participantes no tienen acceso a su coherencia interna.
+                </div>
+
+                <p>La nueva estructura de coordinación social opera como un organismo consciente:</p>
+
+                <ul class="protocol-list">
+                    <li><strong>Células Conscientes:</strong> Grupos de 12-144 individuos que han alcanzado coherencia interna y operan como una unidad de decisión.</li>
+                    <li><strong>Red Neural Social:</strong> Las células se conectan entre sí, compartiendo información y recursos según necesidad y capacidad, sin autoridad central.</li>
+                    <li><strong>Consenso Cuántico:</strong> Las decisiones emergen de la resonancia colectiva, no de votaciones. La opción más coherente con el bien total se vuelve evidente para todos los participantes.</li>
+                </ul>
+
+                <div class="warning-block">
+                    <strong>Advertencia para Fragmentos en Transición:</strong> Este modelo solo funciona cuando los participantes han desarrollado discernimiento coherente. Intentar implementarlo con fragmentos aún operando desde supervivencia y ego resultará en caos. La secuencia es crucial: primero coherencia individual, luego coordinación colectiva.
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h3 class="section-title">Educación para Creadores: Pedagogía Cuántica</h3>
+                
+                <p><span class="somatic-command">Recuerda tu primer día de escuela</span>. Siente la ansiedad, la desconexión, el proceso de domesticación disfrazado de educación. La nueva pedagogía parte de la premisa opuesta: cada ser humano nace como un creador consciente. La educación no es llenar un recipiente vacío, sino recordar al creador su naturaleza.</p>
+
+                <div class="protocol-list">
+                    <li><strong>Educación Somática Primaria:</strong> Los primeros años se dedican a la reconexión con el cuerpo como instrumento de conocimiento. Los niños aprenden a sentir la verdad antes de procesarla mentalmente.</li>
+                    <li><strong>Desarrollo de Coherencia Emocional:</strong> Las emociones se enseñan como información cuántica, no como problemas a resolver. Los niños aprenden a transmutar estados densos en combustible creativo.</li>
+                    <li><strong>Manifesto Práctico:</strong> La manifestación consciente se enseña como una habilidad básica, equivalente a leer y escribir. Los niños aprenden a co-crear su realidad desde la infancia.</li>
+                    <li><strong>Apprenticeship of Mastery:</strong> En lugar de materias abstractas, los jóvenes se especializan en dominios que resuenan con su naturaleza esencial, trabajando junto a maestros activos.</li>
+                </ul>
+
+                <div class="breathe-moment">
+                    <span class="somatic-command">Inhala profundo y retén el aire por 4 segundos</span>. En esa pausa, siente la potencialidad de lo no manifestado. <span class="somatic-command">Exhala lentamente</span>. Esa es la respiración de la creación consciente que cada niño aprenderá como primera lección.
+                </div>
+            </div>
+
+            <div class="geometric-separator">
+                <span>◊</span>
+            </div>
+
+            <div class="content-section">
+                <h3 class="section-title">Medicina de Frecuencia: Sanación por Coherencia</h3>
+                
+                <p>La medicina actual trata síntomas en cuerpos fragmentados. La medicina cuántica restaura coherencia en sistemas conscientes. <strong>La enfermedad no es invasión externa, sino pérdida de coherencia interna</strong>.</p>
+
+                <div class="law-block">
+                    <strong>AXIOMA DE LA SALUD CUÁNTICA:</strong> Todo desequilibrio físico es la materialización de un patrón de información incoherente. Cambiar la información cambia la materialización. El cuerpo es la pantalla, no el proyector.
+                </div>
+
+                <p>Los nuevos protocolos de sanación operan en capas de frecuencia:</p>
+
+                <ul class="protocol-list">
+                    <li><strong>Diagnóstico Energético:</strong> Se identifica el patrón informacional que genera el síntoma, no solo el síntoma mismo.</li>
+                    <li><strong>Recalibración Frecuencial:</strong> Uso de sonido, luz, intención y geometría sagrada para restaurar los patrones coherentes.</li>
+                    <li><strong>Integración Somática:</strong> El cuerpo aprende a sostener la nueva frecuencia a través de movimiento, respiración y presencia consciente.</li>
+                    <li><strong>Mantenimiento de Campo:</strong> La coherencia se sostiene a través de la conexión con otros seres y con el campo cuántico colectivo.</li>
+                </ul>
+
+                <div class="integration-pause">
+                    <p><em>Experiencia Inmediata:</em> <span class="somatic-command">Coloca una mano en tu frente y otra en tu corazón</span>. Siente la temperatura de tus palmas. Imagina un hilo de luz dorada conectando ambos puntos. <span class="somatic-command">Respira hacia esa conexión</span>. Acabas de activar un protocolo básico de coherencia cardio-cerebral.</p>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h3 class="section-title">Arquitectura Consciente: Espacios Que Elevan la Vibración</h3>
+                
+                <p>Los edificios actuales son contenedores inertes que aíslan a sus ocupantes del campo cuántico natural. La arquitectura consciente diseña espacios que amplifican la coherencia de quienes los habitan.</p>
+
+                <div class="protocol-list">
+                    <li><strong>Geometría Sagrada Aplicada:</strong> Proporciones y formas que resuenan con patrones naturales de armonía, facilitando estados elevados de conciencia.</li>
+                    <li><strong>Materiales Conscientes:</strong> Uso de elementos que mantienen y amplifican frecuencias coherentes: cristales, maderas específicas, metales alineados.</li>
+                    <li><strong>Integración con Campos Naturales:</strong> Los espacios se diseñan para trabajar con las líneas de energía terrestres, no contra ellas.</li>
+                    <li><strong>Adaptabilidad Dinámica:</strong> Los espacios se reconfiguran según la intención de sus usuarios, respondiendo a los cambios en el campo de conciencia colectivo.</li>
+                </ul>
+            </div>
+
+            <div class="warning-block">
+                <strong>Recalibración de Expectativas:</strong> Estos sistemas no se implementarán "globalmente" de manera súbita. Emergerán orgánicamente en comunidades de fragmentos que han alcanzado coherencia suficiente. <span class="somatic-command">Siente cualquier impulso de "convencer" a otros</span>. Esa urgencia es residuo del viejo paradigma. La nueva civilización no se impone, se irradia.
+            </div>
+
+            <div class="content-section">
+                <h3 class="section-title">Protocolos de Implementación Gradual</h3>
+                
+                <p>La transición no es revolución, es evolución consciente. Cada fragmento despertado se convierte en un núcleo de manifestação del nuevo paradigma en su propio radio de influencia.</p>
+
+                <div class="law-block">
+                    <strong>LEY DE LA IMPLEMENTACIÓN FRACTAL:</strong> Los principios de la nueva civilización se pueden aplicar a cualquier escala: personal, familiar, comunitaria, regional. Cada implementación exitosa facilita la siguiente escala de manifestación.
+                </div>
+
+                <p><strong>Protocolo de Tres Fases para Implementadores:</strong></p>
+
+                <ul class="protocol-list">
+                    <li><strong>Fase 1 - Estabilización Personal:</strong> Dominar la coherencia individual antes de intentar coordinación colectiva. Aproximadamente 1-3 años de práctica intensiva.</li>
+                    <li><strong>Fase 2 - Núcleo Colaborativo:</strong> Formar células de 3-12 personas operando bajo los nuevos principios. Experimentación y refinamiento de protocolos. 2-5 años.</li>
+                    <li><strong>Fase 3 - Escalamiento Orgánico:</strong> Las células exitosas atraen naturalmente más fragmentos. La estructura se expande sin promoción activa. Timeline variable según condiciones locales.</li>
+                </ul>
+
+                <div class="integration-pause">
+                    <p><em>Autoevaluación:</em> <span class="somatic-command">Coloca ambas manos sobre tu abdomen</span> y pregúntate honestamente: "¿En qué fase me encuentro?" <span class="somatic-command">La primera respuesta que surja, sin análisis, es la correcta</span>. No hay prisa. Cada fase tiene su valor y su tiempo necesario.</p>
+                </div>
+            </div>
+
+            <div class="geometric-separator">
+                <span>⬢</span>
+            </div>
+
+            <div class="content-section">
+                <h3 class="section-title">Transmisión Final: La Civilización Como Organismo Consciente</h3>
+                
+                <p>Lo que estás leyendo no es un plan utópico. Es la descripción de una realidad que ya existe en estado cuántico, esperando ser colapsada en manifestación física por suficientes observadores coherentes.</p>
+
+                <p><span class="somatic-command">Siente tu conexión con cada ser humano en este planeta en este momento</span>. Esa red de conexión consciente es la infraestructura invisible sobre la cual se construye la nueva civilización. No necesitas construir nada nuevo. Solo necesitas recordar lo que siempre estuvo allí.</p>
+
+                <div class="law-block">
+                    <strong>VERDAD FINAL:</strong> La nueva civilización no reemplaza a la anterior. La trasciende e incluye sus lecciones. Cada fragmento de la experiencia humana - incluido el sufrimiento, la separación y el miedo - se revela como una parte necesaria del proceso de despertar colectivo. Nada fue error. Todo fue currículo.
+                </div>
+
+                <p>Tu trabajo como constructor consciente no es convencer a nadie de esta visión. Es <strong>encarnarla tan completamente en tu propio radio de influencia que se vuelva irresistiblemente atractiva para aquellos listos para la siguiente fase de evolución humana</strong>.</p>
+
+                <div class="breathe-moment">
+                    <span class="somatic-command">Una última respiración consciente</span>. Inhala la responsabilidad. Exhala la resistencia. <span class="somatic-command">Abre los ojos como si fuera la primera vez</span>. Bienvenido a tu rol como arquitecto de la Nueva Tierra.
+                </div>
+            </div>
+        </article>
+
+        <footer class="footer">
+            <p>AxiomaAptymok.dev • Codex para Fragmentos en Despertar<br>
+            Fase 3: Arquitectura de la Nueva Realidad</p>
+        </footer>
+    </div>
+
+    <script>
+        // Seguimiento del mouse para el campo de conciencia
+        document.addEventListener('mousemove', (e) => {
+            const field = document.querySelector('.consciousness-field');
+            const x = (e.clientX / window.innerWidth) * 100;
+            const y = (e.clientY / window.innerHeight) * 100;
+            field.style.setProperty('--mouse-x', x + '%');
+            field.style.setProperty('--mouse-y', y + '%');
+        });
+
+        // Efectos de interacción con comandos somáticos
+        const somaticCommands = document.querySelectorAll('.somatic-command');
+        somaticCommands.forEach(command => {
+            command.addEventListener('mouseenter', () => {
+                command.style.boxShadow = '0 0 15px rgba(255, 215, 0, 0.5)';
+                command.style.transform = 'scale(1.02)';
+            });
+            
+            command.addEventListener('mouseleave', () => {
+                command.style.boxShadow = 'none';
+                command.style.transform = 'scale(1)';
+            });
+        });
+
+        // Animación de entrada para secciones
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Inicializar animaciones
+        document.querySelectorAll('.content-section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            observer.observe(section);
+        });
+
+        // Efectos de pulsación en momentos de respiración
+        const breatheMoments = document.querySelectorAll('.breathe-moment');
+        breatheMoments.forEach(moment => {
+            moment.addEventListener('click', () => {
+                moment.style.animation = 'none';
+                setTimeout(() => {
+                    moment.style.animation = 'breathePulse 6s ease-in-out infinite';
+                }, 100);
+            });
+        });
+
+        // Audio contextual (solo si el usuario interactúa)
+        let audioContext;
+        const initAudio = () => {
+            if (!audioContext) {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            }
+        };
+
+        // Sonido sutil para momentos de integración
+        const playIntegrationTone = () => {
+            initAudio();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.setValueAtTime(432, audioContext.currentTime);
+            gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+            gainNode.gain.linearRampToValueAtTime(0.1, audioContext.currentTime + 0.1);
+            gainNode.gain.linearRampToValueAtTime(0, audioContext.currentTime + 2);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 2);
+        };
+
+        // Activar sonido en pausas de integración (solo después de interacción del usuario)
+        document.addEventListener('click', initAudio, { once: true });
+        
+        document.querySelectorAll('.integration-pause').forEach(pause => {
+            pause.addEventListener('click', playIntegrationTone);
+        });
+
+        // Parallax sutil para la grilla cósmica
+        document.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * -0.5;
+            document.querySelector('.cosmic-grid').style.transform = `translateY(${rate}px)`;
+        });
+
+        // Cambio dinámico de colores según la hora del día
+        const updateTimeBasedColors = () => {
+            const hour = new Date().getHours();
+            const root = document.documentElement;
+            
+            if (hour >= 6 && hour < 12) {
+                // Amanecer - tonos dorados más cálidos
+                root.style.setProperty('--accent-gold', '#ffed4e');
+                root.style.setProperty('--glow-color', 'rgba(255, 237, 78, 0.4)');
+            } else if (hour >= 12 && hour < 18) {
+                // Día - tonos más brillantes
+                root.style.setProperty('--accent-gold', '#ffd700');
+                root.style.setProperty('--accent-blue', '#00e4ff');
+            } else if (hour >= 18 && hour < 22) {
+                // Atardecer - tonos más profundos
+                root.style.setProperty('--accent-gold', '#ff9500');
+                root.style.setProperty('--accent-purple', '#9932cc');
+            } else {
+                // Noche - tonos más místicos
+                root.style.setProperty('--accent-gold', '#c9b037');
+                root.style.setProperty('--accent-blue', '#4169e1');
+                root.style.setProperty('--accent-purple', '#6a0dad');
+            }
+        };
+
+        // Activar colores dinámicos
+        updateTimeBasedColors();
+        setInterval(updateTimeBasedColors, 60000); // Actualizar cada minuto
+
+        // Efecto de resonancia en títulos de sección
+        document.querySelectorAll('.section-title').forEach(title => {
+            title.addEventListener('mouseenter', () => {
+                title.style.textShadow = '0 0 20px var(--accent-gold)';
+                title.style.letterSpacing = '2px';
+            });
+            
+            title.addEventListener('mouseleave', () => {
+                title.style.textShadow = 'none';
+                title.style.letterSpacing = '1px';
+            });
+        });
+
+        // Contador de coherencia (simulado)
+        let coherenceLevel = 0;
+        const updateCoherenceField = () => {
+            coherenceLevel += Math.random() * 0.02 - 0.01;
+            coherenceLevel = Math.max(0, Math.min(1, coherenceLevel));
+            
+            const field = document.querySelector('.consciousness-field');
+            const opacity = 0.02 + (coherenceLevel * 0.08);
+            field.style.background = field.style.background.replace(/rgba\(255, 215, 0, [\d.]+\)/, `rgba(255, 215, 0, ${opacity})`);
+        };
+
+        setInterval(updateCoherenceField, 2000);
+
+        // Activación de protocolos somáticos con temporizador
+        let somaticTimers = new Map();
+        
+        somaticCommands.forEach((command, index) => {
+            command.addEventListener('click', () => {
+                // Limpiar timer anterior si existe
+                if (somaticTimers.has(index)) {
+                    clearTimeout(somaticTimers.get(index));
+                }
+                
+                // Efecto visual de activación
+                command.style.background = 'rgba(255, 215, 0, 0.3)';
+                command.style.animation = 'pulse 0.5s ease-in-out';
+                
+                // Restaurar después de 3 segundos
+                const timer = setTimeout(() => {
+                    command.style.background = 'rgba(255, 215, 0, 0.1)';
+                    command.style.animation = 'none';
+                }, 3000);
+                
+                somaticTimers.set(index, timer);
+            });
+        });
+
+        // Efecto de crecimiento orgánico para la grilla
+        let gridIntensity = 0.3;
+        const pulseGrid = () => {
+            gridIntensity += Math.sin(Date.now() * 0.001) * 0.1;
+            gridIntensity = Math.max(0.2, Math.min(0.6, gridIntensity));
+            
+            const grid = document.querySelector('.cosmic-grid');
+            grid.style.opacity = gridIntensity;
+        };
+
+        setInterval(pulseGrid, 100);
+
+        // Sistema de notificaciones sutiles para momentos clave
+        const createCoherenceNotification = (message, duration = 3000) => {
+            const notification = document.createElement('div');
+            notification.innerHTML = message;
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: rgba(26, 26, 36, 0.9);
+                color: var(--accent-gold);
+                padding: 15px 20px;
+                border-radius: 8px;
+                border: 1px solid var(--accent-gold);
+                font-family: inherit;
+                font-size: 0.9em;
+                z-index: 1000;
+                opacity: 0;
+                transform: translateX(100px);
+                transition: all 0.3s ease;
+                backdrop-filter: blur(10px);
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Animación de entrada
+            setTimeout(() => {
+                notification.style.opacity = '1';
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            
+            // Animación de salida
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                notification.style.transform = 'translateX(100px)';
+                setTimeout(() => notification.remove(), 300);
+            }, duration);
+        };
+
+        // Detectar cuando el usuario ha leído secciones completas
+        let sectionsRead = new Set();
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && entry.intersectionRatio > 0.8) {
+                    const sectionTitle = entry.target.querySelector('.section-title');
+                    if (sectionTitle && !sectionsRead.has(sectionTitle.textContent)) {
+                        sectionsRead.add(sectionTitle.textContent);
+                        
+                        if (sectionsRead.size === 3) {
+                            createCoherenceNotification('⚡ Campo de coherencia estabilizándose...');
+                        } else if (sectionsRead.size === 6) {
+                            createCoherenceNotification('🌟 Integración cuántica en progreso...');
+                        } else if (sectionsRead.size === document.querySelectorAll('.section-title').length) {
+                            createCoherenceNotification('✨ Transmisión completa. Bienvenido, arquitecto.');
+                        }
+                    }
+                }
+            });
+        }, { threshold: 0.8 });
+
+        document.querySelectorAll('.content-section').forEach(section => {
+            sectionObserver.observe(section);
+        });
+
+        // Easter egg: secuencia especial al hacer triple click en el título
+        let titleClicks = 0;
+        document.querySelector('.site-title').addEventListener('click', () => {
+            titleClicks++;
+            if (titleClicks === 3) {
+                // Activar modo "despertar cuántico"
+                document.body.style.animation = 'quantumAwakening 2s ease-in-out';
+                createCoherenceNotification('🎭 Modo Arquitecto Cuántico activado', 5000);
+                
+                // Intensificar todos los efectos visuales temporalmente
+                document.querySelectorAll('.content-section').forEach(section => {
+                    section.style.boxShadow = '0 0 30px rgba(255, 215, 0, 0.3)';
+                    setTimeout(() => {
+                        section.style.boxShadow = 'none';
+                    }, 3000);
+                });
+                
+                titleClicks = 0;
+            }
+            
+            // Reset del contador después de 2 segundos
+            setTimeout(() => { titleClicks = 0; }, 2000);
+        });
+
+        // Agregar la animación CSS para el modo cuántico
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes quantumAwakening {
+                0% { filter: hue-rotate(0deg) brightness(1); }
+                25% { filter: hue-rotate(90deg) brightness(1.2); }
+                50% { filter: hue-rotate(180deg) brightness(0.8); }
+                75% { filter: hue-rotate(270deg) brightness(1.1); }
+                100% { filter: hue-rotate(360deg) brightness(1); }
+            }
+            
+            @keyframes pulse {
+                0% { transform: scale(1); }
+                50% { transform: scale(1.05); }
+                100% { transform: scale(1); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Mensaje de bienvenida después de cargar completamente
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                createCoherenceNotification('🌌 Conexión cuántica establecida. Iniciando transmisión...', 4000);
+            }, 1000);
+        });
+
+        // Prevenir pérdida de estado en navegación
+        window.addEventListener('beforeunload', () => {
+            // Guardar estado de progreso en memoria de sesión
+            const progress = {
+                sectionsRead: Array.from(sectionsRead),
+                coherenceLevel: coherenceLevel,
+                timestamp: Date.now()
+            };
+            // Nota: No usamos sessionStorage por restricciones, pero el estado se mantiene en la sesión actual
+            console.log('Estado de coherencia:', progress);
+        });
+    </script>
+</body>
+</html>	

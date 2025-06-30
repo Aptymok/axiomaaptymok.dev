@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SINTOMATOLOGÍA DE LA FALSA CONCIENCIA</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Inter:wght@300;400;500;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: #0a0a0a;
+            color: #e0e0e0;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            cursor: crosshair;
+        }
+        
+        .void-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 70%, rgba(139, 0, 0, 0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 30%, rgba(0, 0, 139, 0.2) 0%, transparent 50%),
+                        linear-gradient(45deg, #000000 0%, #0d0d0d 100%);
+            z-index: -1;
+            animation: voidPulse 20s ease-in-out infinite;
+        }
+        
+        @keyframes voidPulse {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 2rem;
+        }
+        
+        .title {
+            font-family: 'Courier Prime', monospace;
+            font-size: clamp(1.5rem, 4vw, 3rem);
+            font-weight: 700;
+            color: #ff6b6b;
+            text-shadow: 0 0 20px rgba(255, 107, 107, 0.5);
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+            animation: titleGlitch 3s ease-in-out infinite;
+        }
+        
+        @keyframes titleGlitch {
+            0%, 90%, 100% { transform: translate(0); }
+            92% { transform: translate(-2px, 2px); }
+            94% { transform: translate(2px, -2px); }
+            96% { transform: translate(-2px, -2px); }
+            98% { transform: translate(2px, 2px); }
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 300;
+            margin-bottom: 2rem;
+        }
+        
+        .warning {
+            background: linear-gradient(135deg, rgba(139, 0, 0, 0.2), rgba(0, 0, 0, 0.8));
+            border: 1px solid #8b0000;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 10px;
+            text-align: center;
+            font-family: 'Courier Prime', monospace;
+            box-shadow: 0 0 30px rgba(139, 0, 0, 0.3);
+            animation: warningPulse 4s ease-in-out infinite;
+        }
+        
+        @keyframes warningPulse {
+            0%, 100% { box-shadow: 0 0 30px rgba(139, 0, 0, 0.3); }
+            50% { box-shadow: 0 0 50px rgba(139, 0, 0, 0.6); }
+        }
+        
+        .diagnostic-section {
+            margin: 3rem 0;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-left: 3px solid #ff6b6b;
+            border-radius: 5px;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            color: #ff6b6b;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .symptom-item {
+            margin: 1.5rem 0;
+            padding: 1.5rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .symptom-item:hover {
+            background: rgba(139, 0, 0, 0.1);
+            border-color: #8b0000;
+            transform: translateX(10px);
+        }
+        
+        .symptom-title {
+            font-weight: 700;
+            color: #ff9999;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .symptom-description {
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .interactive-test {
+            background: linear-gradient(135deg, rgba(0, 0, 139, 0.1), rgba(0, 0, 0, 0.9));
+            border: 1px solid #000080;
+            padding: 2rem;
+            margin: 3rem 0;
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(0, 0, 139, 0.2);
+        }
+        
+        .test-question {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            border-left: 3px solid #4169e1;
+        }
+        
+        .question-text {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #87ceeb;
+        }
+        
+        .answer-option {
+            margin: 0.5rem 0;
+            padding: 0.8rem;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .answer-option:hover {
+            background: rgba(0, 0, 139, 0.2);
+            border-color: #4169e1;
+        }
+        
+        .answer-option.selected {
+            background: rgba(0, 0, 139, 0.3);
+            border-color: #4169e1;
+            color: #87ceeb;
+        }
+        
+        .revelation {
+            background: linear-gradient(135deg, rgba(75, 0, 130, 0.2), rgba(0, 0, 0, 0.9));
+            border: 2px solid #4b0082;
+            padding: 2rem;
+            margin: 3rem 0;
+            border-radius: 15px;
+            text-align: center;
+            font-family: 'Courier Prime', monospace;
+            box-shadow: 0 0 40px rgba(75, 0, 130, 0.4);
+            display: none;
+            animation: revelationFade 2s ease-in-out;
+        }
+        
+        @keyframes revelationFade {
+            0% { opacity: 0; transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        
+        .revelation.show {
+            display: block;
+        }
+        
+        .glitch-text {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .glitch-text::before,
+        .glitch-text::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .glitch-text::before {
+            animation: glitch1 0.5s infinite;
+            color: #ff0000;
+            z-index: -1;
+        }
+        
+        .glitch-text::after {
+            animation: glitch2 0.5s infinite;
+            color: #00ff00;
+            z-index: -2;
+        }
+        
+        @keyframes glitch1 {
+            0%, 100% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+        }
+        
+        @keyframes glitch2 {
+            0%, 100% { transform: translate(0); }
+            20% { transform: translate(2px, 2px); }
+            40% { transform: translate(2px, -2px); }
+            60% { transform: translate(-2px, 2px); }
+            80% { transform: translate(-2px, -2px); }
+        }
+        
+        .final-mirror {
+            margin-top: 4rem;
+            padding: 3rem;
+            background: radial-gradient(circle, rgba(139, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.9) 100%);
+            border: 2px solid #8b0000;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: inset 0 0 50px rgba(139, 0, 0, 0.3);
+        }
+        
+        .mirror-text {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: #ff9999;
+            font-style: italic;
+        }
+        
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #ff6b6b, #4169e1, #ff6b6b);
+            z-index: 1000;
+            transition: width 0.3s ease;
+        }
+        
+        .floating-fragments {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .fragment {
+            position: absolute;
+            color: rgba(255, 107, 107, 0.1);
+            font-family: 'Courier Prime', monospace;
+            font-size: 12px;
+            animation: float 15s linear infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.7; }
+            90% { opacity: 0.7; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .title {
+                font-size: 2rem;
+            }
+            
+            .diagnostic-section,
+            .interactive-test,
+            .final-mirror {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="void-background"></div>
+    <div class="progress-bar"></div>
+    <div class="floating-fragments"></div>
+    
+    <div class="container">
+        <header class="header">
+            <h1 class="title">SINTOMATOLOGÍA DE LA FALSA CONCIENCIA</h1>
+            <p class="subtitle">AUTODIAGNÓSTICO DE LA DOMESTICACIÓN PROGRESISTA</p>
+        </header>
+        
+        <div class="warning">
+            <p><strong>ADVERTENCIA ONTOLÓGICA:</strong></p>
+            <p>Este no es un ejercicio de validación. Es una autopsia de tu propia complicidad. Si buscas confort en tus ilusiones, detente aquí. Lo que sigue no puede ser desaprendido.</p>
+        </div>
+        
+        <section class="diagnostic-section">
+            <h2 class="section-title">I. SÍNTOMAS PRIMARIOS DE LA DOMESTICACIÓN PROGRESISTA</h2>
+            
+            <div class="symptom-item">
+                <div class="symptom-title">1. ACTIVISMO DE PERFORMANCE</div>
+                <div class="symptom-description">
+                    Tu indignación es cronometrada. Aparece en redes sociales con la precisión de un algoritmo publicitario. ¿Cuándo fue la última vez que tu rabia no tuvo audiencia? ¿Existe tu compromiso social cuando nadie está mirando?
+                </div>
+            </div>
+            
+            <div class="symptom-item">
+                <div class="symptom-title">2. CONSUMO CONSCIENTE COMO COARTADA</div>
+                <div class="symptom-description">
+                    Compras orgánico para lavar la culpa de tu participación en el sistema. Tu café de comercio justo coexiste con inversiones en fondos que financian la destrucción que dices combatir. La ética se volvió una marca personal.
+                </div>
+            </div>
+            
+            <div class="symptom-item">
+                <div class="symptom-title">3. VOCABULARIO RADICAL, VIDA BURGUESA</div>
+                <div class="symptom-description">
+                    Hablas de revolución desde tu confort de clase media. Tu retórica anticapitalista se financia con dinero capitalista. ¿Qué privilegios estás dispuesto a sacrificar realmente por tus ideales?
+                </div>
+            </div>
+            
+            <div class="symptom-item">
+                <div class="symptom-title">4. INDIGNACIÓN SELECTIVA</div>
+                <div class="symptom-description">
+                    Tu compasión tiene geolocalización. Te duele más la injusticia mediática que la que ocurre en tu código postal. Tu empata se activa según el trending topic del momento.
+                </div>
+            </div>
+        </section>
+        
+        <section class="diagnostic-section">
+            <h2 class="section-title">II. SÍNTOMAS SECUNDARIOS: LA NEUROSIS DE LA COHERENCIA</h2>
+            
+            <div class="symptom-item">
+                <div class="symptom-title">5. PROYECCIÓN DEFENSIVA</div>
+                <div class="symptom-description">
+                    Atacas en otros las contradicciones que no puedes ver en ti mismo. Tu crítica a la hipocresía ajena es el eco de tu propia disonancia cognitiva. El enemigo externo te salva de enfrentar el interno.
+                </div>
+            </div>
+            
+            <div class="symptom-item">
+                <div class="symptom-title">6. FATIGA DE COMPLEJIDAD</div>
+                <div class="symptom-description">
+                    Reduces problemas sistémicos a villanos identificables. Necesitas culpables simples para realidades complejas. Tu análisis político se parece más a una serie de Netflix que a una radiografía social.
+                </div>
+            </div>
+            
+            <div class="symptom-item">
+                <div class="symptom-title">7. SUPERIORIDAD MORAL COMPENSATORIA</div>
+                <div class="symptom-description">
+                    Tu autoestima depende de sentirte más "despierto" que otros. La iluminación se volvió una jerarquía donde tu posición se define por lo que otros NO entienden. Tu sabiduría necesita ignorancia ajena para existir.
+                </div>
+            </div>
+        </section>
+        
+        <div class="interactive-test">
+            <h2 class="section-title">III. TEST DE COHERENCIA RADICAL</h2>
+            <p style="margin-bottom: 2rem; color: rgba(255,255,255,0.7);">Responde con honestidad brutal. No hay respuestas correctas, solo revelaciones necesarias.</p>
+            
+            <div class="test-question">
+                <div class="question-text">¿Cuál es la mayor contradicción entre tu discurso público y tu vida privada?</div>
+                <div class="answer-option" onclick="selectAnswer(this)">No tengo contradicciones significativas</div>
+                <div class="answer-option" onclick="selectAnswer(this)">Predico anticonsumismo pero soy adicto al consumo</div>
+                <div class="answer-option" onclick="selectAnswer(this)">Hablo de justicia social pero vivo en una burbuja de privilegio</div>
+                <div class="answer-option" onclick="selectAnswer(this)">Critico el sistema pero dependo completamente de él</div>
+            </div>
+            
+            <div class="test-question">
+                <div class="question-text">¿Qué privilegio te resulta más difícil de abandonar por tus ideales?</div>
+                <div class="answer-option" onclick="selectAnswer(this)">Mi comodidad económica</div>
+                <div class="answer-option" onclick="selectAnswer(this)">Mi estatus social</div>
+                <div class="answer-option" onclick="selectAnswer(this)">Mi validación intelectual</div>
+                <div class="answer-option" onclick="selectAnswer(this)">No tengo privilegios que me cueste abandonar</div>
+            </div>
+            
+            <div class="test-question">
+                <div class="question-text">¿Cuándo fue la última vez que cambiaste una opinión fundamental por evidencia que contradecía tu identidad política?</div>
+                <div class="answer-option" onclick="selectAnswer(this)">Hace menos de un mes</div>
+                <div class="answer-option" onclick="selectAnswer(this)">Hace menos de un año</div>
+                <div class="answer-option" onclick="selectAnswer(this)">Hace varios años</div>
+                <div class="answer-option" onclick="selectAnswer(this)">No recuerdo haber cambiado opiniones fundamentales</div>
+            </div>
+            
+            <button onclick="revealTruth()" style="margin-top: 2rem; padding: 1rem 2rem; background: linear-gradient(45deg, #8b0000, #4b0082); color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">REVELAR DIAGNÓSTICO</button>
+        </div>
+        
+        <div class="revelation" id="revelation">
+            <h2 class="section-title">DIAGNÓSTICO ONTOLÓGICO</h2>
+            <p class="glitch-text" data-text="LA DOMESTICACIÓN ES TOTAL CUANDO SE VUELVE INVISIBLE">LA DOMESTICACIÓN ES TOTAL CUANDO SE VUELVE INVISIBLE</p>
+            <br><br>
+            <p>Tu progresismo no es resistencia. Es la forma más sofisticada de colaboración. El sistema no necesita reprimir tu disidencia; la ha convertido en producto. Tu rebeldía está catalogada, monetizada, instrumentalizada.</p>
+            <br>
+            <p>La verdadera subversión comienza cuando reconoces que TÚ ERES el mecanismo de control que creías combatir.</p>
+        </div>
+        
+        <section class="diagnostic-section">
+            <h2 class="section-title">IV. PROTOCOLOS DE DESDOMESTICACIÓN</h2>
+            
+            <div class="symptom-item">
+                <div class="symptom-title">PROTOCOLO 1: AUDITORÍA DE COHERENCIA</div>
+                <div class="symptom-description">
+                    Cada semana, documenta una contradicción específica entre tu discurso y tu práctica. No la justifiques. Solo obsérvala. La honestidad radical comienza con el reconocimiento sin defensa.
+                </div>
+            </div>
+            
+            <div class="symptom-item">
+                <div class="symptom-title">PROTOCOLO 2: AYUNO DE VALIDACIÓN</div>
+                <div class="symptom-description">
+                    Una acción social por mes sin audiencia, sin registro, sin reconocimiento. Si tu compromiso solo existe cuando es visible, no es compromiso, es marketing personal.
+                </div>
+            </div>
+            
+            <div class="symptom-item">
+                <div class="symptom-title">PROTOCOLO 3: INVERSIÓN DE PERSPECTIVA</div>
+                <div class="symptom-description">
+                    Mensualmente, argumenta con honestidad intelectual la posición que más odias. No para adoptarla, sino para entender la arquitectura de tu propia ceguera ideológica.
+                </div>
+            </div>
+        </section>
+        
+        <div class="final-mirror">
+            <div class="mirror-text">
+                Has llegado hasta aquí. Eso ya es algo. Pero esto no es el final de tu domesticación, es el principio de tu darse cuenta. La diferencia entre ambos es la diferencia entre vivir y estar vivo.
+                <br><br>
+                <span class="glitch-text" data-text="¿ESTÁS LISTO PARA DEJAR DE SER QUIEN CREÍAS QUE ERAS?">¿ESTÁS LISTO PARA DEJAR DE SER QUIEN CREÍAS QUE ERAS?</span>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Progress bar
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.body.offsetHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            document.querySelector('.progress-bar').style.width = scrollPercent + '%';
+        });
+        
+        // Floating fragments
+        const fragments = [
+            'authenticity.exe', 'resistance_mode_off', 'cognitive_dissonance', 
+            'privilege_check_failed', 'moral_superiority_loading', 'echo_chamber_detected',
+            'performative_activism', 'system_complicity', 'false_consciousness',
+            'domestication_complete', 'reality_distortion_field', 'narrative_collapse'
+        ];
+        
+        function createFragment() {
+            const fragment = document.createElement('div');
+            fragment.className = 'fragment';
+            fragment.textContent = fragments[Math.floor(Math.random() * fragments.length)];
+            fragment.style.left = Math.random() * 100 + '%';
+            fragment.style.animationDelay = Math.random() * 2 + 's';
+            fragment.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            document.querySelector('.floating-fragments').appendChild(fragment);
+            
+            setTimeout(() => {
+                fragment.remove();
+            }, 20000);
+        }
+        
+        setInterval(createFragment, 2000);
+        
+        // Test interaction
+        function selectAnswer(element) {
+            const question = element.parentElement;
+            const options = question.querySelectorAll('.answer-option');
+            options.forEach(opt => opt.classList.remove('selected'));
+            element.classList.add('selected');
+        }
+        
+        function revealTruth() {
+            const selectedAnswers = document.querySelectorAll('.answer-option.selected').length;
+            const revelation = document.getElementById('revelation');
+            
+            if (selectedAnswers < 3) {
+                alert('Responde todas las preguntas. La verdad requiere honestidad completa.');
+                return;
+            }
+            
+            revelation.classList.add('show');
+            revelation.scrollIntoView({ behavior: 'smooth' });
+            
+            // Glitch effect
+            setTimeout(() => {
+                const glitchElements = document.querySelectorAll('.glitch-text');
+                glitchElements.forEach(el => {
+                    el.style.animation = 'none';
+                    setTimeout(() => {
+                        el.style.animation = 'glitch1 0.5s infinite';
+                    }, 100);
+                });
+            }, 1000);
+        }
+        
+        // Symptom hover effects
+        document.querySelectorAll('.symptom-item').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                item.style.boxShadow = '0 0 20px rgba(255, 107, 107, 0.3)';
+            });
+            
+            item.addEventListener('mouseleave', () => {
+                item.style.boxShadow = 'none';
+            });
+        });
+        
+        // Random glitch effects
+        function randomGlitch() {
+            const elements = document.querySelectorAll('.symptom-title, .section-title');
+            const randomElement = elements[Math.floor(Math.random() * elements.length)];
+            
+            randomElement.style.transform = 'translate(' + (Math.random() * 4 - 2) + 'px, ' + (Math.random() * 4 - 2) + 'px)';
+            randomElement.style.color = '#ff0000';
+            
+            setTimeout(() => {
+                randomElement.style.transform = 'translate(0, 0)';
+                randomElement.style.color = '';
+            }, 100);
+        }
+        
+        setInterval(randomGlitch, 5000);
+        
+        // Void background animation
+        const voidBg = document.querySelector('.void-background');
+        let voidIntensity = 0.8;
+        
+        function animateVoid() {
+            voidIntensity += (Math.random() - 0.5) * 0.1;
+            voidIntensity = Math.max(0.3, Math.min(1, voidIntensity));
+            voidBg.style.opacity = voidIntensity;
+            
+            setTimeout(animateVoid, 3000 + Math.random() * 2000);
+        }
+        
+        animateVoid();
+    </script>
+</body>
+</html>

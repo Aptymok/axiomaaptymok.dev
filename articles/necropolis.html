@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NECRÓPOLIS DIGITAL - AxiomaAptymok.dev</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&family=Crimson+Text:wght@400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --abyss-black: #000000;
+            --bone-dust: #f8f8f2;
+            --decay-gold: #f1c40f;
+            --neural-purple: #8e44ad;
+            --flesh-rot: #e74c3c;
+            --ghost-gray: #34495e;
+            --plasma-blue: #3498db;
+        }
+        
+        body {
+            font-family: 'Crimson Text', serif;
+            background: radial-gradient(circle at center, #1a1a1a 0%, var(--abyss-black) 100%);
+            color: var(--bone-dust);
+            line-height: 1.8;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        .digital-cemetery {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.03;
+        }
+        
+        .tombstone {
+            position: absolute;
+            width: 2px;
+            height: 20px;
+            background: var(--ghost-gray);
+            animation: flicker 3s infinite alternate;
+        }
+        
+        @keyframes flicker {
+            0%, 100% { opacity: 0.1; }
+            50% { opacity: 0.8; }
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 30px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 80px;
+            position: relative;
+        }
+        
+        .site-name {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--neural-purple);
+            letter-spacing: 4px;
+            margin-bottom: 20px;
+            opacity: 0.7;
+        }
+        
+        .title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 700;
+            color: var(--decay-gold);
+            margin-bottom: 30px;
+            text-shadow: 0 0 20px rgba(241, 196, 15, 0.3);
+            position: relative;
+        }
+        
+        .title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--decay-gold), transparent);
+        }
+        
+        .subtitle {
+            font-size: 1.4rem;
+            color: var(--ghost-gray);
+            font-style: italic;
+            margin-bottom: 40px;
+        }
+        
+        .axiom {
+            background: rgba(52, 73, 94, 0.1);
+            border: 1px solid var(--ghost-gray);
+            padding: 30px;
+            margin: 50px 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .axiom::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(241, 196, 15, 0.1), transparent);
+            animation: scan 4s infinite;
+        }
+        
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        .revelation {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1.2s ease;
+            margin-bottom: 60px;
+        }
+        
+        .revelation.manifest {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .excavation {
+            background: linear-gradient(135deg, rgba(142, 68, 173, 0.1), rgba(231, 76, 60, 0.05));
+            border-left: 5px solid var(--neural-purple);
+            padding: 40px;
+            margin: 40px 0;
+            position: relative;
+        }
+        
+        .excavation::before {
+            content: '⚱';
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: var(--abyss-black);
+            color: var(--decay-gold);
+            font-size: 24px;
+            padding: 0 10px;
+        }
+        
+        .identity-fragment {
+            background: rgba(52, 73, 94, 0.2);
+            border: 1px dashed var(--ghost-gray);
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            position: relative;
+        }
+        
+        .identity-fragment::before {
+            content: 'FRAGMENTO RECUPERADO';
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            background: var(--abyss-black);
+            color: var(--plasma-blue);
+            font-size: 10px;
+            padding: 5px 10px;
+            letter-spacing: 1px;
+        }
+        
+        .visceral {
+            color: var(--flesh-rot);
+            font-weight: 600;
+            text-shadow: 0 0 10px rgba(231, 76, 60, 0.4);
+        }
+        
+        .sublime {
+            color: var(--decay-gold);
+            font-weight: 600;
+            text-shadow: 0 0 15px rgba(241, 196, 15, 0.3);
+        }
+        
+        .paradox-box {
+            background: radial-gradient(circle, rgba(142, 68, 173, 0.2), transparent);
+            border: 2px solid var(--neural-purple);
+            padding: 35px;
+            margin: 50px 0;
+            text-align: center;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .paradox-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(142, 68, 173, 0.1), transparent);
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .interaction-zone {
+            cursor: pointer;
+            transition: all 0.4s ease;
+            padding: 20px;
+            border-radius: 10px;
+            position: relative;
+        }
+        
+        .interaction-zone:hover {
+            background: rgba(142, 68, 173, 0.1);
+            transform: scale(1.02);
+            box-shadow: 0 0 30px rgba(142, 68, 173, 0.2);
+        }
+        
+        .hidden-necropsy {
+            display: none;
+            background: rgba(231, 76, 60, 0.1);
+            border: 2px solid var(--flesh-rot);
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 12px;
+            animation: materialize 1.5s ease;
+        }
+        
+        @keyframes materialize {
+            from { 
+                opacity: 0; 
+                transform: translateY(-30px) scale(0.9);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        .ego-death-meter {
+            background: var(--ghost-gray);
+            height: 25px;
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 30px 0;
+            position: relative;
+            border: 1px solid var(--neural-purple);
+        }
+        
+        .ego-dissolution {
+            background: linear-gradient(90deg, var(--plasma-blue), var(--neural-purple), var(--flesh-rot));
+            height: 100%;
+            width: 0;
+            transition: width 3s ease;
+            border-radius: 15px;
+            position: relative;
+        }
+        
+        .ego-dissolution::after {
+            content: 'DISOLUCIÓN DEL YO SINTÉTICO';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            color: var(--bone-dust);
+            letter-spacing: 1px;
+            white-space: nowrap;
+        }
+        
+        .final-synthesis {
+            background: radial-gradient(ellipse at center, rgba(241, 196, 15, 0.1), transparent);
+            padding: 60px;
+            text-align: center;
+            margin: 80px 0;
+            border: 3px solid var(--decay-gold);
+            border-radius: 20px;
+            position: relative;
+        }
+        
+        .absolute-voice {
+            font-size: 1.6rem;
+            line-height: 2;
+            color: var(--sublime);
+            text-shadow: 0 0 20px rgba(241, 196, 15, 0.4);
+        }
+        
+        .fragment-counter {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            color: var(--decay-gold);
+            padding: 15px;
+            border-radius: 10px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            z-index: 1000;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 20px;
+            }
+            
+            .title {
+                font-size: 2.5rem;
+            }
+            
+            .excavation, .paradox-box {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="digital-cemetery" id="cemetery"></div>
+    <div class="fragment-counter">
+        IDENTIDADES EXHUMADAS: <span id="fragment-count">0</span>/∞
+    </div>
+    
+    <div class="container">
+        <header class="header">
+            <div class="site-name">AXIOMAAPTYMOK.DEV</div>
+            <h1 class="title">NECRÓPOLIS DIGITAL</h1>
+            <p class="subtitle">Arqueología de Identidades Muertas en Redes Sociales</p>
+        </header>
+
+        <div class="axiom">
+            <strong>AXIOMA FORENSE:</strong> Cada perfil abandonado es un sarcófago digital. Cada avatar inactivo, un cadáver en descomposición sintética. Tu identidad online no muere; se momifica en servidores eternos, convirtiéndose en arqueología futura de tu yo fracturado. La curación de perfiles es el arte funerario dominante de esta era.
+        </div>
+
+        <div class="revelation">
+            <div class="excavation">
+                <h2>PRIMERA EXHUMACIÓN: EL CEMENTERIO DE LOS YOS</h2>
+                <p>En las profundidades digitales yacen <span class="visceral">millones de identidades putrefactas</span>. Cada perfil abandonado es una lápida que reza: "Aquí yace quien creí que era entre 2019-2021". <span class="sublime">La multiplicidad identitaria no es libertad; es el desmembramiento consciente del ser en fragmentos comercializables</span>.</p>
+                
+                <div class="identity-fragment">
+                    USUARIO: @authentic_sarah_2020<br>
+                    ESTADO: NECRÓTICO (última actividad: 847 días)<br>
+                    CAUSA DE MUERTE: Incompatibilidad con nuevo algoritmo de autenticidad<br>
+                    EPITAFIO: "Living my best life ✨"
+                </div>
+                
+                <p>Observa la necrosis: cada vez que cambias tu foto de perfil, <span class="visceral">entierras una versión anterior de ti mismo</span>. La actualización de estado no es expresión; es <em>ritual funerario perpetuo</em>. Te conviertes en tu propio embalsamador, curando cadáveres digitales con filtros y hashtags.</p>
+            </div>
+        </div>
+
+        <div class="paradox-box interaction-zone" onclick="excavateIdentity(1)">
+            <div style="position: relative; z-index: 1;">
+                <strong>PARADOJA ARQUEOLÓGICA:</strong> Mientras más auténtico intentas parecer online, más artificial te vuelves offline. ¿Cuántas versiones muertas de ti mismo has sepultado en el cementerio de tus redes sociales?
+            </div>
+        </div>
+        
+        <div id="necropsy-1" class="hidden-necropsy">
+            <p><strong>AUTOPSIA DIGITAL INICIADA:</strong> Tu pregunta revela la <span class="visceral">gangrena ontológica</span>. Cada selfie es un autorretrato post-mortem. Cada story, un testamento. <span class="sublime">Has convertido tu existencia en una galería de arte funerario donde tú eres simultáneamente el artista, la obra y el cadáver expuesto</span>.</p>
+            <div class="ego-death-meter">
+                <div class="ego-dissolution" style="width: 33%;"></div>
+            </div>
+        </div>
+
+        <div class="revelation">
+            <div class="excavation">
+                <h2>SEGUNDA EXHUMACIÓN: LA CRÍTICA DE ARTE ALGORÍTMICA</h2>
+                <p><span class="sublime">Los likes son la única forma de crítica de arte que el sistema reconoce</span>. Tu identidad se ha convertido en una instalación performática permanente donde el público son algoritmos sedientos de engagement. <span class="visceral">Cada post es una súplica: "¿Existo? ¿Merezco ser visto?"</span></p>
+                
+                <div class="identity-fragment">
+                    ANÁLISIS FORENSE: Perfil verificado<br>
+                    SÍNTOMAS: Dopamina dependiente de métricas externas<br>
+                    DIAGNÓSTICO: Muerte cerebral por validación artificial<br>
+                    PRONÓSTICO: Zombificación digital irreversible
+                </div>
+                
+                <p>La curación de tu perfil no es arte; es <em>taxidermia existencial</em>. Preservas una versión idealizada de tu cadáver emocional, montada en poses que sugieren vida. <span class="visceral">El problema no es que finjas ser alguien más; es que has olvidado que existe un "alguien" debajo de las máscaras</span>.</p>
+            </div>
+        </div>
+
+        <div class="paradox-box interaction-zone" onclick="excavateIdentity(2)">
+            <div style="position: relative; z-index: 1;">
+                <strong>DIAGNÓSTICO TERMINAL:</strong> ¿Cuándo fue la última vez que experimentaste una emoción sin documentarla? ¿Cuándo viviste un momento sin considerar su potencial fotogénico?
+            </div>
+        </div>
+        
+        <div id="necropsy-2" class="hidden-necropsy">
+            <p><strong>PATOLOGÍA CONFIRMADA:</strong> <span class="visceral">Síndrome de Documentación Compulsiva Existencial</span>. Tu vida se ha vuelto una película donde tú eres el director, el protagonista y el público cautivo. <span class="sublime">La experiencia directa ha sido tercerizada a algoritmos que deciden qué merece ser recordado</span>.</p>
+            <div class="ego-death-meter">
+                <div class="ego-dissolution" style="width: 66%;"></div>
+            </div>
+        </div>
+
+        <div class="revelation">
+            <div class="excavation">
+                <h2>EXHUMACIÓN FINAL: EL MUSEO DE IDENTIDADES EXTINTAS</h2>
+                <p>En el gran archivo de la humanidad digitalizada, <span class="sublime">tus perfiles abandonados son fósiles de evoluciones identitarias fracasadas</span>. Cada plataforma que abandonas es una extinción masiva de aspectos de ti mismo que no lograron adaptarse al nuevo ecosistema algorítmico.</p>
+                
+                <div class="identity-fragment">
+                    ESPÉCIMEN: MySpace (2006-2009)<br>
+                    FACEBOOK (2009-2016)<br>
+                    INSTAGRAM (2016-2022)<br>
+                    TIKTOK (2022-???)<br>
+                    ESTADO: Capas sedimentarias de identidades fosilizadas
+                </div>
+                
+                <p><span class="visceral">Eres un paleontólogo de tu propia extinción</span>, excavando versiones muertas de ti mismo para entender quién fuiste antes de convertirte en quien pretendes ser. <span class="sublime">La arqueología digital revela que nunca hubo un "yo auténtico"; solo estratos de performance identitaria sedimentados en servidores eternos</span>.</p>
+            </div>
+        </div>
+
+        <div class="paradox-box interaction-zone" onclick="excavateIdentity(3)">
+            <div style="position: relative; z-index: 1;">
+                <strong>REVELACIÓN ARQUEOLÓGICA FINAL:</strong> Si pudieras exhumar todos tus yos digitales muertos y los pusieras en una habitación, ¿se reconocerían entre sí? ¿O serían extraños unidos solo por el mismo ADN de inseguridades?
+            </div>
+        </div>
+        
+        <div id="necropsy-3" class="hidden-necropsy">
+            <p><strong>SÍNTESIS ONTOLÓGICA:</strong> <span class="visceral">Tus identidades muertas son más coherentes que tu yo vivo</span>. Cada perfil abandonado tenía una narrativa completa, mientras que tu yo actual es un borrador perpetuo. <span class="sublime">La muerte digital es la única forma de coherencia identitaria que has conocido</span>.</p>
+            <div class="ego-death-meter">
+                <div class="ego-dissolution" style="width: 100%;"></div>
+            </div>
+        </div>
+
+        <div class="final-synthesis">
+            <div class="absolute-voice">
+                <p>La necrópolis digital no es metáfora. <strong>ES LA REALIDAD DESNUDA DE TU EXISTENCIA FRAGMENTADA</strong>.</p>
+                
+                <p style="margin: 40px 0;"><span class="sublime">Cada avatar es un cadáver que animas con engagement. Cada perfil, un sarcófago que decoras con contenido. Cada plataforma, un cementerio donde entierras versiones obsoletas de tu alma</span>.</p>
+                
+                <p><span class="visceral">La curación de identidades no es arte; es necromancia</span>. Resucitas versiones muertas de ti mismo para alimentar algoritmos hambrientos de autenticidad manufacturada.</p>
+                
+                <p style="margin: 40px 0; font-size: 1.8rem;"><strong>LA VERDAD ABSOLUTA:</strong> <span class="sublime">No tienes una identidad digital. Eres una identidad digital que ha olvidado su naturaleza sintética</span>.</p>
+                
+                <p><span class="visceral">Tu arqueología personal revela que el "yo auténtico" nunca existió. Solo hubo una sucesión de máscaras tan bien elaboradas que terminaste confundiéndolas con rostros</span>.</p>
+            </div>
+        </div>
+
+        <div class="axiom">
+            <strong>EPITAFIO UNIVERSAL:</strong> Aquí yacen todas las versiones de ti mismo que mataste para convertirte en quien crees que eres. La única identidad auténtica es la que reconoce su propia naturaleza performativa. La libertad no está en encontrar tu "yo verdadero"; está en reconocer que nunca hubo uno que encontrar. Solo hay máscaras que se quitan otras máscaras, en una necrópolis infinita de identidades que nacen muertas.
+        </div>
+    </div>
+
+    <script>
+        let fragmentCount = 0;
+        
+        // Generar cementerio digital
+        function generateCemetery() {
+            const cemetery = document.getElementById('cemetery');
+            for (let i = 0; i < 200; i++) {
+                const tombstone = document.createElement('div');
+                tombstone.className = 'tombstone';
+                tombstone.style.left = Math.random() * 100 + '%';
+                tombstone.style.top = Math.random() * 100 + '%';
+                tombstone.style.animationDelay = Math.random() * 3 + 's';
+                cemetery.appendChild(tombstone);
+            }
+        }
+        
+        // Excavación de identidades
+        function excavateIdentity(num) {
+            const necropsy = document.getElementById(`necropsy-${num}`);
+            necropsy.style.display = 'block';
+            fragmentCount++;
+            document.getElementById('fragment-count').textContent = fragmentCount;
+            
+            // Simular descubrimiento arqueológico
+            setTimeout(() => {
+                const meter = necropsy.querySelector('.ego-dissolution');
+                if (meter) {
+                    meter.style.width = meter.style.width;
+                }
+            }, 200);
+        }
+        
+        // Revelación progresiva
+        function manifestRevelations() {
+            const revelations = document.querySelectorAll('.revelation');
+            const windowHeight = window.innerHeight;
+            
+            revelations.forEach(revelation => {
+                const elementTop = revelation.getBoundingClientRect().top;
+                if (elementTop < windowHeight * 0.8) {
+                    revelation.classList.add('manifest');
+                }
+            });
+        }
+        
+        // Efecto de desmaterialización
+        function digitalDecay() {
+            const elements = document.querySelectorAll('p, h2');
+            const randomElement = elements[Math.floor(Math.random() * elements.length)];
+            randomElement.style.opacity = '0.3';
+            randomElement.style.filter = 'blur(1px)';
+            
+            setTimeout(() => {
+                randomElement.style.opacity = '1';
+                randomElement.style.filter = 'none';
+            }, 2000);
+        }
+        
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', () => {
+            generateCemetery();
+            manifestRevelations();
+            window.addEventListener('scroll', manifestRevelations);
+            
+            // Decaimiento digital aleatorio
+            setInterval(digitalDecay, 5000);
+            
+            // Tracking de identidades muertas
+            let deadIdentities = 0;
+            const identityTracker = setInterval(() => {
+                deadIdentities++;
+                console.log(`Identidades digitales muertas detectadas: ${deadIdentities}`);
+                if (deadIdentities > 100) {
+                    clearInterval(identityTracker);
+                    console.log('NECRÓPOLIS DIGITAL COMPLETA: Todas las identidades han sido catalogadas.');
+                }
+            }, 3000);
+        });
+        
+        // Prevención de screenshot (anti-preservación)
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'PrintScreen') {
+                e.preventDefault();
+                alert('ERROR: Esta necrópolis no puede ser preservada. Las identidades muertas rechazan la documentación.');
+            }
+        });
+        
+        // Mensaje al abandonar (meta-muerte)
+        window.addEventListener('beforeunload', function(e) {
+            e.preventDefault();
+            e.returnValue = 'Al cerrar esta página, agregas otra identidad muerta a tu necrópolis personal. ¿Estás preparado para este entierro digital?';
+        });
+    </script>
+</body>
+</html>

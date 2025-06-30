@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARQUEOLOGÍA DEL FUTURO CANCELADO</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,700;1,400&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            line-height: 1.4;
+            overflow-x: hidden;
+            cursor: none;
+            position: relative;
+        }
+        
+        .cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border: 1px solid #ff0000;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: transform 0.1s ease;
+        }
+        
+        .glitch-container {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            background: linear-gradient(45deg, #0a0a0a 0%, #1a0a0a 25%, #0a0a0a 50%, #0a1a0a 75%, #0a0a0a 100%);
+            background-size: 400% 400%;
+            animation: backgroundShift 20s ease-in-out infinite;
+        }
+        
+        @keyframes backgroundShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .static-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(255, 255, 255, 0.01) 2px,
+                rgba(255, 255, 255, 0.01) 4px
+            );
+            pointer-events: none;
+            animation: staticFlicker 0.1s infinite;
+            z-index: 1;
+        }
+        
+        @keyframes staticFlicker {
+            0% { opacity: 0.02; }
+            50% { opacity: 0.05; }
+            100% { opacity: 0.02; }
+        }
+        
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .title {
+            font-size: clamp(1.5rem, 4vw, 3rem);
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: #ff0000;
+            text-shadow: 
+                0 0 10px #ff0000,
+                0 0 20px #ff0000,
+                0 0 40px #ff0000;
+            animation: titleGlitch 3s infinite;
+            margin-bottom: 20px;
+        }
+        
+        @keyframes titleGlitch {
+            0%, 96% { transform: translate(0); }
+            1% { transform: translate(2px, -2px); }
+            2% { transform: translate(-2px, 2px); }
+            3% { transform: translate(0); }
+            4% { transform: translate(-1px, 1px); }
+            5% { transform: translate(1px, -1px); }
+        }
+        
+        .subtitle {
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+            letter-spacing: 1px;
+        }
+        
+        .warning {
+            background: rgba(255, 0, 0, 0.1);
+            border: 1px solid #ff0000;
+            padding: 20px;
+            margin: 40px 20px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #ff6666;
+            animation: pulseWarning 2s infinite;
+            position: relative;
+            z-index: 2;
+        }
+        
+        @keyframes pulseWarning {
+            0%, 100% { box-shadow: 0 0 5px rgba(255, 0, 0, 0.3); }
+            50% { box-shadow: 0 0 20px rgba(255, 0, 0, 0.6); }
+        }
+        
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .fragment {
+            margin: 60px 0;
+            padding: 30px;
+            background: rgba(20, 20, 20, 0.8);
+            border-left: 3px solid #ff0000;
+            position: relative;
+            transform: translateX(-100px);
+            opacity: 0;
+            transition: all 0.8s ease;
+        }
+        
+        .fragment.visible {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        
+        .fragment:nth-child(even) {
+            border-left: 3px solid #00ff00;
+            transform: translateX(100px);
+        }
+        
+        .fragment-title {
+            font-size: 1.2rem;
+            color: #ff0000;
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .fragment:nth-child(even) .fragment-title {
+            color: #00ff00;
+        }
+        
+        .fragment-text {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #cccccc;
+        }
+        
+        .revelation {
+            background: rgba(255, 0, 0, 0.05);
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px dashed #ff0000;
+            font-style: italic;
+            color: #ff9999;
+        }
+        
+        .glitch-text {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .glitch-text:hover:before {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            color: #ff0000;
+            animation: glitchEffect 0.3s infinite;
+        }
+        
+        @keyframes glitchEffect {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+        
+        .excavation-site {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 40px;
+            margin: 80px 0;
+            border: 2px solid #333;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .excavation-site:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: scan 3s infinite;
+        }
+        
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        .buried-future {
+            background: rgba(0, 50, 0, 0.2);
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 2px solid #00ff00;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .buried-future:hover {
+            opacity: 1;
+            background: rgba(0, 50, 0, 0.4);
+        }
+        
+        .terminal {
+            background: #000;
+            border: 1px solid #333;
+            padding: 20px;
+            margin: 40px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+        }
+        
+        .terminal-prompt {
+            color: #00ff00;
+        }
+        
+        .terminal-output {
+            color: #ffff00;
+            margin: 5px 0;
+        }
+        
+        .horror-trigger {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255, 0, 0, 0.8);
+            border: none;
+            padding: 15px 30px;
+            color: white;
+            font-family: inherit;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .horror-trigger:hover {
+            background: rgba(255, 0, 0, 1);
+            transform: scale(1.1);
+        }
+        
+        .horror-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 9998;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        
+        .horror-text {
+            font-size: 2rem;
+            color: #ff0000;
+            text-align: center;
+            animation: horrorPulse 1s infinite;
+            max-width: 80%;
+        }
+        
+        @keyframes horrorPulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.1); }
+        }
+        
+        .close-horror {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            background: none;
+            border: none;
+            color: #ff0000;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+        
+        @media (max-width: 768px) {
+            .fragment {
+                transform: translateY(50px);
+                margin: 40px 0;
+                padding: 20px;
+            }
+            
+            .fragment.visible {
+                transform: translateY(0);
+            }
+            
+            .fragment:nth-child(even) {
+                transform: translateY(50px);
+            }
+        }
+        
+        .void-whisper {
+            position: absolute;
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.1);
+            pointer-events: none;
+            animation: whisperFade 8s infinite;
+            z-index: 0;
+        }
+        
+        @keyframes whisperFade {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 0.3; }
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor"></div>
+    <div class="static-overlay"></div>
+    
+    <div class="glitch-container">
+        <div class="header">
+            <h1 class="title">ARQUEOLOGÍA DEL FUTURO CANCELADO</h1>
+            <p class="subtitle">Lo que perdimos cuando aceptamos el presente</p>
+        </div>
+        
+        <div class="warning">
+            <strong>ADVERTENCIA ONTOLÓGICA:</strong> Este documento contiene fragmentos de realidades abortadas. 
+            La exposición prolongada puede causar: nostalgia existencial, horror al presente, 
+            y la incapacidad permanente de aceptar el "realismo" como excusa.
+        </div>
+        
+        <div class="content">
+            <div class="fragment">
+                <h2 class="fragment-title">I. PRÓLOGO: EL CEMENTERIO DE LAS POSIBILIDADES</h2>
+                <div class="fragment-text">
+                    Bajo cada "sé realista" yace sepultado un mundo. Bajo cada "eso no es posible" 
+                    se pudren civilizaciones enteras que nunca tuvieron oportunidad de existir. 
+                    Este documento es una <span class="glitch-text" data-text="EXCAVACIÓN">excavación</span> 
+                    arqueológica de los futuros que sacrificamos en el altar del pragmatismo.
+                    
+                    <div class="revelation">
+                        El presente no es un dato objetivo. Es una conspiración colectiva 
+                        de imaginaciones empobrecidas.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="fragment">
+                <h2 class="fragment-title">II. LA GRAN CASTRACIÓN IMAGINATIVA</h2>
+                <div class="fragment-text">
+                    Nos enseñaron que madurar significaba renunciar. Que ser adulto implicaba 
+                    aceptar límites que nunca cuestionamos. La "realidad" se convirtió en 
+                    nuestro carcelero más eficiente: uno que llevamos dentro, susurrando 
+                    constantemente que nuestros sueños son "irrealistas".
+                    
+                    <div class="terminal">
+                        <div class="terminal-prompt">future_scanner@cancelled:~$ grep -r "impossible" /dev/dreams</div>
+                        <div class="terminal-output">Encontradas 47,392 coincidencias en archivos de sueños suprimidos</div>
+                        <div class="terminal-output">Ejecutando protocolo de recuperación...</div>
+                        <div class="terminal-output">ERROR: Acceso denegado por subsistema PRAGMATIC_FILTER</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="excavation-site">
+                <h2 class="fragment-title">III. SITIO DE EXCAVACIÓN: FUTUROS SEPULTADOS</h2>
+                <div class="fragment-text">
+                    Los siguientes fragmentos fueron recuperados de los estratos profundos 
+                    de la imaginación colectiva, antes de su extinción:
+                    
+                    <div class="buried-future" onclick="revealFuture(this)">
+                        <strong>Estrato 1987:</strong> "Un mundo donde el trabajo sea opcional 
+                        y la creatividad, obligatoria."
+                    </div>
+                    
+                    <div class="buried-future" onclick="revealFuture(this)">
+                        <strong>Estrato 1994:</strong> "Ciudades que crecen como organismos, 
+                        sin arquitectos ni planificadores urbanos."
+                    </div>
+                    
+                    <div class="buried-future" onclick="revealFuture(this)">
+                        <strong>Estrato 2001:</strong> "Internet como espacio de liberación total, 
+                        no de vigilancia corporativa."
+                    </div>
+                    
+                    <div class="buried-future" onclick="revealFuture(this)">
+                        <strong>Estrato 2008:</strong> "Crisis económicas como oportunidades 
+                        para reinventar completamente el sistema."
+                    </div>
+                </div>
+            </div>
+            
+            <div class="fragment">
+                <h2 class="fragment-title">IV. EL ASESINATO DE LA UTOPÍA</h2>
+                <div class="fragment-text">
+                    No fue un accidente. La muerte de la imaginación utópica fue un homicidio 
+                    premeditado. Los asesinos tenían nombres: "sentido común", "pragmatismo", 
+                    "madurez", "responsabilidad". Sus armas: la repetición constante de que 
+                    "así son las cosas" hasta que olvidamos que las cosas podrían ser de otra manera.
+                    
+                    <div class="revelation">
+                        Cada vez que dices "sé realista" estás perpetuando un genocidio 
+                        de posibilidades.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="fragment">
+                <h2 class="fragment-title">V. PROTOCOLO DE RESURRECCIÓN</h2>
+                <div class="fragment-text">
+                    Para recuperar un futuro cancelado, sigue estos pasos:
+                    <br><br>
+                    1. Identifica una "imposibilidad" que aceptas sin cuestionar
+                    <br>
+                    2. Pregúntate: ¿quién se beneficia de que yo crea que esto es imposible?
+                    <br>
+                    3. Imagina el mundo en el que esa "imposibilidad" es normal
+                    <br>
+                    4. Actúa como si ya vivieras en ese mundo
+                    <br>
+                    5. Ignora a quienes te llamen "irrealista"
+                    
+                    <div class="revelation">
+                        El realismo es la ideología de quienes se benefician del status quo.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="fragment">
+                <h2 class="fragment-title">VI. MANIFIESTO PARA LA INSURGENCIA IMAGINATIVA</h2>
+                <div class="fragment-text">
+                    Declaramos la guerra contra el presente como prisión. Nos negamos a aceptar 
+                    que "así son las cosas" sea una respuesta válida a "¿cómo podrían ser?". 
+                    Reivindicamos nuestro derecho a imaginar futuros radicalmente diferentes, 
+                    a actuar como si fueran posibles, y a hacerlos realidad mediante la 
+                    insurrección de la imaginación contra los límites impuestos.
+                    
+                    <div class="revelation">
+                        La realidad es negociable. El presente es revisable. 
+                        El futuro está por escribirse.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <button class="horror-trigger" onclick="triggerHorror()">DESPERTAR</button>
+    
+    <div class="horror-overlay" id="horrorOverlay">
+        <button class="close-horror" onclick="closeHorror()">&times;</button>
+        <div class="horror-text" id="horrorText">
+            AHORA SABES QUE VIVES EN UN MUNDO<br>
+            QUE ELIGIÓ LA MEDIOCRIDAD<br>
+            SOBRE LA MAGNIFICENCIA<br><br>
+            NO PUEDES VOLVER<br>
+            A NO SABER<br><br>
+            LA ARQUEOLOGÍA HA TERMINADO<br>
+            LA RECONSTRUCCIÓN COMIENZA<br>
+            AHORA
+        </div>
+    </div>
+    
+    <script>
+        // Cursor personalizado
+        const cursor = document.querySelector('.cursor');
+        let mouseX = 0, mouseY = 0;
+        let cursorX = 0, cursorY = 0;
+        
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+        
+        function animateCursor() {
+            cursorX += (mouseX - cursorX) * 0.1;
+            cursorY += (mouseY - cursorY) * 0.1;
+            cursor.style.left = cursorX + 'px';
+            cursor.style.top = cursorY + 'px';
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+        
+        // Animación de fragmentos al scroll
+        const fragments = document.querySelectorAll('.fragment');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        fragments.forEach(fragment => observer.observe(fragment));
+        
+        // Susurros del vacío
+        function createVoidWhisper() {
+            const whispers = [
+                "¿Recuerdas cuando creías que todo era posible?",
+                "Tu rendición fue silenciosa pero total",
+                "Cada día aceptas un poco menos de vida",
+                "El pragmatismo es el opio de los soñadores",
+                "Tus padres también tuvieron sueños",
+                "La mediocridad es contagiosa",
+                "¿Cuándo dejaste de preguntarte 'por qué no'?"
+            ];
+            
+            const whisper = document.createElement('div');
+            whisper.className = 'void-whisper';
+            whisper.textContent = whispers[Math.floor(Math.random() * whispers.length)];
+            whisper.style.left = Math.random() * window.innerWidth + 'px';
+            whisper.style.top = Math.random() * window.innerHeight + 'px';
+            
+            document.body.appendChild(whisper);
+            
+            setTimeout(() => whisper.remove(), 8000);
+        }
+        
+        setInterval(createVoidWhisper, 5000);
+        
+        // Revelar futuros enterrados
+        function revealFuture(element) {
+            const reveals = [
+                "Este futuro fue cancelado por 'falta de financiación'",
+                "Demasiado radical para los focus groups",
+                "Los algoritmos de recomendación lo enterraron",
+                "No era compatible con la economía extractiva",
+                "Requería que las personas cambiaran, no solo consumieran"
+            ];
+            
+            const reveal = reveals[Math.floor(Math.random() * reveals.length)];
+            element.innerHTML += `<br><em style="color: #ff6666; font-size: 0.8rem;">→ ${reveal}</em>`;
+            element.style.background = 'rgba(100, 0, 0, 0.3)';
+        }
+        
+        // Horror ontológico
+        function triggerHorror() {
+            document.getElementById('horrorOverlay').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            
+            // Efecto de glitch en todo el documento
+            document.body.style.animation = 'glitchEffect 0.1s infinite';
+            
+            setTimeout(() => {
+                document.body.style.animation = '';
+            }, 2000);
+        }
+        
+        function closeHorror() {
+            document.getElementById('horrorOverlay').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Efectos de sonido simulados con vibración en móviles
+        document.addEventListener('click', () => {
+            if (navigator.vibrate) {
+                navigator.vibrate(50);
+            }
+        });
+        
+        // Glitch aleatorio del título
+        setInterval(() => {
+            const title = document.querySelector('.title');
+            if (Math.random() < 0.1) {
+                title.style.transform = `translate(${Math.random() * 4 - 2}px, ${Math.random() * 4 - 2}px)`;
+                setTimeout(() => {
+                    title.style.transform = 'translate(0)';
+                }, 100);
+            }
+        }, 1000);
+    </script>
+</body>
+</html>

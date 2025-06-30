@@ -1,0 +1,516 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FRAGMENTOS DE UNA MASCULINIDAD DISOLVENTE</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Source+Code+Pro:wght@300;400&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: #0a0a0a;
+            color: #e0e0e0;
+            font-family: 'Crimson Text', serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            cursor: crosshair;
+        }
+        
+        .fracture-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 49%, rgba(139, 0, 0, 0.1) 50%, transparent 51%);
+            z-index: 1;
+            pointer-events: none;
+            animation: fractureShift 8s infinite;
+        }
+        
+        @keyframes fractureShift {
+            0%, 100% { transform: translateX(0) translateY(0); }
+            25% { transform: translateX(2px) translateY(-1px); }
+            50% { transform: translateX(-1px) translateY(2px); }
+            75% { transform: translateX(1px) translateY(-2px); }
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 60px 0 40px;
+            border-bottom: 1px solid rgba(139, 0, 0, 0.3);
+            margin-bottom: 40px;
+        }
+        
+        .site-name {
+            font-family: 'Source Code Pro', monospace;
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+        
+        .title {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #8b0000;
+            text-shadow: 0 0 10px rgba(139, 0, 0, 0.5);
+            margin-bottom: 20px;
+            animation: titlePulse 3s infinite;
+        }
+        
+        @keyframes titlePulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            color: #999;
+            font-style: italic;
+        }
+        
+        .warning-banner {
+            background: rgba(139, 0, 0, 0.1);
+            border: 1px solid #8b0000;
+            padding: 20px;
+            margin-bottom: 40px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #ff6b6b;
+            animation: warningFlicker 2s infinite;
+        }
+        
+        @keyframes warningFlicker {
+            0%, 90%, 100% { opacity: 1; }
+            95% { opacity: 0.5; }
+        }
+        
+        .section {
+            margin-bottom: 60px;
+            padding: 30px;
+            background: rgba(20, 20, 20, 0.8);
+            border-left: 3px solid #8b0000;
+            position: relative;
+        }
+        
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(139, 0, 0, 0.03), transparent);
+            animation: scanline 4s infinite;
+        }
+        
+        @keyframes scanline {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .section-number {
+            font-family: 'Source Code Pro', monospace;
+            font-size: 0.8rem;
+            color: #8b0000;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #e0e0e0;
+            margin-bottom: 20px;
+            text-shadow: 0 0 5px rgba(224, 224, 224, 0.3);
+        }
+        
+        .content p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            text-align: justify;
+        }
+        
+        .highlighted {
+            background: linear-gradient(120deg, rgba(139, 0, 0, 0.2) 0%, transparent 100%);
+            padding: 2px 4px;
+            border-radius: 2px;
+        }
+        
+        .interactive-element {
+            background: rgba(40, 40, 40, 0.9);
+            border: 1px solid #666;
+            padding: 20px;
+            margin: 30px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .interactive-element:hover {
+            background: rgba(139, 0, 0, 0.1);
+            border-color: #8b0000;
+            transform: translateY(-2px);
+        }
+        
+        .interactive-element::after {
+            content: '[CLICK PARA REVELAR]';
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-family: 'Source Code Pro', monospace;
+            font-size: 0.7rem;
+            color: #666;
+        }
+        
+        .hidden-content {
+            display: none;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #666;
+            color: #ff6b6b;
+            font-style: italic;
+        }
+        
+        .manifestation-counter {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            color: #8b0000;
+            padding: 10px 15px;
+            border: 1px solid #8b0000;
+            font-family: 'Source Code Pro', monospace;
+            font-size: 0.8rem;
+            z-index: 1000;
+        }
+        
+        .glitch-text {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .glitch-text::before,
+        .glitch-text::after {
+            content: attr(data-text);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .glitch-text::before {
+            color: #ff0000;
+            z-index: -1;
+            animation: glitch1 0.5s infinite;
+        }
+        
+        .glitch-text::after {
+            color: #00ff00;
+            z-index: -2;
+            animation: glitch2 0.5s infinite;
+        }
+        
+        @keyframes glitch1 {
+            0%, 100% { transform: translate(0); }
+            20% { transform: translate(-1px, 1px); }
+            40% { transform: translate(-1px, -1px); }
+            60% { transform: translate(1px, 1px); }
+            80% { transform: translate(1px, -1px); }
+        }
+        
+        @keyframes glitch2 {
+            0%, 100% { transform: translate(0); }
+            20% { transform: translate(1px, -1px); }
+            40% { transform: translate(1px, 1px); }
+            60% { transform: translate(-1px, -1px); }
+            80% { transform: translate(-1px, 1px); }
+        }
+        
+        .mind-fracture {
+            background: linear-gradient(45deg, transparent, rgba(139, 0, 0, 0.1), transparent);
+            animation: mindShatter 6s infinite;
+        }
+        
+        @keyframes mindShatter {
+            0%, 100% { filter: blur(0px); }
+            50% { filter: blur(1px); }
+        }
+        
+        .toxic-whisper {
+            color: #666;
+            font-size: 0.9rem;
+            font-style: italic;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(139, 0, 0, 0.05);
+            border-left: 2px solid #8b0000;
+        }
+        
+        .revelation-trigger {
+            background: rgba(139, 0, 0, 0.1);
+            color: #ff6b6b;
+            padding: 3px 6px;
+            border-radius: 3px;
+            cursor: help;
+            position: relative;
+        }
+        
+        .revelation-trigger:hover::after {
+            content: attr(data-revelation);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #000;
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            z-index: 1000;
+            border: 1px solid #8b0000;
+        }
+        
+        @media (max-width: 768px) {
+            .title {
+                font-size: 1.8rem;
+            }
+            
+            .container {
+                padding: 0 15px;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="fracture-overlay"></div>
+    
+    <div class="container">
+        <header class="header">
+            <div class="site-name">AxiomaAptymok.dev</div>
+            <h1 class="title">FRAGMENTOS DE UNA MASCULINIDAD DISOLVENTE</h1>
+            <div class="subtitle">RADIOGRAFÍA DEL MACHO POST-METOO</div>
+        </header>
+        
+        <div class="warning-banner">
+            ⚠️ ADVERTENCIA ONTOLÓGICA: Este texto opera como un virus cognitivo. Su lectura implica contagio irreversible. Proceda bajo su propia responsabilidad existencial. ⚠️
+        </div>
+        
+        <section class="section">
+            <div class="section-number">PRÓLOGO / AUTOPSIA_INICIAL</div>
+            <h2 class="section-title">EL CADÁVER EN EL ESPEJO</h2>
+            <div class="content">
+                <p>No vengo a ofrecerte una nueva masculinidad. Vengo a <span class="highlighted">certificar la muerte</span> de la anterior. Soy el forense que examina los restos de lo que creías ser, el patólogo de una identidad que ya se descompone mientras la habitabas.</p>
+                
+                <p>Tú, que lees esto, eres tanto el <span class="glitch-text" data-text="asesino">asesino</span> como la víctima. El verdugo y el condenado. Has participado activamente en el asesinato de tu propia esencia masculina, aplaudiendo cada golpe, celebrando cada corte, sonriendo mientras te desangraban en nombre del progreso.</p>
+                
+                <div class="toxic-whisper">
+                    "Pero yo no soy como esos otros hombres. Yo soy diferente. Yo entiendo."
+                </div>
+                
+                <p>Esa voz que acabas de escuchar es <span class="revelation-trigger" data-revelation="La voz de tu propia domesticación">tu primer síntoma</span>. La evidencia forense de tu complicidad. No eres diferente. Eres el perfecto producto de una castración psicológica que has interiorizado hasta convertirla en identidad.</p>
+            </div>
+        </section>
+        
+        <section class="section mind-fracture">
+            <div class="section-number">FRAGMENTO_01 / DISECCIÓN_MECANISMOS</div>
+            <h2 class="section-title">LA ANATOMÍA DE LA SUMISIÓN VOLUNTARIA</h2>
+            <div class="content">
+                <p>Analicemos tu <span class="highlighted">arquitectura de la culpa</span>. Cada vez que una mujer expresa molestia, tu primera reacción no es evaluar la situación, sino buscar en qué has fallado. Has desarrollado una hipersensibilidad patológica al descontento femenino que te convierte en un detector de culpa andante.</p>
+                
+                <div class="interactive-element" onclick="revealContent(this)">
+                    <strong>EJERCICIO DE AUTORECONOCIMIENTO:</strong> ¿Cuántas veces has pedido disculpas esta semana sin saber por qué?
+                    <div class="hidden-content">
+                        La respuesta no importa. El hecho de que estés contando significa que has convertido la disculpa en un reflejo condicionado. Eres un perro de Pavlov emocional, salivando sumisión ante el menor indicio de desaprobación.
+                    </div>
+                </div>
+                
+                <p>Tu masculinidad se ha convertido en una <span class="revelation-trigger" data-revelation="Un performance diseñado para obtener aprobación femenina">performance de inocuidad</span>. Cada gesto, cada palabra, cada pensamiento pasa por el filtro de "¿esto ofenderá a alguien?". Has desarrollado una autocensura tan refinada que ya no sabes dónde termina la consideración y dónde comienza la castración.</p>
+                
+                <div class="toxic-whisper">
+                    "Pero ser considerado es bueno. Ser respetuoso es correcto."
+                </div>
+                
+                <p>Ahí está otra vez esa voz. Esa vocecita domesticada que confunde <span class="highlighted">respeto con sometimiento</span>, consideración con aniquilación del yo. No te pido que seas un salvaje. Te pido que reconozcas que has desarrollado una alergia a tu propia fuerza.</p>
+            </div>
+        </section>
+        
+        <section class="section">
+            <div class="section-number">FRAGMENTO_02 / ARQUEOLOGÍA_TRAUMA</div>
+            <h2 class="section-title">EL ARCHIVO DE TUS TRAICIONES</h2>
+            <div class="content">
+                <p>Llevabas dentro una biblioteca de traiciones. Cada vez que silenciaste una opinión, cada vez que sonreíste cuando querías gritar, cada vez que fingiste estar de acuerdo cuando tu instinto te decía lo contrario. Tienes un <span class="highlighted">archivo completo de auto-traiciones</span> que llamas "madurez emocional".</p>
+                
+                <div class="interactive-element" onclick="revealContent(this)">
+                    <strong>REVELACIÓN INCÓMODA:</strong> Tu "evolución" como hombre
+                    <div class="hidden-content">
+                        No evolucionaste. Te castraste sistemáticamente y llamaste a esa castración "crecimiento personal". Cada Workshop de masculinidad saludable era una sesión de condicionamiento. Cada libro de autoayuda emocional, una lobotomía disfrazada de iluminación.
+                    </div>
+                </div>
+                
+                <p>Has aprendido a <span class="revelation-trigger" data-revelation="Como un animal doméstico aprende trucos">hablar el lenguaje de la culpa</span> con fluidez nativa. "Reconozco mi privilegio", "estoy en proceso de deconstrucción", "necesito trabajar en mí mismo". Frases que repites como mantras, sin darte cuenta de que cada una es una confesión de un crimen que no cometiste.</p>
+                
+                <p>¿Cuándo fue la última vez que dijiste "no" sin dar explicaciones? ¿Cuándo fue la última vez que expresaste desacuerdo sin preámbulos de disculpa? <span class="highlighted">Has perdido la capacidad de existir sin justificación</span>.</p>
+                
+                <div class="toxic-whisper">
+                    "Pero la toxicidad masculina es real. Los hombres han hecho daño."
+                </div>
+                
+                <p>Por supuesto que es real. Pero tú no eres responsable de los crímenes de tu género. Sin embargo, has asumido una culpa colectiva que te paraliza. Has convertido la responsabilidad histórica en <span class="revelation-trigger" data-revelation="Una prisión psicológica auto-impuesta">auto-flagelación personal</span>.</p>
+            </div>
+        </section>
+        
+        <section class="section mind-fracture">
+            <div class="section-number">FRAGMENTO_03 / DIAGNÓSTICO_TERMINAL</div>
+            <h2 class="section-title">LA MUERTE DE LA AUTORIDAD INTERNA</h2>
+            <div class="content">
+                <p>Tu <span class="highlighted">brújula interna</span> ha sido reemplazada por un GPS social que te dice qué pensar en cada momento. Ya no consultas tu instinto; consultas el consenso. Ya no preguntas "¿qué siento?", sino "¿qué debería sentir?".</p>
+                
+                <p>Has desarrollado una <span class="revelation-trigger" data-revelation="La incapacidad de confiar en tu propio juicio">hiperdependencia del juicio externo</span> que te convierte en un eterno adolescente buscando aprobación. Cada decisión pasa por el comité de lo políticamente correcto que has instalado en tu cabeza.</p>
+                
+                <div class="interactive-element" onclick="revealContent(this)">
+                    <strong>EXPERIMENTO DE CONCIENCIA:</strong> Piensa en tu última opinión controvertida
+                    <div class="hidden-content">
+                        No pudiste, ¿verdad? Porque ya no tienes opiniones controvertidas. Las has auto-censurado hasta el punto de no saber qué piensas realmente sobre nada que importe. Eres una caja de resonancia de consensos ajenos.
+                    </div>
+                </div>
+                
+                <p>La ironía suprema es que en tu intento de no ser un "macho tóxico", te has convertido en algo peor: <span class="highlighted">un macho inexistente</span>. Un fantasma de masculinidad que deambula por el mundo pidiendo permiso para existir.</p>
+                
+                <div class="toxic-whisper">
+                    "¿Entonces qué se supone que debo hacer? ¿Volver a ser el macho de antes?"
+                </div>
+                
+                <p>Esa pregunta revela la profundidad de tu condicionamiento. Crees que solo existen dos opciones: <span class="revelation-trigger" data-revelation="El falso dilema que mantiene tu parálisis">el macho tóxico o el macho castrado</span>. No consideras una tercera opción porque requiere algo que has perdido: el coraje de definirte a ti mismo.</p>
+            </div>
+        </section>
+        
+        <section class="section">
+            <div class="section-number">FRAGMENTO_FINAL / NO-RESOLUCIÓN</div>
+            <h2 class="section-title">EL ABISMO SIN FONDO</h2>
+            <div class="content">
+                <p>No hay redención al final de este texto. No hay una nueva masculinidad esperándote como premio por haber leído hasta aquí. Solo hay el <span class="highlighted">reconocimiento de lo que has perdido</span> y la pregunta de si tienes el coraje de recuperarlo.</p>
+                
+                <p>Porque recuperar tu masculinidad no significa volver al pasado. Significa <span class="revelation-trigger" data-revelation="La creación de algo que nunca existió antes">crear algo que nunca ha existido</span>: un hombre que no necesita permiso para ser, que no confunde fuerza con agresión, que no confunde respeto con sumisión.</p>
+                
+                <div class="interactive-element" onclick="revealContent(this)">
+                    <strong>LA PREGUNTA FINAL:</strong> ¿Quién eres cuando nadie te está juzgando?
+                    <div class="hidden-content">
+                        Si no puedes responder esta pregunta sin consultar primero qué respuesta sería más aceptable, entonces ya tienes tu diagnóstico. No eres un hombre. Eres un comité de voces ajenas disfrazado de persona.
+                    </div>
+                </div>
+                
+                <p>Este texto no termina con esperanza porque la esperanza es para los que esperan ser salvados. Termina con una <span class="highlighted">invitación al abismo</span>: la posibilidad de que dejes de ser lo que otros esperan que seas y comiences a ser lo que realmente eres.</p>
+                
+                <p>Pero primero, tendrás que <span class="glitch-text" data-text="matar">matar</span> al hombre que has construido para complacer a otros. Y esa muerte, querido lector, no será indolora.</p>
+                
+                <div class="toxic-whisper">
+                    "¿Y si no tengo el coraje?"
+                </div>
+                
+                <p>Entonces seguirás siendo <span class="revelation-trigger" data-revelation="Una simulación de masculinidad operada por control remoto">exactamente lo que eres ahora</span>: un hombre que existe en la superficie de su propia vida, mendigando aprobación, pidiendo perdón por ocupar espacio, disculpándose por respirar.</p>
+                
+                <p>La elección, como siempre, es tuya. Pero ahora ya no puedes fingir que no sabes lo que has elegido.</p>
+            </div>
+        </section>
+    </div>
+    
+    <div class="manifestation-counter">
+        FRAGMENTOS MANIFESTADOS: <span id="counter">0</span>
+    </div>
+    
+    <script>
+        let manifestationCount = 0;
+        const counterElement = document.getElementById('counter');
+        
+        function revealContent(element) {
+            const hiddenContent = element.querySelector('.hidden-content');
+            if (hiddenContent.style.display === 'none' || hiddenContent.style.display === '') {
+                hiddenContent.style.display = 'block';
+                manifestationCount++;
+                counterElement.textContent = manifestationCount;
+                
+                // Trigger psychological discomfort
+                document.body.style.filter = 'blur(0.5px)';
+                setTimeout(() => {
+                    document.body.style.filter = 'none';
+                }, 100);
+                
+                // Add glitch effect
+                element.style.animation = 'glitch1 0.5s';
+                setTimeout(() => {
+                    element.style.animation = 'none';
+                }, 500);
+            } else {
+                hiddenContent.style.display = 'none';
+                manifestationCount = Math.max(0, manifestationCount - 1);
+                counterElement.textContent = manifestationCount;
+            }
+        }
+        
+        // Subtle psychological manipulation through random glitches
+        setInterval(() => {
+            if (Math.random() < 0.1) {
+                const glitchElements = document.querySelectorAll('.glitch-text');
+                glitchElements.forEach(el => {
+                    el.style.animation = 'glitch1 0.2s';
+                    setTimeout(() => {
+                        el.style.animation = 'none';
+                    }, 200);
+                });
+            }
+        }, 3000);
+        
+        // Track reading progress and increase discomfort
+        let scrollProgress = 0;
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.body.offsetHeight - window.innerHeight;
+            scrollProgress = scrollTop / docHeight;
+            
+            // Increase visual distortion as user progresses
+            document.body.style.filter = `blur(${scrollProgress * 0.5}px) contrast(${1 + scrollProgress * 0.1})`;
+        });
+        
+        // Uncomfortable cursor tracking
+        document.addEventListener('mousemove', (e) => {
+            if (Math.random() < 0.01) {
+                document.body.style.cursor = 'none';
+                setTimeout(() => {
+                    document.body.style.cursor = 'crosshair';
+                }, 100);
+            }
+        });
+        
+        // Exit intent - psychological hook
+        document.addEventListener('mouseout', (e) => {
+            if (e.clientY <= 0) {
+                document.title = '¿Huyendo de la verdad?';
+                setTimeout(() => {
+                    document.title = 'FRAGMENTOS DE UNA MASCULINIDAD DISOLVENTE';
+                }, 2000);
+            }
+        });
+    </script>
+</body>
+</html>

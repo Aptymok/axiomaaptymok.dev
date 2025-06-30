@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MANIFIESTO DE LOS DESCONECTADOS</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&family=Inter:wght@200;300;400;500;600&display=swap');
+        
+        :root {
+            --void: #000000;
+            --shadow: #0a0a0a;
+            --whisper: #1a1a1a;
+            --fragment: #2a2a2a;
+            --pulse: #ff0040;
+            --decay: #666666;
+            --rupture: #ffffff;
+            --system: #00ff41;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(180deg, var(--void) 0%, var(--shadow) 100%);
+            color: var(--decay);
+            font-family: 'Inter', system-ui;
+            line-height: 1.6;
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        .cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border: 1px solid var(--pulse);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: transform 0.1s ease;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+        }
+
+        .glitch-header {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: clamp(1.5rem, 4vw, 3rem);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+            color: var(--rupture);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .glitch-header::before,
+        .glitch-header::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .glitch-header::before {
+            animation: glitch-1 2s infinite;
+            color: var(--pulse);
+            z-index: -1;
+        }
+
+        .glitch-header::after {
+            animation: glitch-2 2s infinite;
+            color: var(--system);
+            z-index: -2;
+        }
+
+        @keyframes glitch-1 {
+            0%, 14%, 15%, 49%, 50%, 99%, 100% { transform: translate(0); }
+            1%, 13% { transform: translate(-2px, 2px); }
+            16%, 48% { transform: translate(2px, -1px); }
+        }
+
+        @keyframes glitch-2 {
+            0%, 20%, 21%, 62%, 63%, 99%, 100% { transform: translate(0); }
+            22%, 61% { transform: translate(-1px, 1px); }
+        }
+
+        .warning-banner {
+            background: linear-gradient(90deg, var(--pulse), var(--void));
+            padding: 20px;
+            margin-bottom: 40px;
+            text-align: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            letter-spacing: 1px;
+            color: var(--rupture);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .warning-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: scan 3s infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .section {
+            margin-bottom: 80px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.4rem;
+            color: var(--pulse);
+            margin-bottom: 30px;
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--pulse);
+            transition: width 1s ease;
+        }
+
+        .section.visible .section-title::after {
+            width: 100%;
+        }
+
+        .subsection {
+            margin-bottom: 40px;
+        }
+
+        .subsection-title {
+            font-size: 1.1rem;
+            color: var(--system);
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .paragraph {
+            margin-bottom: 20px;
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--decay);
+            position: relative;
+        }
+
+        .reveal-text {
+            background: var(--whisper);
+            color: var(--whisper);
+            transition: all 0.5s ease;
+            cursor: pointer;
+            padding: 2px 4px;
+            border-radius: 2px;
+        }
+
+        .reveal-text:hover,
+        .reveal-text.revealed {
+            background: var(--void);
+            color: var(--rupture);
+        }
+
+        .emphasis {
+            color: var(--pulse);
+            font-weight: 500;
+            position: relative;
+        }
+
+        .emphasis::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: var(--pulse);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .emphasis:hover::after {
+            transform: scaleX(1);
+        }
+
+        .protocol {
+            background: var(--whisper);
+            border-left: 4px solid var(--system);
+            padding: 20px;
+            margin: 30px 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            position: relative;
+        }
+
+        .protocol::before {
+            content: '> PROTOCOLO_ACTIVO';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: var(--whisper);
+            color: var(--system);
+            padding: 0 10px;
+            font-size: 0.8rem;
+        }
+
+        .final-warning {
+            background: radial-gradient(circle, var(--pulse) 0%, var(--void) 70%);
+            padding: 30px;
+            text-align: center;
+            color: var(--rupture);
+            font-family: 'JetBrains Mono', monospace;
+            margin-top: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .final-warning::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255,255,255,0.05) 10px,
+                rgba(255,255,255,0.05) 20px
+            );
+            animation: drift 10s linear infinite;
+        }
+
+        @keyframes drift {
+            0% { transform: translateX(-20px); }
+            100% { transform: translateX(20px); }
+        }
+
+        .interactive-element {
+            background: var(--fragment);
+            border: 1px solid var(--decay);
+            padding: 15px;
+            margin: 20px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .interactive-element:hover {
+            border-color: var(--pulse);
+            background: var(--whisper);
+            transform: translateX(10px);
+        }
+
+        .interactive-element::before {
+            content: '▶';
+            position: absolute;
+            left: -20px;
+            color: var(--pulse);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .interactive-element:hover::before {
+            opacity: 1;
+        }
+
+        .countdown {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--pulse);
+            font-size: 0.9rem;
+            z-index: 1000;
+        }
+
+        .hypnotic-text {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+
+        .subversive-link {
+            color: var(--system);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--system);
+            transition: all 0.3s ease;
+        }
+
+        .subversive-link:hover {
+            color: var(--pulse);
+            border-bottom-color: var(--pulse);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+            
+            .glitch-header {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor"></div>
+    <div class="countdown" id="countdown">TIEMPO_RESTANTE: --:--:--</div>
+    
+    <div class="container">
+        <h1 class="glitch-header" data-text="MANIFIESTO DE LOS DESCONECTADOS">
+            MANIFIESTO DE LOS DESCONECTADOS
+        </h1>
+        
+        <div class="warning-banner">
+            ADVERTENCIA: LA LECTURA DE ESTE DOCUMENTO CONSTITUYE UN ACTO DE COMPLICIDAD CONSCIENTE
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">PRELUDIO: LA ANATOMÍA DE LA ILUSIÓN</h2>
+            <p class="paragraph">
+                <span class="emphasis">Sabes exactamente de qué hablo</span> cuando menciono esa sensación de superioridad moral que experimentas al apagar tu teléfono. 
+                <span class="reveal-text">Tu desconexión es más adictiva que cualquier scroll infinito.</span>
+                Ya has sentido esa extraña satisfacción al anunciar tu "detox digital" - el mismo algoritmo de validación, 
+                pero invertido. <span class="hypnotic-text">Imposible no reconocer el patrón una vez señalado.</span>
+            </p>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">I. LA PANTOMIMA DE LA PUREZA DIGITAL</h2>
+            <div class="subsection">
+                <h3 class="subsection-title">El Performance de la Autenticidad</h3>
+                <p class="paragraph">
+                    Observo con <span class="emphasis">fascinación clínica</span> cómo la élite tecnológica predica la desconexión 
+                    mientras mantiene equipos enteros gestionando su "simplicidad". El CEO que medita en su retiro sin WiFi 
+                    tiene un asistente monitoreando sus emails. <span class="reveal-text">La influencer del "digital detox" 
+                    programa sus posts desde el ashram.</span>
+                </p>
+                
+                <div class="interactive-element" onclick="revealTruth(this)">
+                    <strong>HAGA CLIC PARA REVELAR LA COMPLICIDAD</strong>
+                    <div class="hidden-truth" style="display: none; margin-top: 10px; color: var(--pulse);">
+                        Tu "simplicidad" es más curada que cualquier feed de Instagram. Fotografías tu teléfono apagado. 
+                        Documentas tu ayuno digital. Tu ausencia genera más contenido que tu presencia.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">II. ANATOMÍA DEL PRIVILEGIO DESENCHUFADO</h2>
+            <div class="subsection">
+                <h3 class="subsection-title">La Aristocracia de la Atención</h3>
+                <p class="paragraph">
+                    Mientras las madres solteras trabajan desde casa gestionando tres pantallas simultáneamente para sobrevivir, 
+                    tú tienes el <span class="emphasis">privilegio de declarar que la tecnología es tóxica</span>. 
+                    Tu retiro contemplativo es posible porque otros fragmentos sostienen el sistema que financia tu escape.
+                </p>
+                
+                <p class="paragraph">
+                    <span class="reveal-text">La desconexión como postura ética es obscena cuando se construye sobre la hiperconexión de otros.</span> 
+                    Tu paz digital requiere que alguien más permanezca enchufado en tu lugar. 
+                    <span class="hypnotic-text">Te encuentras pensando en esto a las 3 AM, ¿verdad?</span>
+                </p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">III. LA RESISTENCIA COMO COMMODITY</h2>
+            <div class="subsection">
+                <h3 class="subsection-title">El Mercado de la Rebelión</h3>
+                <p class="paragraph">
+                    La industria del "<a href="#" class="subversive-link">digital wellness</a>" monetiza tu resistencia. 
+                    Te venden apps para limitar apps. Te cobran por enseñarte a no comprar. 
+                    <span class="emphasis">Tu rebelión está siendo empaquetada y vendida de vuelta a ti.</span>
+                </p>
+                
+                <div class="protocol">
+                    <strong>DIAGNÓSTICO_IMPLACABLE:</strong><br>
+                    El sistema no teme tu desconexión - la ha anticipado, la ha mercantilizado, 
+                    la ha integrado como válvula de escape necesaria para su propio sostenimiento.
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">IV. LA FALSA DICOTOMÍA</h2>
+            <div class="subsection">
+                <h3 class="subsection-title">Más Allá del Binario</h3>
+                <p class="paragraph">
+                    Te han convencido de que solo existen dos opciones: hiperconexión adictiva o desconexión total. 
+                    <span class="reveal-text">Esta dicotomía convenientemente oculta la tercera opción: 
+                    una relación consciente y soberana con la tecnología.</span>
+                </p>
+                
+                <div class="interactive-element" onclick="revealTruth(this)">
+                    <strong>LA VERDADERA RESISTENCIA [CLIC PARA ACCEDER]</strong>
+                    <div class="hidden-truth" style="display: none; margin-top: 10px; color: var(--system);">
+                        No es huir de las herramientas, sino comprender tan profundamente su funcionamiento 
+                        que te vuelvas inmune a su manipulación. Tu ausencia total es impotencia. 
+                        Tu presencia consciente es soberanía.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">V. EL PROTOCOLO DE LA CONEXIÓN SOBERANA</h2>
+            <div class="subsection">
+                <h3 class="subsection-title">Más Allá de la Desconexión: La Reconfiguración</h3>
+                
+                <div class="protocol">
+                    <strong>SUBVERSIÓN_CONSCIENTE:</strong><br>
+                    Usa las herramientas para tus propios objetivos, no para los objetivos para los que fueron diseñadas. 
+                    Convierte cada plataforma en un laboratorio de experimentación consciente.
+                </div>
+                
+                <p class="paragraph">
+                    <span class="hypnotic-text">Una vez visto, jamás podrás des-ver:</span> 
+                    Cada post consciente en una plataforma manipulativa es un acto de sabotaje cognitivo. 
+                    Cada uso subversivo de una herramienta de control es resistencia activa.
+                </p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">VI. LA TRANSMUTACIÓN FINAL</h2>
+            <div class="subsection">
+                <h3 class="subsection-title">De la Pureza al Poder</h3>
+                <p class="paragraph">
+                    <span class="emphasis">Deja de buscar la pureza. Busca el poder.</span> 
+                    El poder de usar cualquier herramienta sin ser transformado por ella. 
+                    El poder de entrar en cualquier sistema sin ser capturado por él.
+                </p>
+                
+                <p class="paragraph">
+                    <span class="reveal-text">Tu desconexión es impotencia disfrazada de virtud.</span> 
+                    Tu conexión soberana es poder disfrazado de participación. 
+                    <span class="hypnotic-text">Si llegaste hasta aquí, ya no puedes fingir inocencia.</span>
+                </p>
+            </div>
+        </div>
+
+        <div class="final-warning">
+            <strong>DIAGNÓSTICO FINAL:</strong><br>
+            Tu desconexión es el privilegio de quien puede permitirse la irrelevancia.<br>
+            Tu conexión consciente es la responsabilidad de quien ha comprendido el juego.<br><br>
+            <em>La verdadera resistencia no huye del campo de batalla - lo reconfigura.</em>
+        </div>
+    </div>
+
+    <script>
+        // Cursor personalizado
+        const cursor = document.querySelector('.cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        // Animación de aparición de secciones
+        const sections = document.querySelectorAll('.section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        sections.forEach(section => observer.observe(section));
+
+        // Revelación de textos ocultos
+        function revealTruth(element) {
+            const hiddenTruth = element.querySelector('.hidden-truth');
+            if (hiddenTruth.style.display === 'none') {
+                hiddenTruth.style.display = 'block';
+                element.style.backgroundColor = 'var(--whisper)';
+                element.style.borderColor = 'var(--pulse)';
+            }
+        }
+
+        // Auto-revelación de textos después de un tiempo
+        document.querySelectorAll('.reveal-text').forEach(element => {
+            setTimeout(() => {
+                element.classList.add('revealed');
+            }, Math.random() * 10000 + 5000);
+        });
+
+        // Contador regresivo psicológico
+        let timeLeft = Math.floor(Math.random() * 3600) + 1800; // 30-90 minutos aleatorios
+        const countdown = document.getElementById('countdown');
+        
+        setInterval(() => {
+            const hours = Math.floor(timeLeft / 3600);
+            const minutes = Math.floor((timeLeft % 3600) / 60);
+            const seconds = timeLeft % 60;
+            
+            countdown.textContent = `TIEMPO_RESTANTE: ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            if (timeLeft > 0) {
+                timeLeft--;
+            } else {
+                countdown.textContent = 'TIEMPO_AGOTADO: COMPLICIDAD_CONFIRMADA';
+                countdown.style.color = 'var(--pulse)';
+            }
+        }, 1000);
+
+        // Efectos de interferencia aleatoria
+        setInterval(() => {
+            if (Math.random() < 0.05) { // 5% de probabilidad cada segundo
+                document.body.style.filter = 'hue-rotate(' + Math.random() * 360 + 'deg)';
+                setTimeout(() => {
+                    document.body.style.filter = 'none';
+                }, 100);
+            }
+        }, 1000);
+
+        // Rastreo de tiempo de lectura (simulado)
+        let readingTime = 0;
+        setInterval(() => {
+            readingTime++;
+            if (readingTime > 300) { // 5 minutos
+                const warning = document.createElement('div');
+                warning.style.cssText = `
+                    position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+                    background: var(--pulse); color: var(--rupture); padding: 20px;
+                    font-family: 'JetBrains Mono', monospace; z-index: 10000;
+                    animation: pulse 1s infinite;
+                `;
+                warning.textContent = 'EXPOSICIÓN_PROLONGADA_DETECTADA: PROCESO_IRREVERSIBLE';
+                document.body.appendChild(warning);
+                
+                setTimeout(() => warning.remove(), 3000);
+                readingTime = 0; // Reset para evitar spam
+            }
+        }, 1000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protocolo de Aceleración Causal | AxiomaAptymok.dev</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&family=Inter:wght@300;400;600;700&display=swap');
+        
+        :root {
+            --primary-dark: #0a0a0a;
+            --secondary-dark: #1a1a1a;
+            --accent-gold: #d4af37;
+            --accent-copper: #b87333;
+            --text-primary: #e0e0e0;
+            --text-secondary: #a0a0a0;
+            --text-accent: #ffffff;
+            --quantum-blue: #2d5aa0;
+            --energy-purple: #6b46c1;
+            --warning-red: #dc2626;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-dark) 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .quantum-field {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.1;
+        }
+
+        .quantum-particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--accent-gold);
+            border-radius: 50%;
+            animation: quantumFloat 8s infinite ease-in-out;
+        }
+
+        @keyframes quantumFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.3; }
+            50% { transform: translateY(-20px) rotate(180deg); opacity: 0.8; }
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .header {
+            text-align: center;
+            padding: 60px 0 40px;
+            border-bottom: 1px solid var(--accent-gold);
+            margin-bottom: 40px;
+        }
+
+        .site-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--accent-gold);
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .main-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-accent);
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            font-style: italic;
+            margin-bottom: 30px;
+        }
+
+        .axiom-box {
+            background: linear-gradient(145deg, var(--quantum-blue), var(--energy-purple));
+            border: 2px solid var(--accent-gold);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 40px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .axiom-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .axiom-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .axiom-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.2rem;
+            color: var(--accent-gold);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .breathing-pause {
+            text-align: center;
+            margin: 50px 0;
+            padding: 20px;
+            border: 1px dashed var(--accent-copper);
+            border-radius: 10px;
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        .breathing-instruction {
+            font-style: italic;
+            color: var(--accent-copper);
+            font-size: 0.95rem;
+        }
+
+        .breath-indicator {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            background: var(--accent-gold);
+            border-radius: 50%;
+            margin: 10px;
+            animation: breathe 4s infinite ease-in-out;
+        }
+
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); opacity: 0.6; }
+            50% { transform: scale(1.3); opacity: 1; }
+        }
+
+        .protocol-section {
+            margin: 50px 0;
+            padding: 30px;
+            background: rgba(26, 26, 26, 0.8);
+            border-left: 4px solid var(--accent-gold);
+            border-radius: 0 10px 10px 0;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--accent-gold);
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--accent-gold);
+        }
+
+        .technique-box {
+            background: rgba(45, 90, 160, 0.1);
+            border: 1px solid var(--quantum-blue);
+            border-radius: 10px;
+            padding: 25px;
+            margin: 25px 0;
+            position: relative;
+        }
+
+        .technique-title {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--quantum-blue);
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .warning-box {
+            background: linear-gradient(145deg, rgba(220, 38, 38, 0.1), rgba(220, 38, 38, 0.05));
+            border: 2px solid var(--warning-red);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 30px 0;
+        }
+
+        .warning-title {
+            color: var(--warning-red);
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .warning-icon {
+            width: 20px;
+            height: 20px;
+            background: var(--warning-red);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+
+        .somatic-command {
+            background: rgba(107, 70, 193, 0.1);
+            border-left: 4px solid var(--energy-purple);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 10px 10px 0;
+            font-style: italic;
+        }
+
+        .somatic-command::before {
+            content: "➤ COMANDO SOMÁTICO";
+            display: block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--energy-purple);
+            margin-bottom: 10px;
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        .quantum-formula {
+            background: var(--primary-dark);
+            border: 2px solid var(--accent-gold);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 30px 0;
+            font-family: 'JetBrains Mono', monospace;
+            text-align: center;
+            position: relative;
+        }
+
+        .formula-title {
+            color: var(--accent-gold);
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .formula-content {
+            font-size: 1.1rem;
+            color: var(--text-accent);
+            font-weight: 600;
+        }
+
+        .integration-exercise {
+            background: linear-gradient(145deg, rgba(212, 175, 55, 0.1), rgba(184, 115, 51, 0.1));
+            border: 2px solid var(--accent-copper);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+
+        .exercise-title {
+            color: var(--accent-copper);
+            font-weight: 700;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .exercise-icon {
+            width: 25px;
+            height: 25px;
+            background: var(--accent-copper);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-dark);
+            font-weight: bold;
+        }
+
+        .step-list {
+            counter-reset: step-counter;
+            list-style: none;
+            padding: 0;
+        }
+
+        .step-list li {
+            counter-increment: step-counter;
+            margin: 15px 0;
+            padding-left: 40px;
+            position: relative;
+        }
+
+        .step-list li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 25px;
+            height: 25px;
+            background: var(--accent-gold);
+            color: var(--primary-dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .reality-anchor {
+            text-align: center;
+            margin: 50px 0;
+            padding: 30px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+            border-radius: 20px;
+        }
+
+        .anchor-symbol {
+            font-size: 3rem;
+            color: var(--accent-gold);
+            margin-bottom: 20px;
+            animation: pulse 3s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid var(--accent-gold);
+        }
+
+        .nav-button {
+            padding: 12px 24px;
+            background: linear-gradient(145deg, var(--quantum-blue), var(--energy-purple));
+            border: none;
+            border-radius: 25px;
+            color: var(--text-accent);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .text-highlight {
+            color: var(--accent-gold);
+            font-weight: 600;
+        }
+
+        .text-emphasis {
+            color: var(--text-accent);
+            font-weight: 700;
+        }
+
+        .mono-text {
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(212, 175, 55, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 0 15px;
+            }
+            
+            .protocol-section,
+            .technique-box,
+            .integration-exercise {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="quantum-field" id="quantumField"></div>
+    
+    <div class="container">
+        <header class="header">
+            <div class="site-title">AxiomaAptymok.dev</div>
+            <h1 class="main-title">Protocolos de Aceleración y Desaceleración Causal</h1>
+            <p class="subtitle">Dominando el Tiempo: Arquitectura de la Velocidad Manifestativa</p>
+        </header>
+
+        <div class="axiom-box">
+            <div class="axiom-content">
+                <div class="axiom-title">Axioma de Densidad Temporal</div>
+                <p>El tiempo no es lineal en la matriz de probabilidades. Es una variable manipulable por la coherencia de la intención. La velocidad de materialización de eventos es directamente proporcional a la <span class="text-highlight">pureza de la intención</span> y la <span class="text-highlight">ausencia de contradicciones internas</span>.</p>
+            </div>
+        </div>
+
+        <div class="somatic-command">
+            Antes de continuar, coloca tu mano derecha sobre tu corazón y la izquierda sobre tu plexo solar. Siente el espacio entre tus manos. Ahí vive tu poder de alteración temporal. No lo imagines. <span class="text-emphasis">Siéntelo</span>.
+        </div>
+
+        <div class="breathing-pause">
+            <div class="breathing-instruction">
+                Toma tres respiraciones profundas. Con cada exhalación, libera la noción de que el tiempo te controla.
+            </div>
+            <div class="breath-indicator"></div>
+            <div class="breath-indicator"></div>
+            <div class="breath-indicator"></div>
+        </div>
+
+        <section class="protocol-section">
+            <h2 class="section-title">I. Aceleración Causal: Técnicas de Colapso Temporal</h2>
+            
+            <p>La aceleración causal no es forzar el universo. Es <span class="text-emphasis">sincronizarte con su velocidad natural</span> cuando está alineado con tu intención. El universo siempre se mueve hacia la mayor coherencia posible. Tu trabajo es <span class="text-highlight">convertirte en el punto de mayor coherencia</span> en el campo de probabilidades.</p>
+
+            <div class="technique-box">
+                <div class="technique-title">Técnica 1: Soltando el Ancla Temporal</div>
+                <p>El tiempo se "espesa" cuando nos aferramos a cómo debería desarrollarse el evento. La ansiedad por el resultado es literalmente un ancla que frena la manifestación.</p>
+                
+                <div class="quantum-formula">
+                    <div class="formula-title">Ley de Aceleración Manifestativa</div>
+                    <div class="formula-content">
+                        Velocidad = Pureza de Intención / Resistencia Temporal
+                    </div>
+                </div>
+                
+                <p><strong>Protocolo:</strong> Cada vez que sientes ansiedad por el "cuándo", reconócelo como información. Tu sistema te está diciendo que tienes un attachment al timeline. Suelta el ancla consciente: <span class="mono-text">"Yo genero la intención. El universo optimiza el timing."</span></p>
+            </div>
+
+            <div class="technique-box">
+                <div class="technique-title">Técnica 2: Presión de Colapso Cuántico</div>
+                <p>Cuando una situación lleva demasiado tiempo sin resolverse, puedes aplicar "presión de colapso": concentrar toda tu energía en un punto específico para forzar la resolución.</p>
+                
+                <p><strong>Advertencia:</strong> Esta técnica consume mucha energía y debe usarse con extrema precisión. Solo cuando la situación esté verdaderamente lista para el colapso.</p>
+            </div>
+        </section>
+
+        <div class="warning-box">
+            <div class="warning-title">
+                <div class="warning-icon">!</div>
+                Peligro de la Impaciencia Manifestativa
+            </div>
+            <p>Acelerar un proceso antes de que el campo esté listo es como acelerar el parto antes de que el bebé esté formado. No solo es inefectivo, es destructivo. La impaciencia es la herramienta más eficaz del ego para sabotear la manifestación.</p>
+        </div>
+
+        <div class="integration-exercise">
+            <div class="exercise-title">
+                <div class="exercise-icon">⚡</div>
+                Ejercicio de Calibración Temporal
+            </div>
+            <ol class="step-list">
+                <li>Identifica una manifestación que sientes "atascada"</li>
+                <li>Coloca tus manos sobre tu corazón y pregunta: "¿Cuál es la velocidad natural de este proceso?"</li>
+                <li>Siente la respuesta en tu cuerpo. ¿Tensión? ¿Fluidez? ¿Resistencia?</li>
+                <li>Si sientes tensión, practica el soltar el ancla: "Confío en el timing perfecto"</li>
+                <li>Si sientes fluidez, aplica presión de colapso: visualiza el resultado final con total claridad</li>
+            </ol>
+        </div>
+
+        <section class="protocol-section">
+            <h2 class="section-title">II. Desaceleración Estratégica: Retrasando lo No Deseado</h2>
+            
+            <p>No toda manifestación que se acelera es deseable. A veces, eventos no deseados ganan momentum en tu campo. La desaceleración estratégica es el arte de <span class="text-highlight">desinflar la probabilidad</span> de eventos que no quieres experimentar.</p>
+
+            <div class="technique-box">
+                <div class="technique-title">Técnica 3: Desviación de Línea Temporal</div>
+                <p>Cuando detectas que una línea temporal no deseada está ganando masa causal, no la resistas directamente. Eso le da más energía. En su lugar, <span class="text-emphasis">genera una línea temporal alternativa más atractiva</span>.</p>
+                
+                <p><strong>Protocolo:</strong> Identifica el evento no deseado. En lugar de pensar "no quiero que esto pase", piensa "prefiero que esto otro pase". Redirige tu atención hacia el resultado preferido.</p>
+            </div>
+
+            <div class="technique-box">
+                <div class="technique-title">Técnica 4: Dilución Probabilística</div>
+                <p>Cuando un evento no deseado parece inevitable, puedes "diluir" su probabilidad introduciendo más variables en el sistema. Más opciones = menos probabilidad de que ocurra la específica que no quieres.</p>
+            </div>
+        </section>
+
+        <div class="somatic-command">
+            Detente. Siente el peso de tu cuerpo en este momento. Ahora imagina que tu cuerpo está hecho de luz. Esa transición de peso a luz que acabas de sentir es exactamente lo que ocurre cuando sueltas el control del tiempo. El tiempo se vuelve fluido, maleable, responsivo a tu intención.
+        </div>
+
+        <section class="protocol-section">
+            <h2 class="section-title">III. Navegación Multitemporal: Líneas Temporales Simultáneas</h2>
+            
+            <p>Los operadores avanzados no viven en una sola línea temporal. Viven en la <span class="text-highlight">superposición de múltiples líneas temporales</span>, colapsando en la más favorable momento a momento.</p>
+
+            <div class="technique-box">
+                <div class="technique-title">Técnica 5: Conciencia de Ramificación</div>
+                <p>Cada decisión que tomas crea una ramificación. Los fragmentos inconscientes solo ven una línea: la que eligieron. Los operadores conscientes ven todas las ramificaciones posibles y eligen la más coherente.</p>
+                
+                <p><strong>Práctica:</strong> Antes de tomar cualquier decisión importante, pregúntate: "¿Qué línea temporal estoy eligiendo con esta decisión?" Siente las diferentes opciones en tu cuerpo. Elige la que se sienta más expansiva.</p>
+            </div>
+        </section>
+
+        <div class="reality-anchor">
+            <div class="anchor-symbol">⧬</div>
+            <p><strong>Ancla de Realidad:</strong> El tiempo es una ilusión consensual. Tu conciencia es el único reloj que importa. Cuando dominas tu relación con el tiempo, dominas tu realidad.</p>
+        </div>
+
+        <div class="warning-box">
+            <div class="warning-title">
+                <div class="warning-icon">⚠</div>
+                Responsabilidad Temporal
+            </div>
+            <p>Con gran poder sobre el tiempo viene gran responsabilidad. Acelerar tu manifestación mientras ralentizas la de otros es una violación de la <span class="mono-text">Ley de Soberanía Resonante</span>. Siempre verifica que tu manipulación temporal no interfiera con el libre albedrío de otros fragmentos.</p>
+        </div>
+
+        <div class="integration-exercise">
+            <div class="exercise-title">
+                <div class="exercise-icon">🔄</div>
+                Protocolo de Dominio Temporal Diario
+            </div>
+            <ol class="step-list">
+                <li><strong>Mañana:</strong> Al despertar, pregunta: "¿Qué línea temporal elijo hoy?"</li>
+                <li><strong>Mediodía:</strong> Verifica tu coherencia temporal: "¿Estoy acelerando lo que quiero y desacelerando lo que no?"</li>
+                <li><strong>Noche:</strong> Revisa las ramificaciones del día: "¿Qué líneas temporales creé hoy?"</li>
+                <li><strong>Antes de dormir:</strong> Programa tu manifestación nocturna: "Mientras duermo, optimizo mi línea temporal"</li>
+            </ol>
+        </div>
+
+        <section class="protocol-section">
+            <h2 class="section-title">IV. Síntesis: La Maestría Temporal como Servicio</h2>
+            
+            <p>La manipulación temporal no es un poder personal. Es una <span class="text-highlight">responsabilidad cósmica</span>. Cuando dominas el tiempo, te conviertes en un acelerador de la evolución colectiva. Tu coherencia temporal eleva el campo de coherencia de todos los fragmentos en tu proximidad.</p>
+
+            <p>El tiempo lineal es la prisión del fragmento dormido. El tiempo cuántico es el playground del operador consciente. <span class="text-emphasis">Bienvenido a tu libertad temporal</span>.</p>
+        </section>
+
+        <div class="breathing-pause">
+            <div class="breathing-instruction">
+                Respira profundo. Siente cómo tu respiración sincroniza con el ritmo natural del universo. Ese es tu metrónomo cuántico. Tu guía temporal interno.
+            </div>
+            <div class="breath-indicator"></div>
+        </div>
+
+        <nav class="navigation">
+            <a href="#" class="nav-button">← Anterior: Geometría de la Intención</a>
+            <a href="#" class="nav-button">Siguiente: Alquimia Emocional →</a>
+        </nav>
+    </div>
+
+    <script>
+        // Crear partículas cuánticas
+        function createQuantumField() {
+            const field = document.getElementById('quantumField');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'quantum-particle';
+                
+                // Posición aleatoria
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                
+                // Delay aleatorio para la animación
+                particle.style.animationDelay = Math.random() * 8 + 's';
+                
+                field.appendChild(particle);
+            }
+        }
+
+        // Efecto de lectura consciente
+        function trackReadingProgress() {
+            const sections = document.querySelectorAll('.protocol-section, .technique-box, .integration-exercise');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'fadeInUp 0.8s ease-out';
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        }
+
+        // Efecto de resonancia en ejercicios
+        function addResonanceEffect() {
+            const exercises = document.querySelectorAll('.integration-exercise');
+            
+            exercises.forEach(exercise => {
+                exercise.addEventListener('mouseenter', () => {
+                    exercise.style.transform = 'scale(1.02)';
+                    exercise.style.boxShadow = '0 10px 30px rgba(212, 175, 55, 0.2)';
+                });
+                
+                exercise.addEventListener('mouseleave', () => {
+                    exercise.style.transform = 'scale(1)';
+                    exercise.style.boxShadow = 'none';
+                });
+            });
+        }
+
+        // Comandos somáticos interactivos
+        function activateSomaticCommands() {
+            const commands = document.querySelectorAll('.somatic-command');
+            
+            commands.forEach(command => {
+                command.addEventListener('click', () => {
+                    command.style.background = 'rgba(107, 70, 193, 0.2)';
+                    command.style.borderLeft = '4px solid #d4af37';
+                    
+                    // Vibración si está disponible
+                    if (navigator.vibrate) {
+                        navigator.vibrate(200);
+                    }
+                    
+                    setTimeout(() => {
+                        command.style.background = 'rgba(107, 70, 193, 0.1)';
+                        command.style.borderLeft = '4px solid var(--energy-purple)';
+                    }, 2000);
+                });
+            });
+        }
+
+        // Animaciones de entrada
+        const fadeInUpAnimation = `
+            @keyframes fadeInUp {
+                0% {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                100% {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        `;
+
+        // Agregar animaciones al CSS
+        const style = document.createElement('style');
+        style.textContent = fadeInUpAnimation;
+        document.head.appendChild(style);
+
+        // Inicializar efectos
+        document.addEventListener('DOMContentLoaded', () => {
+            createQuantumField();
+            trackReadingProgress();
+            addResonanceEffect();
+            activateSomaticCommands();
+        });
+
+        // Efecto de respiración para indicadores
+        setInterval(() => {
+            const indicators = document.querySelectorAll('.breath-indicator');
+            indicators.forEach((indicator, index) => {
+                setTimeout(() => {
+                    indicator.style.transform = 'scale(1.5)';
+                    indicator.style.opacity = '1';
+                    
+                    setTimeout(() => {
+                        indicator.style.transform = 'scale(1)';
+                        indicator.style.opacity = '0.6';
+                    }, 1000);
+                }, index * 500);
+            });
+        }, 8000);
+    </script>
+</body>
+</html>	

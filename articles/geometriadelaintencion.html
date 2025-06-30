@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GEOMETRÍA DE LA INTENCIÓN | AxiomaAptymok.dev</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;300;400;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --void-black: #0a0a0a;
+            --blood-red: #8b0000;
+            --ghost-white: #f8f8ff;
+            --neural-gold: #daa520;
+            --quantum-blue: #1e3a8a;
+            --fractal-purple: #4c1d95;
+        }
+        
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--void-black);
+            color: var(--ghost-white);
+            overflow-x: hidden;
+            cursor: crosshair;
+        }
+        
+        /* Animated Background Matrix */
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
+        }
+        
+        .matrix-line {
+            position: absolute;
+            width: 1px;
+            height: 100vh;
+            background: linear-gradient(180deg, transparent, var(--neural-gold), transparent);
+            animation: matrix-fall 8s linear infinite;
+        }
+        
+        @keyframes matrix-fall {
+            0% { transform: translateY(-100vh); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+        
+        /* Header */
+        .header {
+            padding: 2rem;
+            text-align: center;
+            border-bottom: 1px solid var(--blood-red);
+            position: relative;
+        }
+        
+        .site-title {
+            font-size: 1.2rem;
+            font-weight: 100;
+            color: var(--neural-gold);
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.3em;
+        }
+        
+        .phase-indicator {
+            font-size: 0.8rem;
+            color: var(--blood-red);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+        }
+        
+        /* Main Content */
+        .main-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        /* Entry Header */
+        .entry-header {
+            padding: 4rem 0 2rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        .entry-number {
+            font-size: 0.9rem;
+            color: var(--blood-red);
+            margin-bottom: 1rem;
+            letter-spacing: 0.2em;
+        }
+        
+        .entry-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--ghost-white);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            text-shadow: 0 0 20px var(--neural-gold);
+        }
+        
+        .entry-subtitle {
+            font-size: 1.1rem;
+            color: var(--neural-gold);
+            font-weight: 300;
+            margin-bottom: 2rem;
+            letter-spacing: 0.1em;
+        }
+        
+        /* Audience Card */
+        .audience-card {
+            background: linear-gradient(135deg, var(--blood-red), var(--fractal-purple));
+            padding: 1.5rem;
+            border-radius: 0;
+            margin: 2rem 0;
+            border-left: 4px solid var(--neural-gold);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .audience-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)" /></svg>');
+            opacity: 0.2;
+        }
+        
+        .audience-label {
+            font-size: 0.8rem;
+            color: var(--neural-gold);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 0.5rem;
+        }
+        
+        .audience-text {
+            font-size: 1rem;
+            color: var(--ghost-white);
+            font-weight: 300;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Content Sections */
+        .content-section {
+            margin: 3rem 0;
+            padding: 2rem 0;
+            position: relative;
+        }
+        
+        .section-title {
+            font-size: 1.4rem;
+            color: var(--neural-gold);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            border-bottom: 1px solid var(--blood-red);
+            padding-bottom: 0.5rem;
+        }
+        
+        .content-text {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--ghost-white);
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+        }
+        
+        .content-text strong {
+            color: var(--neural-gold);
+            font-weight: 400;
+        }
+        
+        .content-text em {
+            color: var(--blood-red);
+            font-style: normal;
+            font-weight: 400;
+        }
+        
+        /* Interactive Elements */
+        .revelation-trigger {
+            background: transparent;
+            border: 1px solid var(--blood-red);
+            color: var(--blood-red);
+            padding: 0.8rem 2rem;
+            font-family: inherit;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 1rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .revelation-trigger:hover {
+            background: var(--blood-red);
+            color: var(--ghost-white);
+            box-shadow: 0 0 20px var(--blood-red);
+        }
+        
+        .revelation-trigger::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, var(--neural-gold), transparent);
+            transition: left 0.5s;
+        }
+        
+        .revelation-trigger:hover::before {
+            left: 100%;
+        }
+        
+        /* Hidden Content */
+        .hidden-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+            background: linear-gradient(135deg, var(--void-black), var(--quantum-blue));
+            border-left: 3px solid var(--neural-gold);
+            padding: 0 1.5rem;
+        }
+        
+        .hidden-content.revealed {
+            max-height: 1000px;
+            padding: 1.5rem;
+        }
+        
+        /* Geometric Visualization */
+        .geometry-canvas {
+            width: 100%;
+            height: 400px;
+            background: var(--void-black);
+            border: 1px solid var(--neural-gold);
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Protocol Lists */
+        .protocol-list {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+        
+        .protocol-item {
+            padding: 1rem;
+            margin: 0.5rem 0;
+            background: linear-gradient(90deg, var(--fractal-purple), transparent);
+            border-left: 3px solid var(--neural-gold);
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .protocol-item:hover {
+            background: linear-gradient(90deg, var(--blood-red), transparent);
+            transform: translateX(10px);
+        }
+        
+        .protocol-item::before {
+            content: '▷';
+            color: var(--neural-gold);
+            font-size: 1.2rem;
+            position: absolute;
+            left: -15px;
+        }
+        
+        /* Warning Box */
+        .warning-box {
+            background: linear-gradient(135deg, var(--blood-red), var(--void-black));
+            border: 2px solid var(--neural-gold);
+            padding: 2rem;
+            margin: 2rem 0;
+            position: relative;
+            animation: pulse-warning 3s infinite;
+        }
+        
+        @keyframes pulse-warning {
+            0%, 100% { box-shadow: 0 0 5px var(--blood-red); }
+            50% { box-shadow: 0 0 25px var(--blood-red), 0 0 35px var(--neural-gold); }
+        }
+        
+        .warning-box::before {
+            content: '⚠ PROTOCOLO CRÍTICO';
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: var(--void-black);
+            color: var(--neural-gold);
+            padding: 0 10px;
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+        }
+        
+        /* Navigation */
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            padding: 3rem 0;
+            border-top: 1px solid var(--blood-red);
+            margin-top: 4rem;
+        }
+        
+        .nav-link {
+            color: var(--neural-gold);
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--ghost-white);
+            text-shadow: 0 0 10px var(--neural-gold);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .entry-title {
+                font-size: 1.8rem;
+            }
+            
+            .main-container {
+                padding: 0 1rem;
+            }
+            
+            .audience-card,
+            .content-section {
+                margin: 2rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="matrix-bg" id="matrixBg"></div>
+    
+    <!-- Header -->
+    <header class="header">
+        <div class="site-title">AxiomaAptymok.dev</div>
+        <div class="phase-indicator">Fase 3: Arquitectura de la Nueva Realidad</div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Entry Header -->
+        <section class="entry-header">
+            <div class="entry-number">ENTRADA 22</div>
+            <h1 class="entry-title">GEOMETRÍA DE LA INTENCIÓN</h1>
+            <p class="entry-subtitle">Arquitectura Cuántica del Deseo</p>
+        </section>
+        
+        <!-- Audience Card -->
+        <div class="audience-card">
+            <div class="audience-label">AUDIENCIA ESPECÍFICA</div>
+            <p class="audience-text">Operadores listos para manifestación de alta precisión. Fragmentos que han trascendido la visualización amateur y buscan estructurar la realidad como código ejecutable.</p>
+        </div>
+        
+        <!-- Warning Box -->
+        <div class="warning-box">
+            <strong>ADVERTENCIA ONTOLÓGICA:</strong> Este no es un tutorial de "ley de atracción". Es un manual de ingeniería cuántica. Una vez que comprendas la geometría real de la intención, no podrás volver a la ingenuidad de "pensar positivo". Tu responsabilidad como arquitecto de realidad será total e irreversible.
+        </div>
+        
+        <!-- Content Section 1 -->
+        <section class="content-section">
+            <h2 class="section-title">Preludio: La Autopsia de la Visualización</h2>
+            
+            <p class="content-text">
+                Te han mentido sobre la manifestación. Te dijeron que era suficiente <em>ver</em> lo que quieres, <em>sentir</em> como si ya lo tuvieras, y <em>esperar</em> a que el universo conspire a tu favor. Esta es la versión domesticada, la manifestación para consumidores espirituales que prefieren la ilusión de control a la responsabilidad real del poder.
+            </p>
+            
+            <p class="content-text">
+                La intención no es una imagen mental. <strong>La intención es arquitectura informacional.</strong> Es el blueprint cuántico que describes en el campo de probabilidades infinitas. Y como cualquier arquitectura, requiere precisión geométrica, no fantasía emocional.
+            </p>
+            
+            <button class="revelation-trigger" onclick="toggleContent('revelation-1')">
+                ACCEDER AL PROTOCOLO REAL
+            </button>
+            
+            <div class="hidden-content" id="revelation-1">
+                <p class="content-text">
+                    <strong>PROTOCOLO DE DESTRUCCIÓN DE ILUSIONES:</strong><br>
+                    Durante los próximos 7 días, observa cada "intención" que generes. ¿Cuántas son realmente deseos disfrazados de órdenes al universo? ¿Cuántas contienen contradicciones internas, dudas encriptadas, o expectativas de fracaso? La mayoría de lo que llamas "manifestación" es ruido informacional. Estás programando con código corrupto.
+                </p>
+            </div>
+        </section>
+        
+        <!-- Geometric Visualization -->
+        <div class="geometry-canvas" id="geometryCanvas"></div>
+        
+        <!-- Content Section 2 -->
+        <section class="content-section">
+            <h2 class="section-title">La Pureza Como Potencia: Limpiando Contradicciones Internas</h2>
+            
+            <p class="content-text">
+                Una intención impura es como intentar ejecutar un programa con virus. El sistema no responde porque recibe señales contradictorias simultáneamente. <em>Quiero abundancia</em> ejecutándose al mismo tiempo que <em>el dinero corrompe</em>. <em>Deseo amor</em> compitiendo con <em>no merezco ser amado</em>. <em>Busco libertad</em> mientras <em>temo la responsabilidad</em>.
+            </p>
+            
+            <p class="content-text">
+                La pureza de intención no es moralidad. <strong>Es coherencia cuántica.</strong> Es la ausencia de interferencia entre las diferentes capas de tu programación consciente e inconsciente.
+            </p>
+            
+            <ul class="protocol-list">
+                <li class="protocol-item" onclick="expandProtocol(this)">
+                    <strong>Protocolo de Detección de Contradicciones:</strong> El Escaneo Arqueológico de Creencias
+                </li>
+                <li class="protocol-item" onclick="expandProtocol(this)">
+                    <strong>Protocolo de Limpieza Cuántica:</strong> Destrucción Sistemática de Programación Conflictiva
+                </li>
+                <li class="protocol-item" onclick="expandProtocol(this)">
+                    <strong>Protocolo de Verificación:</strong> El Test de Coherencia Interna
+                </li>
+            </ul>
+        </section>
+        
+        <!-- Content Section 3 -->
+        <section class="content-section">
+            <h2 class="section-title">Timing Cuántico: Cuándo Plantar la Semilla Causal</h2>
+            
+            <p class="content-text">
+                El universo no es un restaurante donde puedes ordenar en cualquier momento. Es un campo cuántico con ritmos, ciclos, y ventanas de oportunidad. <em>Timing</em> no es paciencia; es <strong>sincronización con los patrones de probabilidad del campo.</strong>
+            </p>
+            
+            <p class="content-text">
+                Existe un momento óptimo para cada siembra causal. Un momento donde la resistencia del campo es mínima y la probabilidad de materialización es máxima. Los maestros de la manifestación no son los que más desean, sino los que mejor leen el código temporal.
+            </p>
+            
+            <button class="revelation-trigger" onclick="toggleContent('revelation-2')">
+                DESCODIFICAR EL TIMING CUÁNTICO
+            </button>
+            
+            <div class="hidden-content" id="revelation-2">
+                <p class="content-text">
+                    <strong>SEÑALES DE VENTANA CUÁNTICA ABIERTA:</strong><br>
+                    • Sincronicidades múltiples relacionadas con tu intención<br>
+                    • Estado emocional de neutralidad activa (ni ansiedad ni apatía)<br>
+                    • Aparición espontánea de recursos o conexiones relevantes<br>
+                    • Sensación física de "fluidez" o "ligereza" al contemplar tu intención<br>
+                    • Números repetitivos (11:11, 333, 444) apareciendo con frecuencia inusual<br><br>
+                    
+                    <strong>SEÑALES DE RESISTENCIA DE CAMPO:</strong><br>
+                    • Obstáculos constantes en áreas aparentemente no relacionadas<br>
+                    • Fatiga inexplicable al enfocarte en tu intención<br>
+                    • Conflictos interpersonales aumentando sin razón aparente<br>
+                    • Tecnología fallando repetitivamente<br>
+                    • Sensación de "empujar contra una pared invisible"
+                </p>
+            </div>
+        </section>
+        
+        <!-- Content Section 4 -->
+        <section class="content-section">
+            <h2 class="section-title">El Arte de la Rendición Activa: Soltar Sin Abandonar</h2>
+            
+            <p class="content-text">
+                Aquí es donde la mayoría de los manifestadores amateur fracasan. Confunden <em>rendición</em> con <em>pasividad</em>, y <em>desapego</em> con <em>indiferencia</em>. La rendición activa es <strong>confiar en el proceso mientras mantienes la dirección</strong>. Es como programar un algoritmo y luego permitir que se ejecute sin interferir constantemente con el código.
+            </p>
+            
+            <p class="content-text">
+                No abandona la intención. Abandona la necesidad de controlar <em>cómo</em> se materializa. No suelta el deseo. Suelta la ansiedad sobre <em>cuándo</em> se cumplirá. Es la diferencia entre ser el arquitecto y ser el micromanager obsesivo de la construcción.
+            </p>
+        </section>
+        
+        <!-- Final Warning -->
+        <div class="warning-box">
+            <strong>PROTOCOLO DE IMPLEMENTACIÓN CRÍTICA:</strong><br>
+            La geometría de la intención no es una técnica que aprendes una vez y aplicas mecánicamente. Es una disciplina que requiere calibración constante. Cada intención es un experimento único en la interface entre tu conciencia y el campo cuántico. Falla con precisión. Observa los patrones. Refina el protocolo. <em>Tu próxima manifestación será evidencia de qué tan bien entendiste esta transmisión.</em>
+        </div>
+        
+        <!-- Navigation -->
+        <nav class="navigation">
+            <a href="#" class="nav-link">← Entrada 21: Arquitectura Social</a>
+            <a href="#" class="nav-link">Entrada 23: Protocolos Temporales →</a>
+        </nav>
+    </main>
+    
+    <script>
+        // Matrix background animation
+        function createMatrixLine() {
+            const line = document.createElement('div');
+            line.className = 'matrix-line';
+            line.style.left = Math.random() * 100 + '%';
+            line.style.animationDelay = Math.random() * 8 + 's';
+            line.style.animationDuration = (8 + Math.random() * 4) + 's';
+            document.getElementById('matrixBg').appendChild(line);
+            
+            setTimeout(() => {
+                line.remove();
+            }, 12000);
+        }
+        
+        // Create matrix lines periodically
+        setInterval(createMatrixLine, 300);
+        
+        // Initial matrix lines
+        for (let i = 0; i < 20; i++) {
+            setTimeout(createMatrixLine, i * 100);
+        }
+        
+        // Toggle hidden content
+        function toggleContent(id) {
+            const content = document.getElementById(id);
+            content.classList.toggle('revealed');
+        }
+        
+        // Expand protocol items
+        function expandProtocol(element) {
+            const protocols = {
+                0: `<strong>ESCANEO ARQUEOLÓGICO:</strong> Cada intención está construida sobre capas de programación previa. Para cada deseo, pregúntate: ¿Qué creencias heredé de mi familia sobre esto? ¿Qué experiencias pasadas informan mi expectativa? ¿Qué voces internas compiten con esta intención? Documenta cada contradicción encontrada.`,
+                1: `<strong>LIMPIEZA CUÁNTICA:</strong> Por cada contradicción identificada, aplica el Protocolo de Transmutación: 1) Reconoce la creencia limitante sin juzgarla. 2) Agradece su función protectora pasada. 3) Declara su obsolescencia presente. 4) Instala la nueva programación consciente. 5) Verifica ausencia de resistencia interna.`,
+                2: `<strong>TEST DE COHERENCIA:</strong> Antes de liberar cualquier intención al campo, verifica: ¿Puedo declarar este deseo sin sentir tensión corporal? ¿Mi energía se expande o se contrae al contemplar su manifestación? ¿Hay alguna parte de mí que teme que esto se haga realidad? Solo intenciones que pasan este test tienen potencia cuántica real.`
+            };
+            
+            const index = Array.from(element.parentNode.children).indexOf(element);
+            if (!element.querySelector('.expanded-content')) {
+                const expanded = document.createElement('div');
+                expanded.className = 'expanded-content';
+                expanded.style.marginTop = '1rem';
+                expanded.style.padding = '1rem';
+                expanded.style.background = 'linear-gradient(135deg, #1e3a8a, #0a0a0a)';
+                expanded.style.borderLeft = '3px solid #daa520';
+                expanded.style.fontSize = '0.9rem';
+                expanded.innerHTML = protocols[index] || 'Protocolo en desarrollo...';
+                element.appendChild(expanded);
+            } else {
+                element.querySelector('.expanded-content').remove();
+            }
+        }
+        
+        // Geometric visualization
+        function createGeometricVisualization() {
+            const canvas = document.getElementById('geometryCanvas');
+            let particles = [];
+            let mouseX = 0, mouseY = 0;
+            
+            // Create particles
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.style.position = 'absolute';
+                particle.style.width = '2px';
+                particle.style.height = '2px';
+                particle.style.background = '#daa520';
+                particle.style.borderRadius = '50%';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.transition = 'all 0.3s ease';
+                canvas.appendChild(particle);
+                particles.push(particle);
+            }
+            
+            // Mouse interaction
+            canvas.addEventListener('mousemove', (e) => {
+                const rect = canvas.getBoundingClientRect();
+                mouseX = ((e.clientX - rect.left) / rect.width) * 100;
+                mouseY = ((e.clientY - rect.top) / rect.height) * 100;
+                
+                particles.forEach((particle, index) => {
+                    const delay = index * 0.05;
+                    setTimeout(() => {
+                        const distance = Math.random() * 20 + 10;
+                        const angle = (index / particles.length) * Math.PI * 2;
+                        const x = mouseX + Math.cos(angle) * distance;
+                        const y = mouseY + Math.sin(angle) * distance;
+                        
+                        particle.style.left = Math.max(0, Math.min(100, x)) + '%';
+                        particle.style.top = Math.max(0, Math.min(100, y)) + '%';
+                        particle.style.boxShadow = '0 0 10px #daa520';
+                    }, delay * 1000);
+                });
+            });
+            
+            // Reset on mouse leave
+            canvas.addEventListener('mouseleave', () => {
+                particles.forEach((particle) => {
+                    particle.style.left = Math.random() * 100 + '%';
+                    particle.style.top = Math.random() * 100 + '%';
+                    particle.style.boxShadow = 'none';
+                });
+            });
+        }
+        
+        // Initialize geometric visualization
+        createGeometricVisualization();
+        
+        // Ambient sound trigger (visual feedback only)
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('revelation-trigger') || 
+                e.target.classList.contains('protocol-item')) {
+                // Create ripple effect
+                const ripple = document.createElement('div');
+                ripple.style.position = 'fixed';
+                ripple.style.left = e.clientX + 'px';
+                ripple.style.top = e.clientY + 'px';
+                ripple.style.width = '4px';
+                ripple.style.height = '4px';
+                ripple.style.background = '#daa520';
+                ripple.style.borderRadius = '50%';
+                ripple.style.transform = 'translate(-50%, -50%)';
+                ripple.style.pointerEvents = 'none';
+                ripple.style.animation = 'ripple 0.6s ease-out';
+                ripple.style.zIndex = '9999';
+                
+                document.body.appendChild(ripple);
+                
+                setTimeout(() => ripple.remove(), 600);
+            }
+        });
+        
+        // Add ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                0% {
+                    transform: translate(-50%, -50%) scale(1);
+                    opacity: 1;
+                }
+                100% {
+                    transform: translate(-50%, -50%) scale(20);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

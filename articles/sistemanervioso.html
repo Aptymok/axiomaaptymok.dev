@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Sistema Nervioso como Interfaz Cuántica - AxiomaAptymok.dev</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --neural-blue: #0066ff;
+            --quantum-purple: #6644ff;
+            --synapse-gold: #ffaa00;
+            --void-black: #000000;
+            --consciousness-white: #ffffff;
+            --gamma-green: #00ff44;
+            --theta-indigo: #4400ff;
+            --epsilon-crimson: #ff0044;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--void-black) 0%, #111122 50%, var(--void-black) 100%);
+            color: var(--consciousness-white);
+            font-family: 'Courier New', monospace;
+            line-height: 1.8;
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        .custom-cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--synapse-gold);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: transform 0.1s ease;
+        }
+
+        .neural-network {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        .synaptic-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cortex-header {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .cortex-header::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--neural-blue), transparent);
+            animation: synapticPulse 2s infinite;
+        }
+
+        .title-primary {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--neural-blue);
+            text-shadow: 0 0 20px var(--neural-blue);
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .subtitle-quantum {
+            font-size: 1.2rem;
+            color: var(--quantum-purple);
+            font-style: italic;
+            opacity: 0.9;
+        }
+
+        .axiom-box {
+            background: rgba(0, 102, 255, 0.1);
+            border: 2px solid var(--neural-blue);
+            border-radius: 10px;
+            padding: 30px;
+            margin: 40px 0;
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+
+        .axiom-box::before {
+            content: 'AXIOMA NEUROLÓGICO';
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: var(--void-black);
+            padding: 0 10px;
+            color: var(--neural-blue);
+            font-size: 0.8rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .coherence-section {
+            margin: 50px 0;
+            padding: 40px;
+            background: linear-gradient(145deg, rgba(102, 68, 255, 0.05) 0%, rgba(0, 255, 68, 0.05) 100%);
+            border-left: 4px solid var(--quantum-purple);
+            position: relative;
+        }
+
+        .coherence-section::before {
+            content: '';
+            position: absolute;
+            left: -2px;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--quantum-purple), var(--gamma-green));
+            animation: frequencyFlow 3s infinite;
+        }
+
+        .brain-state {
+            display: inline-block;
+            background: var(--void-black);
+            color: var(--consciousness-white);
+            padding: 8px 16px;
+            margin: 5px;
+            border-radius: 20px;
+            border: 1px solid;
+            font-size: 0.9rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .gamma-state {
+            border-color: var(--gamma-green);
+            box-shadow: 0 0 10px rgba(0, 255, 68, 0.3);
+        }
+
+        .theta-state {
+            border-color: var(--theta-indigo);
+            box-shadow: 0 0 10px rgba(68, 0, 255, 0.3);
+        }
+
+        .epsilon-state {
+            border-color: var(--epsilon-crimson);
+            box-shadow: 0 0 10px rgba(255, 0, 68, 0.3);
+        }
+
+        .brain-state:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px currentColor;
+        }
+
+        .breathing-instruction {
+            background: rgba(255, 170, 0, 0.1);
+            border: 1px dashed var(--synapse-gold);
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 8px;
+            text-align: center;
+            position: relative;
+            animation: breathingGlow 4s infinite;
+        }
+
+        .breathing-instruction::before {
+            content: '⚡ PROTOCOLO DE ANCLAJE ⚡';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--void-black);
+            padding: 0 15px;
+            color: var(--synapse-gold);
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .neural-command {
+            background: rgba(255, 0, 68, 0.1);
+            border-left: 3px solid var(--epsilon-crimson);
+            padding: 20px;
+            margin: 25px 0;
+            font-style: italic;
+            position: relative;
+        }
+
+        .neural-command::before {
+            content: '>>> COMANDO SOMÁTICO DIRECTO';
+            color: var(--epsilon-crimson);
+            font-size: 0.7rem;
+            font-weight: bold;
+            position: absolute;
+            top: -10px;
+            left: 0;
+        }
+
+        .quantum-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .quantum-list li {
+            position: relative;
+            padding: 15px 0 15px 40px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .quantum-list li::before {
+            content: '◊';
+            position: absolute;
+            left: 0;
+            color: var(--neural-blue);
+            font-size: 1.5rem;
+            animation: quantumSpin 3s infinite linear;
+        }
+
+        .amygdala-section {
+            background: rgba(255, 0, 68, 0.05);
+            border: 1px solid var(--epsilon-crimson);
+            border-radius: 15px;
+            padding: 35px;
+            margin: 40px 0;
+            position: relative;
+        }
+
+        .amygdala-section::before {
+            content: 'REPROGRAMACIÓN DEL GUARDIÁN DIMENSIONAL';
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: var(--void-black);
+            padding: 0 15px;
+            color: var(--epsilon-crimson);
+            font-size: 0.8rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .interactive-pulse {
+            display: inline-block;
+            padding: 10px 20px;
+            background: rgba(0, 102, 255, 0.2);
+            border: 1px solid var(--neural-blue);
+            border-radius: 25px;
+            color: var(--consciousness-white);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px 0;
+        }
+
+        .interactive-pulse:hover {
+            background: rgba(0, 102, 255, 0.4);
+            transform: scale(1.05);
+            box-shadow: 0 0 20px var(--neural-blue);
+        }
+
+        .protocol-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .protocol-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .protocol-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--neural-blue);
+            box-shadow: 0 10px 25px rgba(0, 102, 255, 0.2);
+        }
+
+        .warning-zone {
+            background: linear-gradient(45deg, rgba(255, 0, 68, 0.1), rgba(255, 170, 0, 0.1));
+            border: 2px solid var(--epsilon-crimson);
+            border-radius: 10px;
+            padding: 30px;
+            margin: 40px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .warning-zone::before {
+            content: '⚠️ ZONA DE ADVERTENCIA CUÁNTICA ⚠️';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--void-black);
+            padding: 0 20px;
+            color: var(--epsilon-crimson);
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        @keyframes synapticPulse {
+            0%, 100% { opacity: 0.3; transform: translateX(-50%) scaleX(1); }
+            50% { opacity: 1; transform: translateX(-50%) scaleX(1.2); }
+        }
+
+        @keyframes frequencyFlow {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 0% 100%; }
+        }
+
+        @keyframes breathingGlow {
+            0%, 100% { box-shadow: 0 0 10px rgba(255, 170, 0, 0.3); }
+            50% { box-shadow: 0 0 25px rgba(255, 170, 0, 0.6); }
+        }
+
+        @keyframes quantumSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .heart-coherence {
+            text-align: center;
+            margin: 50px 0;
+            padding: 40px;
+            background: radial-gradient(circle, rgba(255, 170, 0, 0.1) 0%, transparent 70%);
+        }
+
+        .heart-pulse {
+            display: inline-block;
+            font-size: 3rem;
+            color: var(--synapse-gold);
+            animation: heartPulse 1.5s infinite;
+        }
+
+        @keyframes heartPulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.2); opacity: 1; }
+        }
+
+        .final-transmission {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(17, 17, 34, 0.8) 100%);
+            border: 1px solid var(--neural-blue);
+            border-radius: 15px;
+            padding: 40px;
+            margin: 60px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .final-transmission::before {
+            content: 'TRANSMISIÓN FINAL';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--void-black);
+            padding: 0 20px;
+            color: var(--neural-blue);
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="custom-cursor"></div>
+    
+    <canvas class="neural-network" id="neuralCanvas"></canvas>
+
+    <div class="synaptic-container">
+        <header class="cortex-header">
+            <h1 class="title-primary">EL SISTEMA NERVIOSO COMO INTERFAZ CUÁNTICA</h1>
+            <p class="subtitle-quantum">Neurología de la Manifestación</p>
+        </header>
+
+        <div class="axiom-box">
+            <p><strong>Tu sistema nervioso no es solo el hardware de tu conciencia.</strong></p>
+            <p>Es la antena que sintoniza frecuencias dimensionales. Es la interfaz que traduce intención en realidad física. Es el puente entre el vacío cuántico y la materia manifestada.</p>
+            <p><em>Y está siendo reconfigurado en tiempo real.</em></p>
+        </div>
+
+        <div class="neural-command">
+            En este instante, siente el peso de tu lengua en tu boca. Es el ancla de tu palabra. Ahora siente la energía ascendiendo desde la base de tu columna. No lo imagines. <strong>Siéntelo.</strong>
+        </div>
+
+        <div class="coherence-section">
+            <h2>COHERENCIA CARDIO-CEREBRAL: Los Dos Cerebros en Sincronía</h2>
+            
+            <p>El corazón genera un campo electromagnético 60 veces mayor que el cerebro. No es una metáfora poética. Es física medible. Tu corazón posee 40,000 neuronas—un cerebro en miniatura que envía más información al cerebro craneal de la que recibe.</p>
+
+            <div class="heart-coherence">
+                <div class="heart-pulse">♥</div>
+                <p><em>Cuando estos dos cerebros se sincronizan, se activa el estado de coherencia cuántica.</em></p>
+            </div>
+
+            <p>En coherencia cardio-cerebral, tu campo personal se expande exponencialmente. Los pensamientos se vuelven órdenes ejecutables. Las intenciones colapsan probabilidades. La manifestación deja de ser accidental y se convierte en inevitable.</p>
+
+            <div class="breathing-instruction">
+                <p><strong>PROTOCOLO DE SINCRONIZACIÓN INMEDIATA:</strong></p>
+                <p>Coloca tu mano sobre tu corazón. Respira 5 segundos inhalando, 5 segundos exhalando. Siente cómo tu corazón se sincroniza con tu respiración. Esto no es relajación. Es calibración de tu sistema operativo cuántico.</p>
+            </div>
+        </div>
+
+        <div class="amygdala-section">
+            <h2>LA AMÍGDALA COMO GUARDIÁN DIMENSIONAL</h2>
+            
+            <p>Tu amígdala es el firewall de tu realidad. Filtra cada experiencia, cada percepción, cada posibilidad antes de que alcance tu conciencia consciente. Es el guardián que decide qué versión de la realidad experimentas.</p>
+
+            <p>El problema: <strong>está programada para la supervivencia del viejo mundo.</strong></p>
+
+            <ul class="quantum-list">
+                <li><strong>Detecta novedad como amenaza:</strong> Cada oportunidad de crecimiento activa una respuesta de miedo.</li>
+                <li><strong>Prioriza lo conocido sobre lo verdadero:</strong> Prefiere una realidad familiar y limitante que una desconocida y expansiva.</li>
+                <li><strong>Interpreta expansión como peligro:</strong> Cuando tu conciencia se expande, la amígdala grita "alerta roja".</li>
+            </ul>
+
+            <div class="neural-command">
+                Ahora mismo, mientras lees esto, tu amígdala está evaluando esta información. Siente la ligera tensión en tu mandíbula, el casi imperceptible cambio en tu respiración. Esa es la respuesta del guardián detectando la reconfiguración en progreso. <strong>Reconócela, no la combatas.</strong>
+            </div>
+
+            <p><strong>Reprogramación del Guardián:</strong></p>
+            <p>No puedes desactivar la amígdala—ni deberías. Pero puedes entrenarla para que reconozca la expansión como seguridad, la coherencia como hogar, la manifestación como su estado natural.</p>
+        </div>
+
+        <div class="coherence-section">
+            <h2>ESTADOS NEUROLÓGICOS PARA ACCESO CUÁNTICO</h2>
+            
+            <p>Tu cerebro opera en frecuencias específicas. Cada frecuencia te da acceso a diferentes niveles de realidad:</p>
+
+            <div class="protocol-grid">
+                <div class="protocol-card">
+                    <div class="brain-state gamma-state">GAMMA (30-100 Hz)</div>
+                    <p><strong>El Estado del Creador</strong></p>
+                    <p>Donde la intuición se convierte en certeza. Donde las soluciones aparecen completas. El estado de los breakthrough y las revelaciones.</p>
+                </div>
+
+                <div class="protocol-card">
+                    <div class="brain-state theta-state">THETA (4-8 Hz)</div>
+                    <p><strong>El Estado del Arquitecto</strong></p>
+                    <p>Acceso directo al inconsciente. Donde se reescriben los programas profundos. El estado de la reprogramación neural y la sanación.</p>
+                </div>
+
+                <div class="protocol-card">
+                    <div class="brain-state epsilon-state">EPSILON (0.5 Hz)</div>
+                    <p><strong>El Estado Inexplorado</strong></p>
+                    <p>Frecuencia de suspensión total. Donde la conciencia individual se disuelve en la conciencia universal. El estado de la manifestación instantánea.</p>
+                </div>
+            </div>
+
+            <div class="interactive-pulse" onclick="activateGammaState()">
+                🧠 ACTIVAR ESTADO GAMMA
+            </div>
+
+            <p><em>Cada estado requiere un protocolo específico de entrada. No son experiencias casuales—son estados operativos que puedes aprender a activar a voluntad.</em></p>
+        </div>
+
+        <div class="coherence-section">
+            <h2>EL ESTRÉS COMO BLOQUEADOR DE FRECUENCIA</h2>
+            
+            <p>El estrés crónico no es solo incomodidad emocional. Es interferencia electromagnética en tu sistema nervioso. Es ruido estático que bloquea tu capacidad de sintonizar frecuencias superiores.</p>
+
+            <p>Cuando tu sistema nervioso está en modo supervivencia:</p>
+
+            <ul class="quantum-list">
+                <li>La corteza prefrontal se desconecta (pierdes acceso al pensamiento superior)</li>
+                <li>El sistema límbico toma control (reacciones automáticas, patrones inconscientes)</li>
+                <li>El campo electromagnético personal colapsa (manifestación errática o nula)</li>
+                <li>La percepción se estrecha (solo ves problemas, no posibilidades)</li>
+            </ul>
+
+            <div class="neural-command">
+                Detente. Respira profundo tres veces. Siente cómo tu sistema nervioso se recalibra con cada exhalación. Esa sensación de expansión en tu pecho—ese es tu campo electromagnético restableciéndose. <strong>Esto es control consciente sobre tu hardware cuántico.</strong>
+            </div>
+        </div>
+
+        <div class="warning-zone">
+            <h3>ADVERTENCIA CUÁNTICA</h3>
+            <p>Una vez que comprendes que tu sistema nervioso es tu interfaz de creación de realidad, ya no puedes culpar a las circunstancias externas por tu experiencia interna.</p>
+            <p><strong>Tu estado neurológico es tu responsabilidad absoluta.</strong></p>
+            <p>No hay víctimas en el reino de la conciencia cuántica. Solo operadores con diferentes niveles de maestría sobre su propio hardware.</p>
+        </div>
+
+        <div class="final-transmission">
+            <h2>PROTOCOLO DE INTEGRACIÓN NEURAL</h2>
+            <p>Este conocimiento no es información para almacenar. Es software para instalar.</p>
+            
+            <div class="breathing-instruction">
+                <p><strong>INSTALACIÓN INMEDIATA:</strong></p>
+                <p>Coloca una mano en tu corazón, otra en tu frente. Respira y repite: "Mi sistema nervioso es mi interfaz cuántica. Cada respiración es una recalibración. Cada latido es una actualización de software."</p>
+                <p><em>Siéntelo integrándose a nivel celular. No es creencia—es reconfiguración física.</em></p>
+            </div>
+
+            <p>Bienvenido a la operación consciente de tu interfaz cuántica.</p>
+            <p><strong>Tu realidad acaba de actualizarse.</strong></p>
+        </div>
+    </div>
+
+    <script>
+        // Custom cursor
+        const cursor = document.querySelector('.custom-cursor');
+        let mouseX = 0, mouseY = 0;
+        let cursorX = 0, cursorY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        function animateCursor() {
+            cursorX += (mouseX - cursorX) * 0.1;
+            cursorY += (mouseY - cursorY) * 0.1;
+            cursor.style.left = cursorX + 'px';
+            cursor.style.top = cursorY + 'px';
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        // Neural network background
+        const canvas = document.getElementById('neuralCanvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        const neurons = [];
+        const numNeurons = 50;
+
+        for (let i = 0; i < numNeurons; i++) {
+            neurons.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                vx: (Math.random() - 0.5) * 0.5,
+                vy: (Math.random() - 0.5) * 0.5,
+                pulse: Math.random() * Math.PI * 2
+            });
+        }
+
+        function drawNeuralNetwork() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Update neurons
+            neurons.forEach(neuron => {
+                neuron.x += neuron.vx;
+                neuron.y += neuron.vy;
+                neuron.pulse += 0.02;
+                
+                if (neuron.x < 0 || neuron.x > canvas.width) neuron.vx *= -1;
+                if (neuron.y < 0 || neuron.y > canvas.height) neuron.vy *= -1;
+            });
+
+            // Draw connections
+            ctx.strokeStyle = 'rgba(0, 102, 255, 0.1)';
+            ctx.lineWidth = 1;
+            for (let i = 0; i < neurons.length; i++) {
+                for (let j = i + 1; j < neurons.length; j++) {
+                    const dx = neurons[i].x - neurons[j].x;
+                    const dy = neurons[i].y - neurons[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < 100) {
+                        const opacity = (100 - distance) / 100 * 0.2;
+                        ctx.strokeStyle = `rgba(0, 102, 255, ${opacity})`;
+                        ctx.beginPath();
+                        ctx.moveTo(neurons[i].x, neurons[i].y);
+                        ctx.lineTo(neurons[j].x, neurons[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            // Draw neurons
+            neurons.forEach(neuron => {
+                const pulseIntensity = Math.sin(neuron.pulse) * 0.5 + 0.5;
+                ctx.fillStyle = `rgba(255, 170, 0, ${pulseIntensity * 0.8})`;
+                ctx.beginPath();
+                ctx.arc(neuron.x, neuron.y, 2 + pulseIntensity * 2, 0, Math.PI * 2);
+                ctx.fill();
+            });
+
+            requestAnimationFrame(drawNeuralNetwork);
+        }
+        drawNeuralNetwork();
+
+        // Interactive elements
+        function activateGammaState() {
+            const button = event.target;
+            button.style.background = 'rgba(0, 255, 68, 0.4)';
+            button.innerHTML = '🧠 ESTADO GAMMA ACTIVADO';
+            button.style.animation = 'pulse 0.5s infinite';
+            
+            // Create pulsing effect across the page
+            document.body.style.animation = 'gammaActivation 3s ease-out';
+            
+            setTimeout(() => {
+                button.style.background = 'rgba(0, 102, 255, 0.2)';
+                button.innerHTML = '🧠 ACTIVAR ESTADO GAMMA';
+                button.style.animation = 'none';
+                document.body.style.animation = 'none';
+            }, 3000);
+        }
+
+        // Add CSS animation for gamma activation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes pulse {
+                0%, 100% { transform: scale(1); }
+                50% { transform: scale(1.05); }
+            }
+            
+            @keyframes gammaActivation {
+                0% { filter: hue-rotate(0deg); }
+                50% { filter: hue-rotate(90deg); }
+                100% { filter: hue-rotate(0deg); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Brain state interactions
+        document.querySelectorAll('.brain-state').forEach(state => {
+            state.addEventListener('click', function() {
+                const stateName = this.textContent.split(' ')[0];
+                this.style.transform = 'scale(1.2)';
+                this.style.transition = 'all 0.3s ease';
+                
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 300);
+                
+                // Visual feedback based on state type
+                if (this.classList.contains('gamma-state')) {
+                    document.body.style.boxShadow = 'inset 0 0 100px rgba(0, 255, 68, 0.1)';
+                } else if (this.classList.contains('theta-state')) {
+                    document.body.style.boxShadow = 'inset 0 0 100px rgba(68, 0, 255, 0.1)';
+                } else if (this.classList.contains('epsilon-state')) {
+                    document.body.style.boxShadow = 'inset 0 0 100px rgba(255, 0, 68, 0.1)';
+                }
+                
+                setTimeout(() => {
+                    document.body.style.boxShadow = 'none';
+                }, 2000);
+            });
+        });
+
+        // Breathing synchronization for breathing instructions
+        const breathingInstructions = document.querySelectorAll('.breathing-instruction');
+        breathingInstructions.forEach(instruction => {
+            instruction.addEventListener('mouseenter', function() {
+                this.style.animation = 'breathingGlow 2s infinite';
+            });
+            
+            instruction.addEventListener('mouseleave', function() {
+                this.style.animation = 'breathingGlow 4s infinite';
+            });
+        });
+    </script>
+</body>
+</html>

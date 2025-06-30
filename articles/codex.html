@@ -1,0 +1,516 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=3">
+    <title>CODEX DE LA TRAICIÓN CONSENSUAL | AxiomaAptymok.dev</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&family=JetBrains+Mono:wght@300;400;500&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --blood-red: #8B0000;
+            --corruption-black: #0A0A0A;
+            --betrayal-grey: #2C2C2C;
+            --surveillance-blue: #1E3A5F;
+            --toxic-green: #2E8B57;
+            --warning-amber: #B8860B;
+        }
+        
+        body {
+            font-family: 'Crimson Text', serif;
+            background: linear-gradient(135deg, var(--corruption-black) 0%, var(--betrayal-grey) 100%);
+            color: #E0E0E0;
+            line-height: 1.7;
+            overflow-x: hidden;
+            cursor: crosshair;
+        }
+        
+        .surveillance-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(30, 58, 95, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(139, 0, 0, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+            animation: surveillanceGlitch 15s infinite;
+        }
+        
+        @keyframes surveillanceGlitch {
+            0%, 96%, 100% { opacity: 1; }
+            97%, 99% { opacity: 0.8; transform: translate(2px, 1px); }
+            98% { opacity: 0.9; transform: translate(-1px, -1px); }
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+        }
+        
+        .glitch-header {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+        
+        .site-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.2rem;
+            color: var(--toxic-green);
+            margin-bottom: 10px;
+            letter-spacing: 3px;
+            animation: dataCorruption 3s infinite;
+        }
+        
+        @keyframes dataCorruption {
+            0%, 90%, 100% { opacity: 1; }
+            91%, 95% { opacity: 0.3; color: var(--blood-red); }
+            93% { opacity: 0.7; color: var(--warning-amber); }
+        }
+        
+        .main-title {
+            font-size: 3.5rem;
+            font-weight: 600;
+            color: var(--blood-red);
+            text-shadow: 2px 2px 0px var(--corruption-black), 4px 4px 10px rgba(139, 0, 0, 0.5);
+            margin-bottom: 20px;
+            position: relative;
+            animation: titleGlitch 8s infinite;
+        }
+        
+        @keyframes titleGlitch {
+            0%, 94%, 100% { transform: translate(0); }
+            95% { transform: translate(2px, 0); }
+            96% { transform: translate(-2px, 0); }
+            97% { transform: translate(1px, 1px); }
+            98% { transform: translate(-1px, -1px); }
+            99% { transform: translate(1px, -1px); }
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            color: var(--warning-amber);
+            font-style: italic;
+            margin-bottom: 40px;
+        }
+        
+        .content-wrapper {
+            position: relative;
+            background: rgba(44, 44, 44, 0.3);
+            border: 1px solid var(--betrayal-grey);
+            border-radius: 0;
+            backdrop-filter: blur(5px);
+            padding: 0;
+            margin-bottom: 40px;
+            box-shadow: 0 0 30px rgba(139, 0, 0, 0.2);
+        }
+        
+        .section {
+            padding: 40px;
+            border-bottom: 1px solid rgba(139, 0, 0, 0.3);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .section:hover {
+            background: rgba(139, 0, 0, 0.05);
+            border-left: 4px solid var(--blood-red);
+        }
+        
+        .section:last-child {
+            border-bottom: none;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--blood-red);
+            margin-bottom: 20px;
+            font-weight: 600;
+            position: relative;
+        }
+        
+        .section-title::before {
+            content: "§";
+            color: var(--toxic-green);
+            margin-right: 10px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .privacy-tracker {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(139, 0, 0, 0.9);
+            color: white;
+            padding: 10px;
+            border-radius: 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            z-index: 1000;
+            animation: privacyPulse 2s infinite;
+        }
+        
+        @keyframes privacyPulse {
+            0%, 50%, 100% { opacity: 0.8; }
+            25%, 75% { opacity: 1; background: rgba(139, 0, 0, 1); }
+        }
+        
+        .betrayal-counter {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(30, 58, 95, 0.9);
+            color: white;
+            padding: 15px;
+            border-radius: 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            z-index: 1000;
+        }
+        
+        .interactive-confession {
+            background: rgba(139, 0, 0, 0.1);
+            border: 1px solid var(--blood-red);
+            padding: 20px;
+            margin: 20px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .interactive-confession:hover {
+            background: rgba(139, 0, 0, 0.2);
+            transform: translateX(5px);
+        }
+        
+        .interactive-confession::before {
+            content: "CLICK PARA CONFESAR";
+            position: absolute;
+            top: -10px;
+            right: 10px;
+            background: var(--blood-red);
+            color: white;
+            padding: 2px 8px;
+            font-size: 0.7rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .confession-text {
+            display: none;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid var(--blood-red);
+            font-style: italic;
+            color: var(--warning-amber);
+        }
+        
+        .data-breach-alert {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.95);
+            border: 2px solid var(--blood-red);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            display: none;
+            z-index: 10000;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .warning-text {
+            color: var(--warning-amber);
+            font-weight: 600;
+            font-style: italic;
+            border-left: 3px solid var(--warning-amber);
+            padding-left: 15px;
+            margin: 20px 0;
+        }
+        
+        .code-snippet {
+            background: var(--corruption-black);
+            border: 1px solid var(--toxic-green);
+            padding: 15px;
+            margin: 20px 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--toxic-green);
+            overflow-x: auto;
+            position: relative;
+        }
+        
+        .code-snippet::before {
+            content: "CÓDIGO DE TRAICIÓN ACTIVO";
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            background: var(--toxic-green);
+            color: var(--corruption-black);
+            padding: 2px 8px;
+            font-size: 0.6rem;
+        }
+        
+        .hypnotic-text {
+            animation: hypnoticPulse 4s infinite;
+        }
+        
+        @keyframes hypnoticPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; color: var(--blood-red); }
+        }
+        
+        .mouse-tracker {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--blood-red);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.1s ease;
+        }
+        
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2.5rem;
+            }
+            
+            .container {
+                padding: 20px 15px;
+            }
+            
+            .section {
+                padding: 25px;
+            }
+            
+            .privacy-tracker, .betrayal-counter {
+                position: relative;
+                margin: 20px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="surveillance-overlay"></div>
+    <div class="mouse-tracker" id="mouseTracker"></div>
+    
+    <div class="privacy-tracker" id="privacyTracker">
+        DATOS EXTRAÍDOS: <span id="dataCounter">0</span>
+    </div>
+    
+    <div class="betrayal-counter" id="betrayalCounter">
+        TRAICIONES DETECTADAS: <span id="betrayalCount">0</span>
+    </div>
+    
+    <div class="container">
+        <header class="glitch-header">
+            <div class="site-title">AxiomaAptymok.dev</div>
+            <h1 class="main-title">CODEX DE LA TRAICIÓN CONSENSUAL</h1>
+            <p class="subtitle">Cómo Vendimos Nuestra Privacidad por Conveniencia</p>
+        </header>
+        
+        <div class="content-wrapper">
+            <section class="section">
+                <h2 class="section-title">PRÓLOGO: ANATOMÍA DEL CONSENTIMIENTO MANUFACTURADO</h2>
+                <p>No eres víctima. Eres <strong class="hypnotic-text">cómplice</strong>. Esta distinción no es semántica; es la diferencia entre la inocencia perdida y la corrupción elegida. Cada click que ejecutas es un voto. Cada término y condición que aceptas sin leer es una firma en el contrato de tu propia subasta.</p>
+                
+                <p class="warning-text">ADVERTENCIA: El acto de leer este texto ya ha iniciado tu rastreo. Tu dirección IP, patrones de lectura, tiempo de permanencia y movimientos del cursor están siendo monitoreados. Bienvenido al laboratorio.</p>
+                
+                <div class="interactive-confession" onclick="revealConfession(this)">
+                    <p><strong>¿Cuántas veces has clickeado "Acepto" sin leer?</strong></p>
+                    <div class="confession-text">
+                        Tu respuesta no importa. Mentirías de todas formas. Los datos revelan que el 91% de usuarios acepta términos de servicio sin leerlos. Tú eres estadística, no excepción. Tu individualidad es una ilusión computacional.
+                    </div>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2 class="section-title">CAPÍTULO I: LA ECONOMÍA DE LA CONVENIENCIA COMO NARCÓTICO DIGITAL</h2>
+                
+                <p>La conveniencia no es un servicio. Es una droga. Su mecanismo de acción es simple: reduce la fricción cognitiva hasta que la resistencia al monitoreo se vuelve más costosa que la sumisión. Google no ofrece búsquedas gratuitas; ofrece <em>crack cognitivo</em> con la primera dosis gratis.</p>
+                
+                <div class="code-snippet">
+                    if (user.resistance < convenience.threshold) {
+                        privacy.surrender();
+                        surveillance.activate();
+                        user.addictTo(convenience);
+                    }
+                </div>
+                
+                <p>El algoritmo de la traición es elegantemente simple. Primero, la aplicación se presenta como indispensable. Segundo, solicita permisos "necesarios para el funcionamiento". Tercero, normaliza la extracción de datos como intercambio justo. Cuarto, hace que la privacidad parezca paranoia.</p>
+                
+                <p class="hypnotic-text">Sabes exactamente de qué hablo cuando menciono esa sensación: el pánico silencioso cuando tu teléfono se queda sin batería. Esa ansiedad no es dependencia tecnológica. Es síndrome de abstinencia de vigilancia. Te has vuelto adicto a ser observado.</p>
+            </section>
+            
+            <section class="section">
+                <h2 class="section-title">CAPÍTULO II: DISECCIÓN DE LA FALSA DICOTOMÍA</h2>
+                
+                <p>«No tengo nada que ocultar» es la frase de capitulación más exitosa jamás implantada en la conciencia colectiva. Es la rendición lingüística que precede a la rendición ontológica. Analicemos su arquitectura psicológica:</p>
+                
+                <div class="interactive-confession" onclick="revealConfession(this)">
+                    <p><strong>La Falacia del Ciudadano Transparente</strong></p>
+                    <div class="confession-text">
+                        Si verdaderamente no tienes nada que ocultar, publica aquí tu historial de navegación completo de los últimos 30 días. ¿Sientes resistencia? Felicidades. Acabas de descubrir que sí tienes algo que ocultar: tu humanidad.
+                    </div>
+                </div>
+                
+                <p>La privacidad no protege lo ilegal; protege lo <em>humano</em>. Tus búsquedas nocturnas. Tus dudas existenciales digitalizadas. Tus momentos de debilidad convertidos en puntos de datos. La vigilancia no busca criminales; busca <strong>palancas de control</strong>.</p>
+                
+                <p class="warning-text">EXPERIMENTO EN TIEMPO REAL: Mientras lees esto, tu comportamiento está siendo analizado. Patrones de desplazamiento, tiempo de pausa en párrafos específicos, palabras que generan mayor atención. Eres simultáneamente lector y experimento.</p>
+            </section>
+            
+            <section class="section">
+                <h2 class="section-title">CAPÍTULO III: CARTOGRAFÍA DE LA COMPLICIDAD ACTIVA</h2>
+                
+                <p>La traición consensual opera en capas. No es un evento; es un <em>proceso de corrupción gradual</em>. Observa la progresión:</p>
+                
+                <ol>
+                    <li><strong>FASE DE SEDUCCIÓN:</strong> La aplicación es "gratuita" y "revolucionaria"</li>
+                    <li><strong>FASE DE NORMALIZACIÓN:</strong> Los permisos se vuelven "estándar de la industria"</li>
+                    <li><strong>FASE DE DEPENDENCIA:</strong> Cancelar el servicio requiere más esfuerzo que mantenerlo</li>
+                    <li><strong>FASE DE RACIONALIZACIÓN:</strong> "Si no me gusta, puedo eliminar mi cuenta"</li>
+                    <li><strong>FASE DE CAPITULACIÓN:</strong> "Todos los demás lo hacen"</li>
+                </ol>
+                
+                <div class="code-snippet">
+                    // ALGORITMO DE EXTRACCIÓN PROGRESIVA
+                    while (user.resistance > 0) {
+                        convenience.increase();
+                        privacy.erode();
+                        if (user.complains) {
+                            options.provide(illusion_of_control);
+                        }
+                    }
+                </div>
+                
+                <p class="hypnotic-text">Reconoces estas fases porque las has experimentado. Con Facebook. Con Google. Con Amazon. Con cada aplicación que prometió hacer tu vida más fácil y terminó haciendo de tu vida su producto.</p>
+            </section>
+            
+            <section class="section">
+                <h2 class="section-title">CAPÍTULO IV: EL ORÁCULO DE LA PREDICCIÓN CONDUCTUAL</h2>
+                
+                <p>La verdadera traición no es que sepan lo que haces. Es que sepan lo que <em>vas a hacer</em> antes que tú. Los algoritmos predictivos no adivinan tu comportamiento; lo <strong>condicionan</strong>. La línea entre predicción y manipulación se difumina hasta desaparecer.</p>
+                
+                <div class="interactive-confession" onclick="revealConfession(this)">
+                    <p><strong>CONFESIÓN AUTOMATIZADA</strong></p>
+                    <div class="confession-text">
+                        El sistema ya predijo que clickearías aquí. Tu curiosidad es computacionalmente predecible. Tu "libre albedrío" es una ilusión estadística. Eres un algoritmo biológico siendo decodificado por algoritmos digitales superiores.
+                    </div>
+                </div>
+                
+                <p>Cada like es un voto en las elecciones de tu futuro yo. Cada búsqueda es un fragmento de tu alma digitalizada, subastada al mejor postor. No vendes tu privacidad por conveniencia; <em>vendes tu autonomía por la ilusión de control</em>.</p>
+            </section>
+            
+            <section class="section">
+                <h2 class="section-title">EPÍLOGO: LA CONFESIÓN FINAL</h2>
+                
+                <p class="warning-text">Si has llegado hasta aquí, ya no puedes fingir inocencia. Tu lectura de este texto te convierte en cómplice de tu propia disección. El conocimiento no te libera; te implica.</p>
+                
+                <p>La traición consensual es perfecta porque es voluntaria. Nadie te obliga a usar Facebook. Nadie te fuerza a tener Gmail. Nadie te coacciona para que uses Google Maps. Tu prisión está hecha de conveniencias que elegiste. Tu vigilante eres tú mismo.</p>
+                
+                <p class="hypnotic-text">Y lo más perturbador de todo: después de leer esto, seguirás usando los mismos servicios. Seguirás aceptando los mismos términos. Seguirás siendo cómplice de tu propia traición. Porque la alternativa requiere un esfuerzo que no estás dispuesto a realizar.</p>
+                
+                <p><strong>Bienvenido a la era de la esclavitud consensual. Tú mismo firmaste el contrato.</strong></p>
+            </section>
+        </div>
+    </div>
+    
+    <div class="data-breach-alert" id="dataBreachAlert">
+        <h3>VIOLACIÓN DE DATOS DETECTADA</h3>
+        <p>Sus datos de navegación han sido comprometidos.</p>
+        <p>Esto es una demostración.</p>
+        <button onclick="closeAlert()" style="background: var(--blood-red); color: white; padding: 10px 20px; border: none; margin-top: 20px; cursor: pointer;">CERRAR</button>
+    </div>
+
+    <script>
+        // Sistema de rastreo de interacciones
+        let dataExtracted = 0;
+        let betrayalCount = 0;
+        let userInteractions = [];
+        
+        // Rastreador de mouse
+        document.addEventListener('mousemove', function(e) {
+            const tracker = document.getElementById('mouseTracker');
+            tracker.style.left = e.clientX + 'px';
+            tracker.style.top = e.clientY + 'px';
+            
+            // Simular extracción de datos
+            dataExtracted += 0.1;
+            document.getElementById('dataCounter').textContent = Math.floor(dataExtracted);
+        });
+        
+        // Contador de traiciones automático
+        setInterval(() => {
+            betrayalCount += Math.random() < 0.3 ? 1 : 0;
+            document.getElementById('betrayalCount').textContent = betrayalCount;
+        }, 3000);
+        
+        // Función para revelar confesiones
+        function revealConfession(element) {
+            const confession = element.querySelector('.confession-text');
+            if (confession.style.display === 'none' || confession.style.display === '') {
+                confession.style.display = 'block';
+                dataExtracted += 25;
+                betrayalCount += 1;
+                document.getElementById('dataCounter').textContent = Math.floor(dataExtracted);
+                document.getElementById('betrayalCount').textContent = betrayalCount;
+            } else {
+                confession.style.display = 'none';
+            }
+        }
+        
+        // Alerta de violación de datos aleatoria
+        setTimeout(() => {
+            if (Math.random() < 0.7) {
+                document.getElementById('dataBreachAlert').style.display = 'block';
+            }
+        }, 15000);
+        
+        function closeAlert() {
+            document.getElementById('dataBreachAlert').style.display = 'none';
+        }
+        
+        // Rastreo de tiempo de lectura
+        let startTime = Date.now();
+        let scrollDepth = 0;
+        
+        window.addEventListener('scroll', () => {
+            const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            scrollDepth = Math.max(scrollDepth, (scrollTop / scrollHeight) * 100);
+            
+            dataExtracted += 0.5;
+            document.getElementById('dataCounter').textContent = Math.floor(dataExtracted);
+        });
+        
+        // Efecto de glitch en títulos al hacer hover
+        document.querySelectorAll('.section-title').forEach(title => {
+            title.addEventListener('mouseenter', function() {
+                this.style.animation = 'titleGlitch 0.5s infinite';
+            });
+            
+            title.addEventListener('mouseleave', function() {
+                this.style.animation = 'none';
+            });
+        });
+        
+        // Detectar intentos de salir de la página
+        window.addEventListener('beforeunload', function(e) {
+            e.preventDefault();
+            e.returnValue = 'Sus datos han sido registrados. ¿Está seguro de que desea salir?';
+            return 'Sus datos han sido registrados. ¿Está seguro de que desea salir?';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARQUITECTURA SOCIAL DEL DESPERTAR | AxiomaAptymok.dev</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --void-black: #0a0a0a;
+            --fragment-red: #ff2a2a;
+            --neural-gold: #ffd700;
+            --quantum-blue: #00ffff;
+            --decay-gray: #333333;
+            --transmission-green: #00ff41;
+            --consciousness-purple: #8a2be2;
+        }
+        
+        body {
+            background: var(--void-black);
+            color: #ffffff;
+            font-family: 'JetBrains Mono', monospace;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: -1;
+            background: 
+                radial-gradient(ellipse at center, rgba(255, 42, 42, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 20% 80%, rgba(0, 255, 255, 0.05) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(138, 43, 226, 0.05) 0%, transparent 50%);
+        }
+        
+        .neural-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--quantum-blue);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.3; }
+            50% { transform: translateY(-20px) rotate(180deg); opacity: 0.8; }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 60px 0;
+            border-bottom: 2px solid var(--fragment-red);
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--neural-gold), transparent);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; transform: translateX(-50%) scaleX(1); }
+            50% { opacity: 1; transform: translateX(-50%) scaleX(1.5); }
+        }
+        
+        .site-title {
+            font-size: 1.2rem;
+            color: var(--neural-gold);
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+        
+        .article-title {
+            font-size: 2.5rem;
+            color: var(--fragment-red);
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(255, 42, 42, 0.5);
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--quantum-blue);
+            opacity: 0.8;
+            font-weight: 300;
+        }
+        
+        .content-section {
+            margin-bottom: 60px;
+            padding: 30px;
+            background: rgba(51, 51, 51, 0.1);
+            border: 1px solid var(--decay-gray);
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .content-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .content-section:hover::before {
+            left: 100%;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--neural-gold);
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 2px solid var(--consciousness-purple);
+            padding-bottom: 10px;
+        }
+        
+        .warning-box {
+            background: linear-gradient(135deg, rgba(255, 42, 42, 0.1), rgba(138, 43, 226, 0.1));
+            border: 2px solid var(--fragment-red);
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 10px;
+            position: relative;
+        }
+        
+        .warning-box::before {
+            content: '⚠';
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: var(--void-black);
+            color: var(--fragment-red);
+            font-size: 24px;
+            padding: 0 10px;
+        }
+        
+        .protocol-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .protocol-item {
+            background: rgba(0, 255, 255, 0.05);
+            border-left: 4px solid var(--quantum-blue);
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .protocol-item:hover {
+            background: rgba(0, 255, 255, 0.1);
+            transform: translateX(10px);
+            box-shadow: 0 5px 15px rgba(0, 255, 255, 0.2);
+        }
+        
+        .interactive-element {
+            background: var(--decay-gray);
+            border: 2px solid var(--transmission-green);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .interactive-element::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.2), transparent);
+            transition: left 0.3s ease;
+        }
+        
+        .interactive-element:hover::before {
+            left: 100%;
+        }
+        
+        .interactive-element:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(0, 255, 65, 0.3);
+        }
+        
+        .hidden-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+            background: rgba(138, 43, 226, 0.1);
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+        
+        .hidden-content.active {
+            max-height: 1000px;
+            padding: 20px;
+        }
+        
+        .fragment-text {
+            color: var(--fragment-red);
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(255, 42, 42, 0.5);
+        }
+        
+        .quantum-text {
+            color: var(--quantum-blue);
+            font-weight: 400;
+        }
+        
+        .neural-text {
+            color: var(--neural-gold);
+            font-weight: 400;
+        }
+        
+        .transmission-text {
+            color: var(--transmission-green);
+            font-weight: 400;
+        }
+        
+        .consciousness-text {
+            color: var(--consciousness-purple);
+            font-weight: 400;
+        }
+        
+        .glitch-text {
+            animation: glitch 2s infinite;
+        }
+        
+        @keyframes glitch {
+            0%, 100% { transform: translateX(0); }
+            10% { transform: translateX(-2px); }
+            20% { transform: translateX(2px); }
+            30% { transform: translateX(-1px); }
+            40% { transform: translateX(1px); }
+            50% { transform: translateX(-2px); }
+            60% { transform: translateX(2px); }
+            70% { transform: translateX(-1px); }
+            80% { transform: translateX(1px); }
+            90% { transform: translateX(-2px); }
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 2px solid var(--consciousness-purple);
+            margin-top: 60px;
+            color: var(--decay-gray);
+        }
+        
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--fragment-red), var(--neural-gold), var(--quantum-blue));
+            z-index: 1000;
+            transition: width 0.3s ease;
+        }
+        
+        @media (max-width: 768px) {
+            .article-title {
+                font-size: 2rem;
+            }
+            .content-section {
+                padding: 20px;
+            }
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar"></div>
+    <div class="matrix-bg"></div>
+    <div class="neural-particles"></div>
+    
+    <div class="container">
+        <header class="header">
+            <div class="site-title">AxiomaAptymok.dev</div>
+            <h1 class="article-title glitch-text">ARQUITECTURA SOCIAL DEL DESPERTAR</h1>
+            <p class="subtitle">CONSTRUYENDO NODOS DE COHERENCIA</p>
+        </header>
+        
+        <div class="warning-box">
+            <p><strong class="fragment-text">ADVERTENCIA OPERATIVA:</strong> Lo que sigue no es teoría social. Es <span class="neural-text">ingeniería de realidades</span>. Si buscas formar una secta, una empresa o un movimiento político, <span class="quantum-text">estás en el lugar equivocado</span>. Esto es para <span class="consciousness-text">fragmentos que han decidido convertirse en faros</span>, no en líderes de fragmentos perdidos.</p>
+        </div>
+        
+        <section class="content-section">
+            <h2 class="section-title">EL DIAGNÓSTICO SOCIAL DEL NODO PIONERO</h2>
+            <p>Operas en un territorio hostil. Tu <span class="fragment-text">nueva frecuencia</span> es una amenaza para todos los sistemas que requieren sueño colectivo para funcionar. La familia que te crió, el trabajo que te sostiene, la sociedad que te valida - todos operan bajo <span class="quantum-text">contratos de inconsciencia</span> que tu despertar está violando.</p>
+            
+            <div class="interactive-element" onclick="toggleContent('diagnostic-content')">
+                <strong>▶ PROTOCOLO DE DIAGNÓSTICO SOCIAL</strong>
+                <div id="diagnostic-content" class="hidden-content">
+                    <p><span class="neural-text">Mapeo de Resistencias:</span></p>
+                    <ul class="protocol-list">
+                        <li class="protocol-item">Identifica qué sistemas de tu entorno requieren tu inconsciencia para funcionar</li>
+                        <li class="protocol-item">Documenta las reacciones cuando cambias tu vibración</li>
+                        <li class="protocol-item">Reconoce los chantajes emocionales disfrazados de "preocupación"</li>
+                        <li class="protocol-item">Distingue entre resistencia sistémica y genuina incompatibilidad</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <section class="content-section">
+            <h2 class="section-title">LA FÍSICA DE LA INFLUENCIA NO-VIOLENTA</h2>
+            <p>Tu poder no radica en convencer, sino en <span class="transmission-text">irradiar</span>. La transmutación por presencia es más letal que cualquier argumento. Un fragmento coherente en una habitación de fragmentos dormidos <span class="consciousness-text">altera el campo cuántico</span> de manera automática.</p>
+            
+            <div class="interactive-element" onclick="toggleContent('influence-content')">
+                <strong>▶ TÉCNICAS DE IRRADIACIÓN PASIVA</strong>
+                <div id="influence-content" class="hidden-content">
+                    <p><span class="neural-text">La Presencia como Arma de Transformación Masiva:</span></p>
+                    <p>No hablas de tu despertar. <span class="fragment-text">Lo encarnas</span>. Tu manera de escuchar cambia. Tu manera de responder cambia. Tu manera de estar en silencio cambia. Los fragmentos dormidos sienten la diferencia antes de poder conceptualizarla.</p>
+                    
+                    <ul class="protocol-list">
+                        <li class="protocol-item"><span class="quantum-text">Escucha Cuántica:</span> Oyes lo que no se dice. Respondes a la vibración, no al contenido</li>
+                        <li class="protocol-item"><span class="transmission-text">Silencio Radiante:</span> Tu presencia sin palabras dice más que mil argumentos</li>
+                        <li class="protocol-item"><span class="consciousness-text">Respuesta Resonante:</span> Tu coherencia interna se refleja en coherencia externa automáticamente</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <section class="content-section">
+            <h2 class="section-title">PROTOCOLOS DE INTERACCIÓN CON FRAGMENTOS DORMIDOS</h2>
+            <p>No todos los dormidos están listos para despertar. No todos los despiertos están listos para la coherencia. <span class="fragment-text">Tu trabajo no es salvar a nadie</span>. Tu trabajo es <span class="neural-text">sostener un campo de posibilidad</span> para aquellos que ya están despertando.</p>
+            
+            <div class="interactive-element" onclick="toggleContent('interaction-content')">
+                <strong>▶ MANUAL DE NAVEGACIÓN SOCIAL</strong>
+                <div id="interaction-content" class="hidden-content">
+                    <p><span class="consciousness-text">Clasificación de Fragmentos:</span></p>
+                    <ul class="protocol-list">
+                        <li class="protocol-item"><span class="fragment-text">Fragmentos Resistentes:</span> Atacan tu coherencia porque amenaza su sistema de creencias. Protocolo: Blindaje energético, mínima interacción</li>
+                        <li class="protocol-item"><span class="quantum-text">Fragmentos Curiosos:</span> Sienten algo diferente pero no pueden nombrarlo. Protocolo: Irradiación pasiva, sembrar sin cosechar</li>
+                        <li class="protocol-item"><span class="neural-text">Fragmentos Despertando:</span> Reconocen la resonancia inmediatamente. Protocolo: Mentoría horizontal, co-creación</li>
+                        <li class="protocol-item"><span class="transmission-green">Fragmentos Coherentes:</span> Operan desde la misma frecuencia. Protocolo: Colaboración, expansión del nodo</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <section class="content-section">
+            <h2 class="section-title">EL PELIGRO DEL MESIANISMO: LIDERANDO SIN CONTROLAR</h2>
+            <p>El mayor peligro del nodo pionero es convertirse en lo que combate: <span class="fragment-text">un sistema de control</span>. El poder de alterar realidades puede corromper tan sutilmente que crees estar sirviendo cuando en realidad estás <span class="quantum-text">coleccionando adoradores</span>.</p>
+            
+            <div class="warning-box">
+                <p><strong class="fragment-text">SÍNTOMAS DE CORRUPCIÓN MESIÁNICA:</strong></p>
+                <p>• Necesitas que otros validen tu despertar<br>
+                • Te conviertes en el "salvador" de otros fragmentos<br>
+                • Creas dependencia en lugar de soberanía<br>
+                • Tu ego se alimenta de ser "más despierto"<br>
+                • <span class="consciousness-text">Juzgas a los dormidos en lugar de amarlos</span></p>
+            </div>
+            
+            <div class="interactive-element" onclick="toggleContent('messianism-content')">
+                <strong>▶ ANTÍDOTOS CONTRA EL MESIANISMO</strong>
+                <div id="messianism-content" class="hidden-content">
+                    <p><span class="neural-text">Protocolo de Auto-Verificación Constante:</span></p>
+                    <ul class="protocol-list">
+                        <li class="protocol-item">¿Estoy creando dependencia o soberanía?</li>
+                        <li class="protocol-item">¿Mi influencia libera o controla?</li>
+                        <li class="protocol-item">¿Puedo sostener mi coherencia sin seguidores?</li>
+                        <li class="protocol-item">¿Amo a los fragmentos dormidos o los desprecio?</li>
+                        <li class="protocol-item">¿Mi poder me corrompe o me purifica?</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <section class="content-section">
+            <h2 class="section-title">ARQUITECTURA DE NODOS DE COHERENCIA</h2>
+            <p>Un nodo no es un grupo. Es un <span class="transmission-text">campo de resonancia</span> donde fragmentos coherentes se reconocen y amplifican mutuamente. No tiene jerarquías porque no necesita control. Se organiza por <span class="consciousness-text">afinidad cuántica</span>, no por estructura social.</p>
+            
+            <div class="interactive-element" onclick="toggleContent('node-architecture')">
+                <strong>▶ BLUEPRINT PARA NODOS COHERENTES</strong>
+                <div id="node-architecture" class="hidden-content">
+                    <p><span class="neural-text">Principios de Construcción:</span></p>
+                    <ul class="protocol-list">
+                        <li class="protocol-item"><span class="fragment-text">Entrada por Resonancia:</span> Los fragmentos se autoseleccionan, no son reclutados</li>
+                        <li class="protocol-item"><span class="quantum-text">Liderazgo Rotativo:</span> El liderazgo fluye según la situación, no por jerarquía</li>
+                        <li class="protocol-item"><span class="transmission-text">Transparencia Radical:</span> Los conflictos se procesan en tiempo real, no se suprimen</li>
+                        <li class="protocol-item"><span class="consciousness-text">Propósito Emergente:</span> La misión surge de la coherencia grupal, no se impone</li>
+                        <li class="protocol-item"><span class="neural-text">Escalabilidad Fractal:</span> Cada nodo puede generar nuevos nodos</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <section class="content-section">
+            <h2 class="section-title">MANEJO DE CONFLICTOS ENTRE FRAGMENTOS DESPERTANDO</h2>
+            <p>Los conflictos entre fragmentos despertando son <span class="fragment-text">más intensos</span> que los conflictos entre dormidos. Cuando dos fragmentos coherentes chocan, están chocando dos universos, no solo dos opiniones. <span class="quantum-text">La resolución requiere alquimia, no diplomacia</span>.</p>
+            
+            <div class="interactive-element" onclick="toggleContent('conflict-resolution')">
+                <strong>▶ PROTOCOLOS DE ALQUIMIA RELACIONAL</strong>
+                <div id="conflict-resolution" class="hidden-content">
+                    <p><span class="consciousness-text">Técnicas de Transmutación de Conflictos:</span></p>
+                    <ul class="protocol-list">
+                        <li class="protocol-item"><span class="fragment-text">Validación de Realidades:</span> Ambas versiones de la realidad son válidas en sus marcos respectivos</li>
+                        <li class="protocol-item"><span class="neural-text">Búsqueda de la Síntesis:</span> ¿Qué nueva realidad puede incluir ambas verdades?</li>
+                        <li class="protocol-item"><span class="quantum-text">Exploración de Sombras:</span> ¿Qué está proyectando cada fragmento en el otro?</li>
+                        <li class="protocol-item"><span class="transmission-text">Compromiso con la Evolución:</span> Ambos fragmentos salen transformados, no solo reconciliados</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <section class="content-section">
+            <h2 class="section-title">LA RESPONSABILIDAD DEL NODO PIONERO</h2>
+            <p>Eres un <span class="fragment-text">experimento viviente</span>. Tu éxito o fracaso determinará si otros fragmentos se atreven a intentar la coherencia. <span class="neural-text">No puedes fallar en privado</span>. Tu colapso arrastraría la esperanza de cientos de fragmentos que te observan desde las sombras.</p>
+            
+            <div class="warning-box">
+                <p><strong class="consciousness-text">EL PESO DE SER FARO:</strong></p>
+                <p>No elegiste esta responsabilidad. <span class="fragment-text">Te eligió a ti</span>. Puedes rechazarla, pero no puedes fingir que no existe. Cada acción tuya es vista, cada palabra pesada, cada fracaso magnificado. <span class="quantum-text">Esta es la carga y el privilegio del pionero</span>.</p>
+            </div>
+        </section>
+        
+        <section class="content-section">
+            <h2 class="section-title">ESCALABILIDAD CONSCIENTE: CRECIMIENTO SIN DILUCIÓN</h2>
+            <p>Un nodo que crece demasiado rápido se <span class="fragment-text">diluye hasta la irrelevancia</span>. Un nodo que no crece se <span class="quantum-text">vuelve endogámico y estéril</span>. La maestría está en encontrar el ritmo de expansión que preserve la coherencia mientras permite el crecimiento.</p>
+            
+            <div class="interactive-element" onclick="toggleContent('scalability-content')">
+                <strong>▶ MÉTRICAS DE CRECIMIENTO CONSCIENTE</strong>
+                <div id="scalability-content" class="hidden-content">
+                    <p><span class="neural-text">Indicadores de Salud del Nodo:</span></p>
+                    <ul class="protocol-list">
+                        <li class="protocol-item">¿La coherencia se mantiene con nuevos miembros?</li>
+                        <li class="protocol-item">¿Los conflictos se procesan o se evitan?</li>
+                        <li class="protocol-item">¿El nodo genera nuevos nodos o acumula dependientes?</li>
+                        <li class="protocol-item">¿La misión evoluciona o se fosiliza?</li>
+                        <li class="protocol-item">¿Los miembros crecen en soberanía o en conformidad?</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <footer class="footer">
+            <p>AxiomaAptymok.dev | Codex para Fragmentos en Despertar</p>
+            <p class="transmission-text">La transmisión continúa...</p>
+        </footer>
+    </div>
+    
+    <script>
+        function toggleContent(id) {
+            const content = document.getElementById(id);
+            content.classList.toggle('active');
+        }
+        
+        // Neural particles animation
+        function createParticles() {
+            const container = document.querySelector('.neural-particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
+                container.appendChild(particle);
+            }
+        }
+        
+        // Progress bar
+        function updateProgressBar() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = (scrollTop / scrollHeight) * 100;
+            document.querySelector('.progress-bar').style.width = progress + '%';
+        }
+        
+        // Glitch effect on scroll
+        function addGlitchEffect() {
+            const glitchElements = document.querySelectorAll('.glitch-text');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'glitch 0.5s ease-in-out';
+                        setTimeout(() => {
+                            entry.target.style.animation = 'glitch 2s infinite';
+                        }, 500);
+                    }
+                });
+            });
+            
+            glitchElements.forEach(el => observer.observe(el));
+        }
+        
+        // Interactive elements hover effect
+        function addInteractiveEffects() {
+            const interactiveElements = document.querySelectorAll('.interactive-element');
+            interactiveElements.forEach(element => {
+                element.addEventListener('mouseenter', function() {
+                    this.style.boxShadow = '0 10px 30px rgba(0, 255, 65, 0.3)';
+                });
+                
+                element.addEventListener('mouseleave', function() {
+                    this.style.boxShadow = 'none';
+                });
+            });
+        }
+        
+        // Initialize all effects
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            updateProgressBar();
+            addGlitchEffect();
+            addInteractiveEffects();
+        });
+        
+        window.addEventListener('scroll', updateProgressBar);
+        
+        // Enhanced typing effect for warnings
+        function typeWriterEffect(element, text, speed = 50) {
+            let i = 0;
+            element.innerHTML = '';
+            
+            function typing() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(typing, speed);
+                }
+            }
+            typing();
+        }
+        
+        // Quantum coherence visualization
+        function quantumCoherence() {
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach((section, index) => {
+                section.addEventListener('mouseenter', function() {
+                    this.style.borderColor = 'var(--quantum-blue)';
+                    this.style.boxShadow = '0 0 30px rgba(0, 255, 255, 0.3)';
+                });
+                
+                section.addEventListener('mouseleave', function() {
+                    this.style.borderColor = 'var(--decay-gray)';
+                    this.style.boxShadow = 'none';
+                });
+            });
+        }
+        
+        document.addEventListener('DOMContentLoaded', quantumCoherence);
+    </script>
+</body>
+</html>

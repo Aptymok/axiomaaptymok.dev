@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AxiomaAptymok.dev - LA SINCRONICIDAD COMO GPS MULTIDIMENSIONAL</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,700;1,400&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --primary-bg: #0a0a0f;
+            --secondary-bg: #12121a;
+            --accent-bg: #1a1a2e;
+            --text-primary: #e8e8f0;
+            --text-secondary: #a8a8c0;
+            --text-accent: #6366f1;
+            --gold-accent: #f59e0b;
+            --danger-red: #ef4444;
+            --success-green: #10b981;
+            --warning-orange: #f97316;
+            
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-gold: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            --gradient-danger: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            
+            --shadow-primary: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+            --shadow-accent: 0 0 50px rgba(99, 102, 241, 0.3);
+            --shadow-gold: 0 0 30px rgba(245, 158, 11, 0.4);
+            
+            --border-radius: 16px;
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--primary-bg);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(245, 158, 11, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(16, 185, 129, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .header {
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+        }
+        
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: var(--gradient-primary);
+            border-radius: 1px;
+        }
+        
+        .site-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-accent);
+            margin-bottom: 0.5rem;
+            letter-spacing: 2px;
+        }
+        
+        .phase-indicator {
+            font-size: 0.9rem;
+            color: var(--gold-accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+        
+        .main-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin: 2rem 0;
+            background: var(--gradient-primary);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+            text-align: center;
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-bottom: 3rem;
+            font-style: italic;
+        }
+        
+        .content-section {
+            margin: 4rem 0;
+        }
+        
+        .axiom-card {
+            background: var(--secondary-bg);
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            margin: 2rem 0;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            box-shadow: var(--shadow-primary);
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+        
+        .axiom-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-primary);
+        }
+        
+        .axiom-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-accent);
+            border-color: rgba(99, 102, 241, 0.4);
+        }
+        
+        .breathe-indicator {
+            text-align: center;
+            margin: 3rem 0;
+            padding: 2rem;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            position: relative;
+        }
+        
+        .breathe-text {
+            color: var(--success-green);
+            font-weight: 600;
+            font-size: 1.1rem;
+            animation: breathe 4s ease-in-out infinite;
+        }
+        
+        @keyframes breathe {
+            0%, 100% { opacity: 0.7; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+        
+        .somatic-command {
+            background: var(--accent-bg);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--gold-accent);
+            margin: 2rem 0;
+            font-style: italic;
+            box-shadow: var(--shadow-gold);
+        }
+        
+        .law-definition {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(16, 185, 129, 0.1) 100%);
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            border: 2px solid rgba(99, 102, 241, 0.3);
+            margin: 2rem 0;
+            position: relative;
+        }
+        
+        .law-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-accent);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .warning-box {
+            background: rgba(239, 68, 68, 0.1);
+            border: 2px solid var(--danger-red);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            margin: 2rem 0;
+            position: relative;
+        }
+        
+        .warning-box::before {
+            content: '⚠';
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: var(--primary-bg);
+            color: var(--danger-red);
+            font-size: 1.5rem;
+            padding: 0 0.5rem;
+        }
+        
+        .technique-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .technique-card {
+            background: var(--secondary-bg);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .technique-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--gold-accent);
+            box-shadow: var(--shadow-gold);
+        }
+        
+        .technique-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--gold-accent);
+            margin-bottom: 1rem;
+        }
+        
+        .interactive-element {
+            background: var(--accent-bg);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            margin: 2rem 0;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+        
+        .interactive-element:hover {
+            border-color: var(--text-accent);
+            background: rgba(99, 102, 241, 0.1);
+        }
+        
+        .interactive-element.active {
+            background: rgba(99, 102, 241, 0.2);
+            border-color: var(--text-accent);
+        }
+        
+        .hidden-content {
+            display: none;
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            border-left: 4px solid var(--text-accent);
+        }
+        
+        .hidden-content.revealed {
+            display: block;
+            animation: fadeIn 0.6s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .mono-text {
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            color: var(--gold-accent);
+        }
+        
+        .emphasis {
+            font-weight: 700;
+            color: var(--text-accent);
+        }
+        
+        .gradient-text {
+            background: var(--gradient-gold);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 600;
+        }
+        
+        .footer {
+            margin-top: 6rem;
+            padding: 3rem 0;
+            border-top: 1px solid rgba(99, 102, 241, 0.2);
+            text-align: center;
+        }
+        
+        .next-article {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .next-article:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-accent);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .main-title {
+                font-size: 2.5rem;
+            }
+            
+            .axiom-card,
+            .somatic-command,
+            .law-definition {
+                padding: 1.5rem;
+            }
+            
+            .technique-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="site-title">AxiomaAptymok.dev</div>
+            <div class="phase-indicator">Fase 3: Arquitectura de la Nueva Realidad</div>
+        </header>
+
+        <h1 class="main-title">LA SINCRONICIDAD COMO GPS MULTIDIMENSIONAL</h1>
+        <p class="subtitle">Leyendo el Código de la Realidad Responsiva</p>
+
+        <div class="somatic-command">
+            <strong>Comando Somático Inicial:</strong> Antes de continuar, coloca tu mano izquierda sobre tu corazón y la derecha sobre tu plexo solar. Siente la vibración de estas palabras mientras entran en tu sistema. No lo imagines. <em>Siéntelo</em>.
+        </div>
+
+        <div class="content-section">
+            <div class="axiom-card">
+                <h2>Axioma de la Realidad Responsiva</h2>
+                <p>El universo no es un mecanismo inerte que obedece leyes ciegas. Es un campo consciente que <span class="emphasis">responde</span> a la coherencia de tu señal. La sincronicidad no es coincidencia: es la <span class="gradient-text">confirmación física</span> de que tu frecuencia está siendo recibida y procesada por la arquitectura de la realidad.</p>
+            </div>
+
+            <div class="breathe-indicator">
+                <div class="breathe-text">← PAUSA RESPIRATORIA CONSCIENTE →<br>
+                Inhala por 4 segundos. Sostén por 4. Exhala por 8. La nueva información se descarga a nivel celular.</div>
+            </div>
+
+            <div class="law-definition">
+                <div class="law-title">La Primera Ley de la Navegación Cuántica</div>
+                <p><strong>La Realidad Habla en Símbolos, No en Palabras.</strong></p>
+                <p>Cada evento, objeto, número, animal o situación que aparece en tu campo de experiencia durante estados de coherencia elevada lleva información específica sobre tu trayectoria dimensional. El universo no te envía emails. Te envía <span class="mono-text">experiencias</span>.</p>
+            </div>
+
+            <div class="content-section">
+                <h2>DECODIFICANDO EL LENGUAJE MULTIDIMENSIONAL</h2>
+                
+                <div class="interactive-element" onclick="toggleContent('sync-types')">
+                    <strong>PROTOCOLO DE RECONOCIMIENTO:</strong> Los Cuatro Tipos de Sincronicidad
+                    <div class="hidden-content" id="sync-types">
+                        <div class="technique-grid">
+                            <div class="technique-card">
+                                <div class="technique-title">Tipo I: Confirmación Causal</div>
+                                <p>Eventos que validan una decisión o dirección tomada. <strong>Ejemplo:</strong> Piensas en alguien y te llama, encuentras exactamente el libro que necesitas.</p>
+                                <p><em>Significa:</em> Estás alineado con el flujo.</p>
+                            </div>
+                            <div class="technique-card">
+                                <div class="technique-title">Tipo II: Alerta de Redireccionamiento</div>
+                                <p>Obstáculos "inexplicables" que te fuerzan a cambiar el curso. <strong>Ejemplo:</strong> Se cancela un vuelo, problemas técnicos repetitivos, resistencia inesperada.</p>
+                                <p><em>Significa:</em> El universo te está salvando de una línea temporal subóptima.</p>
+                            </div>
+                            <div class="technique-card">
+                                <div class="technique-title">Tipo III: Mensaje Simbólico</div>
+                                <p>Patrones numéricos, animales, objetos que aparecen repetidamente. <strong>Ejemplo:</strong> 11:11, 333, ver la misma especie de ave tres días seguidos.</p>
+                                <p><em>Significa:</em> Información específica sobre tu estado vibratorio actual.</p>
+                            </div>
+                            <div class="technique-card">
+                                <div class="technique-title">Tipo IV: Portal de Aceleración</div>
+                                <p>Encuentros "casuales" que catalizan expansiones masivas. <strong>Ejemplo:</strong> Conocer a alguien clave en un lugar inesperado, obtener información crucial por "accidente".</p>
+                                <p><em>Significa:</em> Has alcanzado un punto de inflexión dimensional.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="somatic-command">
+                    <strong>Anclaje Físico:</strong> En este momento, nota el sonido más lejano que puedes percibir. Ahora el más cercano. Esa diferencia de enfoque es la misma que existe entre sincronicidad real y proyección mental. La maestría está en el <em>discernimiento</em>.
+                </div>
+
+                <div class="law-definition">
+                    <div class="law-title">La Segunda Ley: Distinción Entre Señal y Ruido</div>
+                    <p><strong>No Todo Es Una Señal. Pero Todo Puede Serlo.</strong></p>
+                    <p>La diferencia entre sincronicidad genuina y proyección mental radica en la <span class="gradient-text">coherencia emocional</span> del momento del reconocimiento. Las señales reales generan una <span class="mono-text">resonancia somática</span> instantánea: sabes que sabes, sin necesidad de convencerte.</p>
+                </div>
+
+                <div class="interactive-element" onclick="toggleContent('decoding-numbers')">
+                    <strong>DESCIFRANDO EL CÓDIGO NUMÉRICO:</strong> Más Allá del 11:11
+                    <div class="hidden-content" id="decoding-numbers">
+                        <div class="technique-grid">
+                            <div class="technique-card">
+                                <div class="technique-title">11:11 - Portal de Manifestación</div>
+                                <p>Momento de máxima coherencia cuántica. Lo que pienses/sientas en ese instante tiene <strong>peso causal amplificado</strong>. No hagas peticiones. Declara realidades.</p>
+                            </div>
+                            <div class="technique-card">
+                                <div class="technique-title">333 - Alineación Trina</div>
+                                <p>Cuerpo, mente y espíritu sincronizados. Indica que estás operando desde tu centro. Es momento de <strong>actuar</strong>, no de planear.</p>
+                            </div>
+                            <div class="technique-card">
+                                <div class="technique-title">444 - Soporte Estructural</div>
+                                <p>La arquitectura invisible te está sosteniendo. Aunque no veas el "cómo", la infraestructura de tu manifestación está siendo construida. <strong>Mantén el curso</strong>.</p>
+                            </div>
+                            <div class="technique-card">
+                                <div class="technique-title">555 - Cambio Acelerado</div>
+                                <p>Metamorfosis en progreso. La forma actual se está disolviendo para dar lugar a la nueva. <strong>No resistas</strong>. Fluye con la transformación.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="warning-box">
+                    <h3>ADVERTENCIA CRÍTICA: El Peligro de la Sobrecarga de Señales</h3>
+                    <p>Cuando despiertas por primera vez a la sincronicidad, es común experimentar "bombardeo simbólico": TODO parece una señal. Esto es <strong>temporal</strong>. Tu antena perceptual se está calibrando. Con la práctica, desarrollarás <span class="emphasis">filtros de relevancia</span> automáticos.</p>
+                    <p><strong>Regla de Oro:</strong> Si tienes que convencerte de que algo es una señal, probablemente no lo es.</p>
+                </div>
+
+                <div class="interactive-element" onclick="toggleContent('animal-messengers')">
+                    <strong>DECODIFICACIÓN ZOOLÓGICA:</strong> Cuando los Animales Son Mensajeros
+                    <div class="hidden-content" id="animal-messengers">
+                        <div class="technique-grid">
+                            <div class="technique-card">
+                                <div class="technique-title">Aves Rapaces (Halcones, Águilas)</div>
+                                <p><strong>Mensaje:</strong> Perspectiva elevada requerida. Necesitas ver el panorama completo antes de actuar. También: <em>poder</em> disponible para ti si lo reclamas.</p>
+                            </div>
+                            <div class="technique-card">
+                                <div class="technique-title">Cuervos/Cuervos</div>
+                                <p><strong>Mensaje:</strong> Transformación profunda en curso. Lo que parece muerte es transmutación. También: <em>secretos</em> ocultos están a punto de revelarse.</p>
+                            </div>
+                            <div class="technique-card">
+                                <div class="technique-title">Mariposas</div>
+                                <p><strong>Mensaje:</strong> Metamorfosis completada exitosamente. Has emergido en una nueva versión de ti mismo. También: <em>ligereza</em> y gozo son accesibles ahora.</p>
+                            </div>
+                            <div class="technique-card">
+                                <div class="technique-title">Serpientes</div>
+                                <p><strong>Mensaje:</strong> Sabiduría ancestral activándose. Es momento de mudar la piel vieja. También: <em>poder</em> kundalínico despertando.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="law-definition">
+                    <div class="law-title">La Tercera Ley: El Timing Divino</div>
+                    <p><strong>El Universo No Tiene Prisa, Pero Nunca Llega Tarde.</strong></p>
+                    <p>Cada sincronicidad aparece en el momento exacto en que tu sistema está listo para procesar esa información. Forzar la interpretación antes de tiempo genera <span class="emphasis">distorsión</span>. Algunas señales solo son comprensibles en <span class="gradient-text">retrospectiva</span>.</p>
+                </div>
+
+                <div class="somatic-command">
+                    <strong>Ejercicio de Calibración:</strong> Cierra los ojos. Pregúntale a tu cuerpo: "¿Qué necesito saber ahora?" Siente la primera respuesta física: tensión, relajación, calor, frío. ESA es tu brújula interna. Ahora abre los ojos y nota lo primero que capte tu atención. Esa es tu primera lección de navegación cuántica.
+                </div>
+
+                <div class="interactive-element" onclick="toggleContent('timing-protocols')">
+                    <strong>PROTOCOLOS AVANZADOS:</strong> Cuándo Actuar y Cuándo Esperar
+                    <div class="hidden-content" id="timing-protocols">
+                        <div class="technique-grid">
+                            <div class="technique-card">
+                                <div class="technique-title">Señales de "ACTÚA AHORA"</div>
+                                <p>• Múltiples sincronicidades convergentes en 24-48 horas<br>
+                                • Sensación somática de <strong>expansión</strong> al pensar en la acción<br>
+                                • Aparición "mágica" de recursos o contactos necesarios<br>
+                                • Resistencia interna mínima</p>
+                            </div>
+                            <div class="technique-card">
+                                <div class="technique-title">Señales de "ESPERA Y OBSERVA"</div>
+                                <p>• Obstáculos repetitivos sin explicación lógica<br>
+                                • Sensación somática de <strong>contracción</strong> al forzar<br>
+                                • Información contradictoria o confusa<br>
+                                • Ansiedad mental vs. paz corporal</p>
+                            </div>
+                            <div class="technique-card">
+                                <div class="technique-title">Señales de "REDIRIGE TU ENFOQUE"</div>
+                                <p>• Sincronicidades que apuntan a áreas que habías ignorado<br>
+                                • Encuentros "casuales" con personas de otros campos<br>
+                                • Ruptura inesperada de patrones establecidos<br>
+                                • Oportunidades que emergen fuera de tu plan</p>
+                            </div>
+                            <div class="technique-card">
+                                <div class="technique-title">Señales de "PREPÁRATE PARA EXPANSIÓN"</div>
+                                <p>• Sensación de que "algo grande" se aproxima<br>
+                                • Sueños vívidos con símbolos de crecimiento<br>
+                                • Cambios físicos inexplicables (más energía, necesidad de menos sueño)<br>
+                                • Magnetismo aumentado: oportunidades te buscan a ti</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="axiom-card">
+                    <h3>El Meta-Principio de la Navegación Cuántica</h3>
+                    <p>La sincronicidad no es un fenómeno externo que "te sucede". Es la <span class="emphasis">manifestación visible</span> de tu coherencia interna. Cuanto más alineado estés con tu verdad esencial, más <span class="gradient-text">conversacional</span> se vuelve tu relación con la realidad.</p>
+                    <p>No buscas señales. <strong>Te conviertes</strong> en una señal.</p>
+                </div>
+
+                <div class="breathe-indicator">
+                    <div class="breathe-text">← INTEGRACIÓN FINAL →<br>
+                    Respira profundamente. Siente cómo esta información se ancla en tu campo energético. Ya no necesitas <em>buscar</em> sincronicidades. Ahora sabes <em>reconocerlas</em>.</div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <button class="next-article" onclick="nextPhase()">
+                SIGUIENTE: ARQUITECTURA SOCIAL DEL DESPERTAR
+            </button>
+            <p style="margin-top: 2rem; color: var(--text-secondary);">
+                <em>La realidad conspira a favor de quienes han aprendido su idioma.</em>
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        function toggleContent(id) {
+            const element = document.getElementById(id);
+            const parent = element.parentElement;
+            
+            if (element.classList.contains('revealed')) {
+                element.classList.remove('revealed');
+                parent.classList.remove('active');
+            } else {
+                element.classList.add('revealed');
+                parent.classList.add('active');
+            }
+        }
+
+        function nextPhase() {
+            alert('Preparando la siguiente transmisión: "ARQUITECTURA SOCIAL DEL DESPERTAR"\n\nLa construcción de nodos de coherencia sin caer en secta...');
+        }
+
+        // Efecto de parpadeo sutil en elementos interactivos
+        setInterval(() => {
+            const interactiveElements = document.querySelectorAll('.interactive-element:not(.active)');
+            interactiveElements.forEach(el => {
+                el.style.opacity = Math.random() > 0.7 ? '0.8' : '1';
+            });
+        }, 3000);
+
+        // Efecto de resonancia en axiom cards
+        document.querySelectorAll('.axiom-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-8px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Comando somático automático cada 3 minutos
+        setInterval(() => {
+            const commands = [
+                "Siente el peso de tu cuerpo en la silla. Eres más real de lo que crees.",
+                "Nota la temperatura del aire entrando por tu nariz. Estás aquí, ahora.",
+                "Siente la vibración de tu corazón. Es tu ancla dimensional.",
+                "Percibe el espacio entre tus pensamientos. Ahí vive tu verdadero yo."
+            ];
+            
+            const randomCommand = commands[Math.floor(Math.random() * commands.length)];
+            
+            // Solo mostrar si la página está visible
+            if (document.visibilityState === 'visible') {
+                const notification = document.createElement('div');
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: rgba(16, 185, 129, 0.9);
+                    color: white;
+                    padding: 1rem;
+                    border-radius: 8px;
+                    font-size: 0.9rem;
+                    max-width: 300px;
+                    z-index: 9999;
+                    opacity: 0;
+                    transition: opacity 0.5s ease;
+                `;
+                notification.textContent = randomCommand;
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.style.opacity = '1';
+                }, 100);
+                
+                setTimeout(() => {
+                    notification.style.opacity = '0';
+                    setTimeout(() => {
+                        document.body.removeChild(notification);
+                    }, 500);
+                }, 4000);
+            }
+        }, 180000); // 3 minutos
+
+        // Detección de patrones de scroll para activar estados de coherencia
+        let scrollPattern = [];
+        let lastScrollTime = 0;
+        
+        window.addEventListener('scroll', () => {
+            const currentTime = Date.now();
+            const scrollSpeed = Math.abs(window.scrollY - (window.lastScrollY || 0));
+            
+            if (currentTime - lastScrollTime > 100) {
+                scrollPattern.push(scrollSpeed);
+                if (scrollPattern.length > 10) {
+                    scrollPattern.shift();
+                }
+                
+                // Detectar patrón de lectura contemplativa (scroll lento y pausado)
+                if (scrollPattern.length === 10) {
+                    const avgSpeed = scrollPattern.reduce((a, b) => a + b) / 10;
+                    if (avgSpeed < 5 && avgSpeed > 0.5) {
+                        // Usuario en estado de lectura profunda
+                        document.body.style.filter = 'brightness(1.05) contrast(1.02)';
+                        setTimeout(() => {
+                            document.body.style.filter = 'none';
+                        }, 2000);
+                    }
+                }
+                
+                lastScrollTime = currentTime;
+            }
+            
+            window.lastScrollY = window.scrollY;
+        });
+
+        // Sistema de reconocimiento de coherencia basado en tiempo de permanencia
+        let sectionStartTime = {};
+        
+        function trackSectionTime() {
+            const sections = document.querySelectorAll('.axiom-card, .law-definition, .interactive-element');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    const sectionId = entry.target.id || `section-${Array.from(sections).indexOf(entry.target)}`;
+                    
+                    if (entry.isIntersecting) {
+                        sectionStartTime[sectionId] = Date.now();
+                    } else if (sectionStartTime[sectionId]) {
+                        const timeSpent = Date.now() - sectionStartTime[sectionId];
+                        
+                        // Si el usuario pasó más de 30 segundos en una sección, activar resonancia
+                        if (timeSpent > 30000) {
+                            entry.target.style.boxShadow = '0 0 30px rgba(99, 102, 241, 0.4)';
+                            entry.target.style.borderColor = 'rgba(99, 102, 241, 0.6)';
+                            
+                            setTimeout(() => {
+                                entry.target.style.boxShadow = '';
+                                entry.target.style.borderColor = '';
+                            }, 3000);
+                        }
+                        
+                        delete sectionStartTime[sectionId];
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            sections.forEach(section => observer.observe(section));
+        }
+        
+        // Inicializar tracking cuando el DOM esté listo
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', trackSectionTime);
+        } else {
+            trackSectionTime();
+        }
+
+        // Easter egg: Secuencia de konami code adaptada para despertar
+        let konamiSequence = [];
+        const awakenSequence = [
+            'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 
+            'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight',
+            'KeyB', 'KeyA'
+        ];
+        
+        document.addEventListener('keydown', (e) => {
+            konamiSequence.push(e.code);
+            
+            if (konamiSequence.length > awakenSequence.length) {
+                konamiSequence.shift();
+            }
+            
+            if (konamiSequence.length === awakenSequence.length && 
+                konamiSequence.every((key, index) => key === awakenSequence[index])) {
+                
+                // Activar modo "Coherencia Máxima"
+                document.body.style.background = `
+                    radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.3) 0%, transparent 70%),
+                    var(--primary-bg)
+                `;
+                
+                const coherenceMessage = document.createElement('div');
+                coherenceMessage.innerHTML = `
+                    <div style="
+                        position: fixed;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                        color: white;
+                        padding: 2rem;
+                        border-radius: 16px;
+                        text-align: center;
+                        font-size: 1.2rem;
+                        font-weight: 600;
+                        z-index: 10000;
+                        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+                        animation: coherencePulse 2s ease-in-out infinite;
+                    ">
+                        <div style="font-family: 'JetBrains Mono', monospace; letter-spacing: 2px;">
+                            COHERENCIA MÁXIMA ACTIVADA
+                        </div>
+                        <div style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.9;">
+                            Tu señal ha sido amplificada.<br>
+                            La realidad te está escuchando.
+                        </div>
+                    </div>
+                    <style>
+                        @keyframes coherencePulse {
+                            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+                            50% { transform: translate(-50%, -50%) scale(1.05); }
+                        }
+                    </style>
+                `;
+                
+                document.body.appendChild(coherenceMessage);
+                
+                setTimeout(() => {
+                    document.body.removeChild(coherenceMessage);
+                    document.body.style.background = '';
+                }, 5000);
+                
+                konamiSequence = [];
+            }
+        });
+
+        // Sistema de respuesta contextual basado en el cursor
+        let cursorPattern = [];
+        let isDrawingPattern = false;
+        
+        document.addEventListener('mousemove', (e) => {
+            if (isDrawingPattern) {
+                cursorPattern.push({ x: e.clientX, y: e.clientY, time: Date.now() });
+                
+                if (cursorPattern.length > 50) {
+                    cursorPattern.shift();
+                }
+            }
+        });
+        
+        document.addEventListener('mousedown', () => {
+            isDrawingPattern = true;
+            cursorPattern = [];
+        });
+        
+        document.addEventListener('mouseup', () => {
+            if (isDrawingPattern && cursorPattern.length > 20) {
+                // Analizar si el patrón del cursor forma un círculo o espiral
+                const isCircular = analyzeCircularPattern(cursorPattern);
+                
+                if (isCircular) {
+                    // Usuario dibujó un círculo - activar portal de manifestación
+                    createManifestationPortal(cursorPattern[cursorPattern.length - 1]);
+                }
+            }
+            
+            isDrawingPattern = false;
+        });
+        
+        function analyzeCircularPattern(pattern) {
+            if (pattern.length < 20) return false;
+            
+            const centerX = pattern.reduce((sum, p) => sum + p.x, 0) / pattern.length;
+            const centerY = pattern.reduce((sum, p) => sum + p.y, 0) / pattern.length;
+            
+            let radiusVariance = 0;
+            const avgRadius = pattern.reduce((sum, p) => {
+                const radius = Math.sqrt(Math.pow(p.x - centerX, 2) + Math.pow(p.y - centerY, 2));
+                return sum + radius;
+            }, 0) / pattern.length;
+            
+            pattern.forEach(p => {
+                const radius = Math.sqrt(Math.pow(p.x - centerX, 2) + Math.pow(p.y - centerY, 2));
+                radiusVariance += Math.abs(radius - avgRadius);
+            });
+            
+            const normalizedVariance = radiusVariance / (pattern.length * avgRadius);
+            
+            return normalizedVariance < 0.3 && avgRadius > 30;
+        }
+        
+        function createManifestationPortal(position) {
+            const portal = document.createElement('div');
+            portal.style.cssText = `
+                position: fixed;
+                left: ${position.x - 50}px;
+                top: ${position.y - 50}px;
+                width: 100px;
+                height: 100px;
+                border: 3px solid transparent;
+                border-radius: 50%;
+                background: 
+                    conic-gradient(from 0deg, 
+                        rgba(99, 102, 241, 0.8) 0deg,
+                        rgba(245, 158, 11, 0.8) 120deg,
+                        rgba(16, 185, 129, 0.8) 240deg,
+                        rgba(99, 102, 241, 0.8) 360deg
+                    );
+                animation: portalSpin 3s linear, portalFade 3s ease-out;
+                pointer-events: none;
+                z-index: 9999;
+            `;
+            
+            const portalCore = document.createElement('div');
+            portalCore.style.cssText = `
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 70px;
+                height: 70px;
+                background: rgba(0, 0, 0, 0.8);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-size: 0.8rem;
+                font-weight: 600;
+                text-align: center;
+                font-family: 'JetBrains Mono', monospace;
+            `;
+            portalCore.textContent = 'PORTAL\nACTIVO';
+            
+            portal.appendChild(portalCore);
+            document.body.appendChild(portal);
+            
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes portalSpin {
+                    from { transform: rotate(0deg); }
+                    to { transform: rotate(360deg); }
+                }
+                @keyframes portalFade {
+                    0% { opacity: 0; }
+                    20% { opacity: 1; }
+                    80% { opacity: 1; }
+                    100% { opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            setTimeout(() => {
+                document.body.removeChild(portal);
+                document.head.removeChild(style);
+            }, 3000);
+        }
+
+        // Activar funcionalidades avanzadas solo después de cierto tiempo de engagement
+        setTimeout(() => {
+            console.log('%c⚡ SISTEMA DE COHERENCIA CUÁNTICA ACTIVADO ⚡', 
+                'color: #6366f1; font-size: 16px; font-weight: bold;');
+            console.log('%cLa realidad está respondiendo a tu presencia...', 
+                'color: #f59e0b; font-style: italic;');
+        }, 30000);
+
+        // Función para detectar estados de flujo basados en patrones de interacción
+        let interactionScore = 0;
+        let flowState = false;
+        
+        function trackFlowState() {
+            // Incrementar score por interacciones significativas
+            document.addEventListener('click', (e) => {
+                if (e.target.closest('.interactive-element, .technique-card, .axiom-card')) {
+                    interactionScore += 10;
+                }
+            });
+            
+            // Incrementar score por tiempo de lectura
+            setInterval(() => {
+                if (document.visibilityState === 'visible' && !flowState) {
+                    interactionScore += 1;
+                }
+                
+                // Activar estado de flujo al alcanzar threshold
+                if (interactionScore > 100 && !flowState) {
+                    flowState = true;
+                    activateFlowState();
+                }
+            }, 1000);
+        }
+        
+        function activateFlowState() {
+            // Cambiar sutilmente la experiencia visual
+            document.body.style.filter = 'brightness(1.1) contrast(1.05) saturate(1.1)';
+            
+            // Hacer que los elementos respondan más fluidamente
+            const style = document.createElement('style');
+            style.textContent = `
+                .axiom-card, .technique-card, .interactive-element {
+                    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+                }
+                .axiom-card:hover, .technique-card:hover {
+                    transform: translateY(-12px) scale(1.02) !important;
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // Notificación sutil de estado de flujo
+            const flowIndicator = document.createElement('div');
+            flowIndicator.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background: rgba(16, 185, 129, 0.1);
+                border: 1px solid rgba(16, 185, 129, 0.3);
+                color: #10b981;
+                padding: 0.5rem 1rem;
+                border-radius: 8px;
+                font-size: 0.8rem;
+                font-weight: 600;
+                z-index: 9999;
+                opacity: 0;
+                transition: opacity 0.5s ease;
+                font-family: 'JetBrains Mono', monospace;
+            `;
+            flowIndicator.textContent = '◉ ESTADO DE FLUJO ACTIVO';
+            
+            document.body.appendChild(flowIndicator);
+            
+            setTimeout(() => {
+                flowIndicator.style.opacity = '1';
+            }, 100);
+            
+            // Mantener indicador visible durante la sesión
+            window.flowIndicator = flowIndicator;
+        }
+        
+        trackFlowState();
+    </script>
+</body>
+</html>

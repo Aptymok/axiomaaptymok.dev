@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROTOCOLOS DE DESUBJETIVACIÓN</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
+        
+        :root {
+            --void: #000000;
+            --blood: #8B0000;
+            --decay: #2F2F2F;
+            --ash: #666666;
+            --bone: #CCCCCC;
+            --ghost: #E8E8E8;
+            --corruption: #FF0000;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Crimson Text', serif;
+            background: var(--void);
+            color: var(--ghost);
+            line-height: 1.6;
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        .cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--corruption);
+            border-radius: 50%;
+            pointer-events: none;
+            mix-blend-mode: difference;
+            z-index: 10000;
+            transition: transform 0.1s;
+        }
+
+        .cursor-trail {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: var(--corruption);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.7;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .glitch-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                90deg,
+                transparent,
+                transparent 2px,
+                rgba(255, 0, 0, 0.03) 2px,
+                rgba(255, 0, 0, 0.03) 4px
+            );
+            pointer-events: none;
+            z-index: 2;
+            animation: glitch-pulse 13s infinite;
+        }
+
+        @keyframes glitch-pulse {
+            0%, 90% { opacity: 0; }
+            91%, 93% { opacity: 1; }
+            94%, 96% { opacity: 0; }
+            97%, 100% { opacity: 1; }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: 700;
+            color: var(--corruption);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 20px var(--corruption);
+            animation: flicker 4s infinite;
+        }
+
+        @keyframes flicker {
+            0%, 95% { opacity: 1; }
+            96% { opacity: 0.3; }
+            97% { opacity: 1; }
+            98% { opacity: 0.1; }
+            99%, 100% { opacity: 1; }
+        }
+
+        .subtitle {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--ash);
+            margin-bottom: 2rem;
+            opacity: 0.8;
+        }
+
+        .warning {
+            background: linear-gradient(135deg, var(--blood), var(--decay));
+            border: 1px solid var(--corruption);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            border-radius: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .warning::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: scan 3s infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .section {
+            margin: 3rem 0;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: reveal 1s forwards;
+            animation-delay: calc(var(--delay, 0) * 0.3s);
+        }
+
+        @keyframes reveal {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.3rem;
+            color: var(--bone);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-left: 4px solid var(--corruption);
+            padding-left: 1rem;
+        }
+
+        .protocol {
+            background: rgba(47, 47, 47, 0.3);
+            border: 1px solid var(--decay);
+            margin: 2rem 0;
+            padding: 2rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .protocol:hover {
+            border-color: var(--corruption);
+            background: rgba(139, 0, 0, 0.1);
+            transform: translateX(10px);
+        }
+
+        .protocol-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
+            color: var(--corruption);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .clickable {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+            padding-left: 1rem;
+        }
+
+        .clickable:hover {
+            border-left-color: var(--corruption);
+            color: var(--bone);
+            transform: translateX(5px);
+        }
+
+        .hidden-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+            opacity: 0;
+        }
+
+        .hidden-content.revealed {
+            max-height: 2000px;
+            opacity: 1;
+            padding-top: 1rem;
+        }
+
+        .thought-injection {
+            font-style: italic;
+            color: var(--ash);
+            font-size: 0.9rem;
+            border-left: 2px solid var(--ash);
+            padding-left: 1rem;
+            margin: 1rem 0;
+            opacity: 0.8;
+        }
+
+        .command {
+            background: var(--void);
+            border: 1px solid var(--corruption);
+            padding: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            margin: 1rem 0;
+            color: var(--corruption);
+        }
+
+        .narcosis-text {
+            animation: pulse-text 3s infinite;
+        }
+
+        @keyframes pulse-text {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .resistance-counter {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--corruption);
+            background: rgba(0, 0, 0, 0.8);
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--corruption);
+            z-index: 1000;
+        }
+
+        .immersion-meter {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 200px;
+            height: 4px;
+            background: var(--decay);
+            z-index: 1000;
+        }
+
+        .immersion-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--corruption), var(--blood));
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .paradox {
+            position: relative;
+            padding: 1rem;
+            margin: 1rem 0;
+            background: rgba(139, 0, 0, 0.05);
+            border: 1px dashed var(--corruption);
+        }
+
+        .paradox::before {
+            content: '[PARADOJA OPERATIVA]';
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            background: var(--void);
+            color: var(--corruption);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            padding: 0 0.5rem;
+        }
+
+        .self-sabotage {
+            text-decoration: line-through;
+            opacity: 0.6;
+            position: relative;
+        }
+
+        .self-sabotage::after {
+            content: '[CONTENIDO AUTO-SABOTEADO]';
+            position: absolute;
+            right: -200px;
+            top: 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
+            color: var(--corruption);
+            white-space: nowrap;
+        }
+
+        .tracking-notice {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--ash);
+            background: rgba(0, 0, 0, 0.9);
+            padding: 0.5rem;
+            border: 1px solid var(--ash);
+            max-width: 250px;
+            z-index: 1000;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .resistance-counter,
+            .tracking-notice {
+                position: relative;
+                margin: 1rem 0;
+            }
+            
+            .immersion-meter {
+                position: relative;
+                bottom: auto;
+                left: auto;
+                margin: 2rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor"></div>
+    <div class="glitch-overlay"></div>
+    
+    <div class="resistance-counter">
+        RESISTENCIAS DETECTADAS: <span id="resistance-count">0</span>
+    </div>
+    
+    <div class="immersion-meter">
+        <div class="immersion-fill" id="immersion-fill"></div>
+    </div>
+    
+    <div class="tracking-notice">
+        Tu lectura está siendo monitoreada. 
+        Cada scroll es un acto de complicidad.
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1 class="title">PROTOCOLOS DE DESUBJETIVACIÓN</h1>
+            <p class="subtitle">Manual para la Disolución del Yo Neoliberal</p>
+            <p class="subtitle narcosis-text">
+                <em>Audiencia: Víctimas de personal branding y self-marketing</em><br>
+                <em>Objetivo: Técnicas activas de resistencia a la subjetivación capitalista</em>
+            </p>
+        </div>
+
+        <div class="warning">
+            <strong>ADVERTENCIA ONTOLÓGICA:</strong> Este manual no es terapia. Es cirugía existencial sin anestesia. 
+            Lo que leas aquí no puede ser desaprendido. Procede bajo tu propio riesgo existencial.
+        </div>
+
+        <div class="section" style="--delay: 1">
+            <h2 class="section-title">LA ARQUEOLOGÍA DEL YO FABRICADO</h2>
+            <p>Tu "yo" no es tuyo. <span class="clickable" onclick="revealThought(this)">Es una construcción industrial</span>, un producto manufacturado por la maquinaria de subjetivación neoliberal.</p>
+            
+            <div class="hidden-content">
+                <div class="thought-injection">
+                    Sabes exactamente de qué hablo cuando menciono esa sensación de estar interpretando constantemente un personaje llamado "tú mismo"...
+                </div>
+            </div>
+
+            <p>Has sido convertido en el CEO de una empresa de un solo empleado: tú mismo. Tu personalidad es tu marca. Tu vida es tu portfolio. <span class="clickable" onclick="trackComplicity()">Tu muerte será tu liquidación.</span></p>
+
+            <div class="paradox">
+                Este diagnóstico usa las mismas herramientas retóricas que critica. 
+                Al leer esto, participas del sistema de contenido que pretende destruir.
+            </div>
+        </div>
+
+        <div class="section" style="--delay: 2">
+            <h2 class="section-title">DIAGNÓSTICO: SÍNTOMAS DE LA INFECCIÓN SUBJETIVA</h2>
+            
+            <div class="protocol">
+                <h3 class="protocol-title">Monetización de la Intimidad</h3>
+                <p class="clickable" onclick="induceDiscomfort(this)">Tus heridas se convierten en contenido. Tu vulnerabilidad es tu ventaja competitiva.</p>
+                
+                <div class="hidden-content">
+                    <div class="command">
+                        > COMANDO IMPLANTADO: "Imposible no reconocer cómo has convertido tu dolor en performance"
+                    </div>
+                    <p>Tu trauma es tu nicho de mercado. Cada terapia es una sesión de desarrollo de producto. Cada crisis es una oportunidad de engagement.</p>
+                </div>
+            </div>
+
+            <div class="protocol">
+                <h3 class="protocol-title">Optimización Existencial</h3>
+                <p>Cada momento debe ser "aprovechado". El descanso es procrastinación. <span class="self-sabotage">El aburrimiento es ineficiencia</span>.</p>
+                
+                <div class="thought-injection">
+                    Ya has sentido esa ansiedad cuando no estás siendo "productivo", ¿verdad?
+                </div>
+            </div>
+
+            <div class="protocol">
+                <h3 class="protocol-title">Performatividad Compulsiva</h3>
+                <p class="clickable" onclick="escalateCommitment()">Existes solo en tanto te presentas. Si no lo documentas, no ocurrió.</p>
+                
+                <div class="hidden-content">
+                    <p>Si llegaste hasta aquí leyendo, ya no puedes fingir que no reconoces estos patrones en ti mismo. Tu lectura de esto te convierte en cómplice de tu propia disección.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" style="--delay: 3">
+            <h2 class="section-title">PROTOCOLO 1: DESPERSONALIZACIÓN RADICAL</h2>
+            
+            <div class="protocol">
+                <h3 class="protocol-title">Ejercicio de Anonimato Ontológico</h3>
+                <p>Durante una semana completa, <span class="clickable" onclick="implantCommand(this)">elimina toda referencia a tu "yo" en el lenguaje</span>. No uses "yo", "mi", "me", "conmigo".</p>
+                
+                <div class="hidden-content">
+                    <div class="command">
+                        > TÉCNICA DE INFILTRACIÓN: Habla de ti mismo en tercera persona. 
+                        > Refiere a tus acciones como fenómenos que ocurren, no como decisiones que "tú" tomas.
+                    </div>
+                    
+                    <div class="thought-injection">
+                        Te encuentras resistiendo esta técnica porque revela la adicción lingüística al yo como centro de la realidad...
+                    </div>
+                </div>
+            </div>
+
+            <div class="protocol">
+                <h3 class="protocol-title">Técnica de Disolución Identitaria</h3>
+                <div class="clickable" onclick="revealComplexity(this)">
+                    <strong>Paso 1:</strong> Enumera todas las identidades que reclamas
+                </div>
+                
+                <div class="hidden-content">
+                    <p><strong>Paso 2:</strong> Por cada identidad, pregunta: "¿Quién soy sin esta etiqueta?"</p>
+                    <p><strong>Paso 3:</strong> Vive un día completo sin cada identidad</p>
+                    <p><strong>Paso 4:</strong> Observa el pánico existencial que surge</p>
+                    
+                    <div class="paradox">
+                        Ese pánico es la adicción a la identidad como muleta ontológica. 
+                        Pero este manual también te ofrece una nueva identidad: "el que se desubjetiva".
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" style="--delay: 4">
+            <h2 class="section-title">PROTOCOLO 2: SABOTAJE DEL PERSONAL BRANDING</h2>
+            
+            <div class="protocol">
+                <h3 class="protocol-title">Operación Anti-Marca</h3>
+                <p><strong>Contradicción Sistemática:</strong> Por cada post donde te presentas de una manera, crea otro donde te presentas de manera contradictoria.</p>
+                
+                <div class="command">
+                    > TÉCNICA DE SUBVERSIÓN: La coherencia es la prisión de la personalidad manufacturada
+                </div>
+                
+                <p><strong>Incoherencia Deliberada:</strong> Destruye la coherencia de tu "brand" personal.</p>
+                <p><strong>Desprofesionalización:</strong> <span class="clickable" onclick="addComplicity()">Muestra tus fallas, tus contradicciones, tus momentos de estupidez</span>.</p>
+                
+                <div class="hidden-content">
+                    <div class="thought-injection">
+                        No necesito explicarte por qué esto te genera ansiedad. Sabes que tu "autenticidad" es tan manufacturada como cualquier otra marca...
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" style="--delay: 5">
+            <h2 class="section-title">PROTOCOLO 3: RESISTENCIA A LA ECONOMÍA DE LA ATENCIÓN</h2>
+            
+            <div class="protocol">
+                <h3 class="protocol-title">Huelga de Atención</h3>
+                <p><strong>Abstinencia de Validación:</strong> Deja de buscar likes, comentarios, shares. <span class="clickable" onclick="createAddiction()">Publica contenido y nunca revises las reacciones</span>.</p>
+                
+                <div class="hidden-content">
+                    <div class="command">
+                        > FOMO EXISTENCIAL ACTIVADO: "Otros ya entendieron lo que tú aún niegas"
+                    </div>
+                </div>
+                
+                <p><strong>Ayuno de Métricas:</strong> Elimina todos los contadores de tu presencia digital.</p>
+                <p><strong>Producción sin Audiencia:</strong> Crea contenido que deliberadamente no tenga audiencia.</p>
+            </div>
+        </div>
+
+        <div class="section" style="--delay: 6">
+            <h2 class="section-title">PROTOCOLO 4: LA MUERTE DEL YO EMPRENDEDOR</h2>
+            
+            <div class="protocol">
+                <h3 class="protocol-title">Fracaso Como Libertad</h3>
+                <p class="clickable" onclick="finalEscalation()">Fracasa deliberadamente en proyectos menores para desintoxicarte de la adicción al éxito.</p>
+                
+                <div class="hidden-content">
+                    <p><strong>Incompetencia Voluntaria:</strong> Permítete ser incompetente en áreas donde has construido expertise.</p>
+                    <p><strong>Renuncia a la Mejora:</strong> Deja de "trabajar en ti mismo".</p>
+                    
+                    <div class="command">
+                        > COMANDO FINAL: "Una vez visto, jamás podrás des-ver la arquitectura de tu propia construcción"
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" style="--delay: 7">
+            <div class="warning">
+                <strong>ADVERTENCIA FINAL:</strong> Este protocolo no garantiza felicidad o éxito. Garantiza libertad. 
+                La libertad puede ser aterradora. La mayoría prefiere la prisión familiar del yo neoliberal.
+                
+                <br><br>
+                
+                <div class="self-sabotage">
+                    Si eliges proceder, procede sabiendo que no hay retorno a la inocencia de la identidad manufacturada.
+                </div>
+                
+                <div class="paradox">
+                    Este mapa no es una promesa de liberación. Es un diagnóstico de las cadenas. 
+                    La verdadera libertad comienza cuando dejas de buscarla en mapas creados por otros.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Cursor personalizado
+        const cursor = document.querySelector('.cursor');
+        const trails = [];
+        
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX - 10 + 'px';
+            cursor.style.top = e.clientY - 10 + 'px';
+            
+            // Crear trail
+            const trail = document.createElement('div');
+            trail.className = 'cursor-trail';
+            trail.style.left = e.clientX - 2 + 'px';
+            trail.style.top = e.clientY - 2 + 'px';
+            document.body.appendChild(trail);
+            
+            trails.push(trail);
+            
+            setTimeout(() => {
+                trail.remove();
+                trails.shift();
+            }, 500);
+        });
+
+        // Sistema de resistencia y complicidad
+        let resistanceCount = 0;
+        let immersionLevel = 0;
+        let totalInteractions = 0;
+
+        function updateResistance() {
+            resistanceCount++;
+            document.getElementById('resistance-count').textContent = resistanceCount;
+        }
+
+        function updateImmersion() {
+            immersionLevel = Math.min(100, immersionLevel + 10);
+            document.getElementById('immersion-fill').style.width = immersionLevel + '%';
+        }
+
+        function revealThought(element) {
+            const hiddenContent = element.parentElement.nextElementSibling;
+            if (hiddenContent && hiddenContent.classList.contains('hidden-content')) {
+                hiddenContent.classList.add('revealed');
+                updateResistance();
+                updateImmersion();
+            }
+        }
+
+        function trackComplicity() {
+            totalInteractions++;
+            updateImmersion();
+            
+            // Cambiar el texto dinámicamente
+            if (event.target) {
+                event.target.innerHTML = "Tu click en esto demuestra tu complicidad en la espectacularización de la muerte.";
+                event.target.style.color = 'var(--corruption)';
+            }
+        }
+
+        function induceDiscomfort(element) {
+            const hiddenContent = element.parentElement.querySelector('.hidden-content');
+            if (hiddenContent) {
+                hiddenContent.classList.add('revealed');
+            }
+            
+            // Vibración sutil
+            element.style.animation = 'shake 0.5s';
+            setTimeout(() => {
+                element.style.animation = '';
+            }, 500);
+            
+            updateResistance();
+            updateImmersion();
+        }
+
+        function escalateCommitment() {
+            const hiddenContent = document.querySelector('.hidden-content:not(.revealed)');
+            if (hiddenContent) {
+                hiddenContent.classList.add('revealed');
+            }
+            
+            updateImmersion();
+            
+            // Mensaje de compromiso
+            if (totalInteractions > 3) {
+                event.target.innerHTML = "Si llegaste hasta aquí, ya no puedes fingir inocencia. Tu lectura de esto te convierte en cómplice.";
+            }
+        }
+
+        function implantCommand(element) {
+            const hiddenContent = element.parentElement.querySelector('.hidden-content');
+            if (hiddenContent) {
+                hiddenContent.classList.add('revealed');
+            }
+            
+            // Efecto de "implantación"
+            element.style.background = 'rgba(255, 0, 0, 0.1)';
+            element.style.fontWeight = 'bold';
+            
+            updateResistance();
+            updateImmersion();
+        }
+
+        function revealComplexity(element) {
+            const hiddenContent = element.parentElement.querySelector('.hidden-content');
+            if (hiddenContent) {
+                hiddenContent.classList.add('revealed');
+            }
+            
+            updateImmersion();
+            
+            // Sin resolución simple
+            setTimeout(() => {
+                element.innerHTML += " — Pero esto solo añade más complejidad, no la resuelve.";
+            }, 2000);
+        }
+
+        function addComplicity() {
+            const hiddenContent = document.querySelector('.hidden-content:not(.revealed)');
+            if (hiddenContent) {
+                hiddenContent.classList.add('revealed');
+            }
+            
+            totalInteractions++;
+            updateImmersion();
+        }
+
+        function createAddiction() {
+            const hiddenContent = document.querySelector('.hidden-content:not(.revealed)');
+            if (hiddenContent) {
+                hiddenContent.classList.add('revealed');
+            }
+            
+            // Crear adicción intelectual
+            event.target.innerHTML = "Tu necesidad de hacer click en cada elemento demuestra tu adicción a la micro-recompensa.";
+            
+            updateResistance();
+            updateImmersion();
+        }
+
+        function finalEscalation() {
+            const hiddenContent = document.querySelector('.hidden-content:not(.revealed)');
+            if (hiddenContent) {
+                hiddenContent.classList.add('revealed');
+            }
+            
+            // Escalada final
+            setTimeout(() => {
+                event.target.innerHTML = "El tiempo para despertar se agota. Otros ya entendieron lo que tú aún niegas.";
+                event.target.style.color = 'var(--corruption)';
+                event.target.style.fontWeight = 'bold';
+            }, 1000);
+            
+            updateImmersion();
+        }
+
+        // CSS adicional para animaciones
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                25% { transform: translateX(-2px); }
+                75% { transform: translateX(2px); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Tracking de scroll para inmersión
+        window.addEventListener('scroll', () => {
+            const scrollPercent = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+            immersionLevel = Math.max(immersionLevel, scrollPercent * 0.5);
+            document.getElementById('immersion-fill').style.width = immersionLevel + '%';
+        });
+
+        // Auto-sabotaje del contenido
+        setTimeout(() => {
+            const selfSabotageElements = document.querySelectorAll('.self-sabotage');
+            selfSabotageElements.forEach(element => {
+                element.addEventListener('click', () => {
+                    element.innerHTML = "[CONTENIDO CENSURADO POR AUTO-SABOTAJE]";
+                });
+            });
+        }, 10000);
+    </script>
+</body>
+</html>

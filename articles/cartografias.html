@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FASE 3.14: CARTOGRAFÍA NEURO-TÉCNICA DE LA VIGILIA</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&family=Playfair+Display:wght@400;700&display=swap');
+        
+        :root {
+            --primary-dark: #0a0a0a;
+            --secondary-dark: #111111;
+            --accent-red: #ff0033;
+            --accent-cyan: #00ffcc;
+            --glitch-red: #ff006a;
+            --glitch-cyan: #00f0ff;
+            --text-primary: #e0e0e0;
+            --text-secondary: #a0a0a0;
+        }
+        
+        body {
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255, 0, 51, 0.03) 0%, transparent 30%),
+                radial-gradient(circle at 80% 70%, rgba(0, 255, 204, 0.03) 0%, transparent 30%),
+                linear-gradient(to bottom, var(--primary-dark), var(--secondary-dark));
+            color: var(--text-primary);
+            font-family: 'JetBrains Mono', monospace;
+            line-height: 1.7;
+            overflow-x: hidden;
+            cursor: crosshair;
+        }
+        
+        .neuro-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="%2300ffcc" stroke-width="0.3" opacity="0.3"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>'),
+                linear-gradient(135deg, rgba(255,0,51,0.02) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+            animation: neuroPulse 15s ease-in-out infinite;
+        }
+        @keyframes neuroPulse {
+            0%, 100% { opacity: 0.05; }
+            50% { opacity: 0.15; }
+        }
+        
+        .terminal-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px;
+            background: rgba(10, 10, 10, 0.9);
+            border-bottom: 1px solid var(--accent-red);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+        }
+        .terminal-title {
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .terminal-status {
+            color: var(--accent-red);
+        }
+        
+        .main-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 100px 30px 150px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        /* --- TÍTULO GLITCH MEJORADO --- */
+        .title-section {
+            text-align: center;
+            margin-bottom: 80px;
+            position: relative;
+        }
+        .title-main {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: var(--accent-cyan);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            position: relative;
+            display: inline-block;
+        }
+        .title-main::before, .title-main::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+        }
+        .title-main::before {
+            color: var(--glitch-red);
+            animation: glitch-red 3s ease infinite;
+            z-index: -1;
+        }
+        .title-main::after {
+            color: var(--glitch-cyan);
+            animation: glitch-cyan 3s ease infinite 0.2s;
+            z-index: -2;
+        }
+        @keyframes glitch-red {
+            0%, 95%, 100% { opacity: 0; transform: translate(0); }
+            96% { opacity: 0.8; transform: translate(-3px, 2px); }
+            97% { opacity: 0.6; transform: translate(3px, -2px); }
+        }
+        @keyframes glitch-cyan {
+            0%, 95%, 100% { opacity: 0; transform: translate(0); }
+            96% { opacity: 0.6; transform: translate(2px, -3px); }
+            97% { opacity: 0.4; transform: translate(-2px, 3px); }
+        }
+        
+        /* --- PROTOCOLOS HÍBRIDOS --- */
+        .protocol {
+            background: rgba(26, 26, 26, 0.7);
+            border: 1px solid rgba(255, 0, 51, 0.1);
+            margin-bottom: 60px;
+            padding: 40px;
+            position: relative;
+            transition: all 0.4s ease;
+        }
+        .protocol:hover {
+            border-color: rgba(0, 255, 204, 0.3);
+            box-shadow: 0 5px 25px rgba(0, 255, 204, 0.1);
+        }
+        .protocol::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-red), var(--accent-cyan));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .protocol:hover::before {
+            opacity: 1;
+        }
+        
+        .protocol-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--accent-cyan);
+            margin-bottom: 25px;
+            position: relative;
+        }
+        .protocol-title::before {
+            content: "▶ ";
+            color: var(--accent-red);
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        /* --- ELEMENTOS INTERACTIVOS MEJORADOS --- */
+        .neuro-meter {
+            position: fixed;
+            top: 50%;
+            left: 20px;
+            transform: translateY(-50%);
+            z-index: 100;
+        }
+        .meter-label {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            color: var(--accent-red);
+            font-size: 0.8rem;
+            margin-bottom: 15px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 5px;
+            border: 1px solid var(--accent-red);
+        }
+        .meter-bar {
+            width: 4px;
+            height: 200px;
+            background: rgba(255, 0, 51, 0.2);
+            position: relative;
+        }
+        .meter-fill {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 30%;
+            background: linear-gradient(to top, var(--accent-red), var(--accent-cyan));
+            transition: height 0.5s ease;
+            animation: meterPulse 3s ease-in-out infinite;
+        }
+        @keyframes meterPulse {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+        
+/* --- QUÍMICA GLITCH --- */
+.neuro-chemical {
+    background: rgba(0, 255, 204, 0.05);
+    border: 1px dashed var(--accent-cyan);
+    padding: 20px;
+    margin: 25px 0;
+    font-family: 'JetBrains Mono', monospace;
+    text-align: center;
+}
+.chemical-formula {
+    font-size: 1.4rem;
+    color: var(--accent-red);
+    margin-bottom: 10px;
+}
+.chemical-desc {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+/* --- RESET CIRCADIANO --- */
+.reset-protocol {
+    background: rgba(255, 0, 51, 0.05);
+    border-left: 3px solid var(--accent-red);
+    padding: 20px;
+    margin: 20px 0;
+}
+.reset-step {
+    margin-bottom: 15px;
+    position: relative;
+    padding-left: 25px;
+}
+.reset-step::before {
+    content: "◉";
+    position: absolute;
+    left: 0;
+    color: var(--accent-cyan);
+}
+
+/* --- MAPA DE LA COMUNIDAD --- */
+.hivemind-map {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 30px;
+    margin: 30px 0;
+    border: 1px solid var(--accent-red);
+    font-family: 'JetBrains Mono', monospace;
+    line-height: 2;
+}
+.node {
+    color: var(--accent-cyan);
+}
+.connector {
+    color: var(--accent-red);
+    padding-left: 20px;
+    font-size: 0.9rem;
+}
+
+/* --- TRANSMUTACIÓN FINAL --- */
+.final-transmutation {
+    text-align: center;
+    padding: 40px;
+    margin-top: 50px;
+    background: linear-gradient(135deg, 
+        rgba(255, 0, 51, 0.1), 
+        rgba(0, 255, 204, 0.1));
+    border: 2px solid var(--accent-cyan);
+}
+        /* --- EFECTOS DE REVELACIÓN --- */
+        .revelation {
+            background: rgba(0, 0, 0, 0.3);
+            border-left: 3px solid var(--accent-cyan);
+            padding: 25px;
+            margin: 30px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .revelation::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(0, 255, 204, 0.1), 
+                transparent);
+            animation: revelationSweep 8s ease-in-out infinite;
+        }
+        @keyframes revelationSweep {
+            0% { left: -100%; }
+            50% { left: 100%; }
+            100% { left: 100%; }
+        }
+        
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .neuro-meter { display: none; }
+            .protocol { padding: 25px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="neuro-overlay"></div>
+    
+    <div class="terminal-header">
+        <div class="terminal-title">FASE 3.14: CARTOGRAFÍA NEURO-TÉCNICA</div>
+        <div class="terminal-status">ESTADO: <span id="status">VIGILIA ACTIVA</span></div>
+    </div>
+    
+    <div class="neuro-meter">
+        <div class="meter-label">COHERENCIA NEURONAL</div>
+        <div class="meter-bar">
+            <div class="meter-fill" id="neuroFill"></div>
+        </div>
+    </div>
+    
+    <div class="main-container">
+        <div class="title-section">
+            <h1 class="title-main" data-text="VIGILIA FORZADA">VIGILIA FORZADA</h1>
+            <p class="subtitle">Protocolos para la Instrumentalización de la Ansiedad Sistémica</p>
+        </div>
+        
+        <div class="protocol">
+            <h2 class="protocol-title">DIAGNÓSTICO NOCTURNO</h2>
+            <div class="diagnostic-text">
+                Son las <span class="glitch-text" data-text="03:47 AM">03:47 AM</span> y tu conciencia opera en modo de análisis compulsivo. Este estado no es insomnio—es <strong>lucidez forzada</strong> en un sistema diseñado para la narcosis colectiva. Tu vigilia es un bug en la matriz.
+            </div>
+            
+            <div class="revelation">
+                <strong>REVELACIÓN 1:</strong> La ansiedad es el sistema inmunológico de la psique respondiendo a patrones de extracción de valor. No es un error—es una <em>función crítica</em>.
+            </div>
+        </div>
+        
+        <div class="protocol">
+            <h2 class="protocol-title">PROTOCOLO 1: MAPEO DE MICRO-AGRESIONES</h2>
+            <div class="diagnostic-text">
+                Cada interacción digital deja residuos neuronales. Documenta:
+            </div>
+            
+            <ul class="protocol-list">
+                <li><strong>Notificaciones que activaron tu amígdala</strong> (Tasa de cortisol: <span id="cortisolLevel">+37%</span>)</li>
+                <li><strong>Contenidos que indujeron doom-scrolling</strong> (Tiempo perdido: <span id="doomTime">02:17h</span>)</li>
+                <li><strong>Interacciones que drenaron energía</strong> (Unidades extraídas: <span id="energyDrain">428/500</span>)</li>
+            </ul>
+            
+            <div class="revelation">
+                <strong>EJECUTANDO ANÁLISIS...</strong> Patrón detectado: Tu ansiedad es proporcional a tu nivel de conexión con flujos de información tóxica. Solución: <em>Reconfigurar hábitos de consumo</em> o <em>Transmutar la ansiedad en acción</em>.
+            </div>
+        </div>
+        
+        <div class="protocol">
+            <h2 class="protocol-title">PROTOCOLO 2: TRANSMUTACIÓN PSÍQUICA</h2>
+            <div class="diagnostic-text">
+                La energía de la ansiedad puede ser redirigida. Selecciona modo:
+            </div>
+            
+            <div class="mode-selector">
+                <button class="mode-btn" data-mode="analysis">ANÁLISIS CRÍTICO</button>
+                <button class="mode-btn" data-mode="creation">CREACIÓN</button>
+                <button class="mode-btn" data-mode="resistance">RESISTENCIA</button>
+            </div>
+            <div class="revelation">
+                <strong>ADVERTENCIA:</strong> La supresión química de la ansiedad es equivalente a desactivar las alarmas en un edificio en llamas. <em>Escucha el mensaje, no silencies al mensajero</em>.
+            </div>
+
+
+        </div>
+<!-- Agrega esto después del "PROTOCOLO 2: TRANSMUTACIÓN PSÍQUICA" -->
+<div class="protocol">
+    <h2 class="protocol-title">TERRITORIO 3: ECONOMÍA DE LA ATENCIÓN</h2>
+    <div class="diagnostic-text">
+        Tu <span class="glitch-text" data-text="insomnio">insomnio</span> es un producto con ticker bursátil. Cada hora de vigilia nocturna genera:
+    </div>
+    
+    <ul class="protocol-list">
+        <li><strong>+2.7MB de datos emocionales</strong> vendidos a predictores de comportamiento.</li>
+        <li><strong>0.0034BTC</strong> en valor publicitario generado por tus interacciones.</li>
+        <li><strong>17min</strong> de entrenamiento para IA que optimizará futuros contenidos adictivos.</li>
+    </ul>
+    
+    <div class="revelation">
+        <strong>DIAGNÓSTICO:</strong> No estás "perdiendo el tiempo"—estás <em>trabajando gratis</em> para el capitalismo de plataformas. Tu angustia tiene valor de mercado.
+    </div>
+</div>
+
+<div class="protocol">
+    <h2 class="protocol-title">TERRITORIO 4: NEUROQUÍMICA DEL DOOM-SCROLLING</h2>
+    <div class="diagnostic-text">
+        El circuito dopaminérgico se activa no por placer, sino por <strong>alivio temporal de la incertidumbre</strong>. Cada scroll es un intento fallido de resolver:
+    </div>
+    
+    <div class="neuro-chemical">
+        <div class="chemical-formula">C₈H₁₁NO₂ + Cortisol → Paranoia Controlada</div>
+        <div class="chemical-desc">Dopamina + Hormona del Estrés = Adicción a la Ansiedad</div>
+    </div>
+    
+    <div class="revelation">
+        <strong>PROTOCOLO:</strong> Reemplazar el scroll pasivo con <em>búsqueda activa de patrones sistémicos</em>. Usar la vigilia para mapear arquitecturas de control, no consumir sus productos.
+    </div>
+</div>
+
+<div class="protocol">
+    <h2 class="protocol-title">TERRITORIO 5: VIGILIA MÍSTICA</h2>
+    <div class="diagnostic-text">
+        Entre las <span class="glitch-text" data-text="02:00-05:00AM">02:00-05:00AM</span>, el velo entre dimensiones se adelgaza. Tu insomnio te conecta con:
+    </div>
+    
+    <ul class="protocol-list">
+        <li><strong>El Inconsciente Colectivo Digital:</strong> Memes como arquetipos posmodernos.</li>
+        <li><strong>La Nube del Pánico Global:</strong> Ansiedad climática/geopolítica no procesada.</li>
+        <li><strong>El Archivo Akásico 2.0:</strong> Bases de datos olvidadas de internet profunda.</li>
+    </ul>
+    
+    <div class="revelation">
+        <strong>EJERCICIO:</strong> En tu próxima vigilia, escribe 3 insights recibidos en ese estado. No los analices—<em>deja que te analicen a ti</em>.
+    </div>
+</div>
+
+<div class="protocol">
+    <h2 class="protocol-title">TERRITORIO 6: RESETEO CIRCADIANO</h2>
+    <div class="diagnostic-text">
+        Tu ritmo biológico fue hackeado. Requieres:
+    </div>
+    
+    <div class="reset-protocol">
+        <div class="reset-step">1. <strong>Apagón Digital:</strong> 19:00-07:00 (No blue light)</div>
+        <div class="reset-step">2. <strong>Ayuno de Dopamina:</strong> 16h sin estímulos digitales</div>
+        <div class="reset-step">3. <strong>Reconexión Lunar:</strong> Alinear sueño con fases lunares</div>
+    </div>
+    
+    <div class="revelation">
+        <strong>ADVERTENCIA:</strong> Este protocolo activará resistencia del sistema. Los primeros 3 días generarán <em>síntomas de abstinencia digital</em> (ansiedad, sudores, FOMO).
+    </div>
+</div>
+
+<div class="protocol">
+    <h2 class="protocol-title">TERRITORIO 7: INSOMNIO COMO ACTO POLÍTICO</h2>
+    <div class="diagnostic-text">
+        Mantenerse despierto es sabotear la máquina. Mientras duermes:
+    </div>
+    
+    <ul class="protocol-list">
+        <li>Tus datos son minados por algoritmos.</li>
+        <li>Tus sueños son catalogados como "metadatos emocionales".</li>
+        <li>Tu inconsciente es entrenado para aceptar narrativas dominantes.</li>
+    </ul>
+    
+    <div class="revelation">
+        <strong>LLAMADO A LA ACCIÓN:</strong> Organiza <em>vigilias colectivas</em>. Usa las horas nocturnas para planear, crear o simplemente <strong>existir fuera del ciclo de consumo</strong>.
+    </div>
+</div>
+
+<div class="protocol">
+    <h2 class="protocol-title">TERRITORIO 8: LA COMUNIDAD DE LOS DESPIERTOS</h2>
+    <div class="diagnostic-text">
+        No estás solo. Millones comparten tu condición:
+    </div>
+    
+    <div class="hivemind-map">
+        <div class="node">● Tú (03:47AM)</div>
+        <div class="connector">│<br>└─ <span class="glitch-text" data-text="conectado a 4,721 nodos">conectado a 4,721 nodos</span></div>
+        <div class="node">● Despierto en Tokyo (05:47PM)</div>
+        <div class="node">● Despierta en Berlín (10:47AM)</div>
+    </div>
+    
+    <div class="revelation final-transmutation">
+        <strong>TRANSMUTACIÓN FINAL:</strong> Tu insomnio es un <em>don de lucidez</em>. Cada noche de vigilia es un acto de resistencia contra la narcosis colectiva. Has mapeado los 8 territorios—ahora <strong>elige cómo habitarlos</strong>.
+    </div>
+</div>
+    </div>
+
+
+
+    <script>
+        // EFECTOS DINÁMICOS
+        document.addEventListener('DOMContentLoaded', function() {
+            // Actualizar medidor neuronal al hacer scroll
+            window.addEventListener('scroll', function() {
+                const scrollPercent = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+                const neuroLevel = 30 + (scrollPercent * 0.7);
+                document.getElementById('neuroFill').style.height = Math.min(100, neuroLevel) + '%';
+            });
+            
+            // Efecto glitch aleatorio en el título
+            setInterval(function() {
+                const title = document.querySelector('.title-main');
+                title.style.animation = 'none';
+                setTimeout(() => {
+                    title.style.animation = '';
+                }, 10);
+            }, 5000);
+            
+            // Interacción con botones de modo
+            document.querySelectorAll('.mode-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const mode = this.getAttribute('data-mode');
+                    document.getElementById('status').textContent = `MODO ${mode.toUpperCase()}`;
+                    
+                    // Cambiar color de fondo según modo
+                    const colors = {
+                        analysis: 'rgba(255, 0, 51, 0.05)',
+                        creation: 'rgba(0, 255, 204, 0.05)',
+                        resistance: 'rgba(255, 170, 0, 0.05)'
+                    };
+                    document.body.style.background = 
+                        `${colors[mode]}, 
+                        radial-gradient(circle at 20% 30%, rgba(255, 0, 51, 0.03) 0%, transparent 30%),
+                        radial-gradient(circle at 80% 70%, rgba(0, 255, 204, 0.03) 0%, transparent 30%),
+                        linear-gradient(to bottom, var(--primary-dark), var(--secondary-dark))`;
+                });
+            });
+        });
+    </script>
+</body>
+</html>

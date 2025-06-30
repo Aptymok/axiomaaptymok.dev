@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AxiomaAptymok.dev - Terminal de Realidades</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap');
+
+        :root {
+            --color-prompt: #00ff41;
+            --color-text: #00ff00;
+            --color-bg: #000000;
+            --color-error: #ff0000;
+            --color-warning: #ffff00;
+            --color-success: #00ffff;
+            --color-border: #00ff00;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Courier Prime', monospace;
+            background: radial-gradient(circle at center, #0a0a0a 0%, #000000 100%);
+            color: var(--color-text);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .terminal {
+            width: 100vw; height: 100vh; padding: 20px;
+            position: relative; overflow-y: auto;
+            scrollbar-width: thin; scrollbar-color: var(--color-border) transparent;
+        }
+        
+        .terminal::-webkit-scrollbar { width: 8px; }
+        .terminal::-webkit-scrollbar-track { background: transparent; }
+        .terminal::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 4px; }
+        
+        .glitch-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(0, 255, 0, 0.02) 2px, rgba(0, 255, 0, 0.02) 4px);
+            pointer-events: none; animation: scan 0.1s linear infinite;
+        }
+        
+        @keyframes scan { 0% { transform: translateY(0); } 100% { transform: translateY(2px); } }
+        
+        .header { text-align: center; margin-bottom: 30px; }
+        .logo { font-size: 2.5em; font-weight: bold; text-shadow: 0 0 20px var(--color-text); margin-bottom: 10px; opacity: 0; }
+        .subtitle { font-size: 1.2em; color: #888; margin-bottom: 20px; opacity: 0; }
+        
+        .terminal-content { max-width: 1000px; margin: 0 auto; opacity: 0; }
+        .prompt { color: var(--color-text); display: flex; align-items: center; margin-bottom: 10px; }
+        .prompt::before { content: "axioma@realidad:~$ "; color: var(--color-prompt); }
+        
+        .input-line {
+            background: transparent; border: none; color: var(--color-text);
+            font-family: inherit; font-size: inherit; outline: none;
+            flex: 1; caret-color: var(--color-text); min-width: 50px;
+        }
+        
+        .output { margin-bottom: 20px; line-height: 1.4; white-space: pre-wrap; word-wrap: break-word; }
+        .hidden { display: none; }
+        .error { color: var(--color-error); text-shadow: 0 0 10px var(--color-error); }
+        .warning { color: var(--color-warning); text-shadow: 0 0 10px var(--color-warning); }
+        .success { color: var(--color-success); text-shadow: 0 0 10px var(--color-success); }
+        .filename { color: var(--color-success); font-weight: bold; }
+        .file-description { color: #888; font-style: italic; }
+
+        .ontological-window {
+            display: none; position: fixed; top: 50%; left: 50%;
+            transform: translate(-50%, -50%); width: 80%; max-width: 900px;
+            height: 85vh; background: rgba(10, 10, 10, 0.95);
+            border: 1px solid var(--color-border); box-shadow: 0 0 30px rgba(0, 255, 0, 0.5);
+            backdrop-filter: blur(10px); z-index: 1000; flex-direction: column;
+        }
+        .window-header {
+            display: flex; justify-content: space-between; align-items: center;
+            background: #000; border-bottom: 1px solid var(--color-border);
+            padding: 8px 15px; color: var(--color-border); font-weight: bold; cursor: move;
+        }
+        .window-close {
+            cursor: pointer; padding: 2px 8px; border: 1px solid var(--color-border);
+            background: transparent; color: var(--color-border); font-weight: bold;
+        }
+        .window-close:hover { background: var(--color-border); color: #000; }
+        .window-content {
+            padding: 0; flex-grow: 1; overflow: hidden;
+        }
+        .window-iframe {
+            width: 100%; height: 100%; border: none;
+        }
+
+        @media (max-width: 480px) {
+            body { font-size: 14px; }
+            .terminal { padding: 10px; }
+            .logo { font-size: 1.8em; }
+            .prompt::before { content: "axm@rd:~$ "; }
+        }
+    </style>
+</head>
+<body>
+    <div class="glitch-bg"></div>
+    <div class="terminal" id="terminal">
+        <div class="header">
+            <div class="logo" id="logo"></div>
+            <div class="subtitle" id="subtitle"></div>
+        </div>
+        <div class="terminal-content" id="content">
+            <div class="output" id="output"></div>
+            <div class="prompt">
+                <input type="text" class="input-line" id="input" placeholder="Escribe un comando..." autocomplete="off" autofocus>
+            </div>
+        </div>
+    </div>
+    <div class="ontological-window" id="ontological-window">
+        <div class="window-header">
+            <span id="window-title"></span>
+            <span class="window-close" id="window-close">X</span>
+        </div>
+        <div class="window-content">
+            <iframe class="window-iframe" id="window-iframe"></iframe>
+        </div>
+    </div>
+
+<script>
+class AxiomaTerminal {
+    constructor() {
+        this.terminal = document.getElementById('terminal');
+        this.output = document.getElementById('output');
+        this.input = document.getElementById('input');
+        this.ontologicalWindow = document.getElementById('ontological-window');
+        this.windowTitle = document.getElementById('window-title');
+        this.windowIframe = document.getElementById('window-iframe');
+
+        this.fileSystem = {
+            'FASE_1-AUTOPSIA_DEL_SISTEMA': {
+                'manuscrito.html': 'Manuscrito para los Huérfanos Digitales',
+                'codex.html': 'Codex de la Traición Consensual',
+                'fragmentos.html': 'Fragmentos de una Masculinidad Disolvente',
+                'evangelio.html': 'Evangelio para Ateos Devotos',
+                'sintomatologia.html': 'Sintomatología de la Falsa Conciencia',
+                'exodo.html': 'Éxodo desde el Metaverso',
+                'necropolis.html': 'Necrópolis Digital',
+            },
+            'FASE_2-GUERRA_COGNITIVA': {
+                'protocolos.html': 'Protocolos de Desubjetivación',
+                'cartografias.html': 'Cartografías del Insomnio',
+                'arqueologia.html': 'Arqueología del Futuro Cancelado',
+                'rituales.html': 'Rituales de Profanación',
+                'gramatica.html': 'Gramática de la Insurrección',
+                'testamento.html': 'Testamento de una Generación Desechable',
+            },
+            'FASE_3-ARQUITECTURA_DE_LA_REALIDAD': {
+                'anatomia.html': 'Anatomía de la Energía del Despertar',
+                'sistemanervioso.html': 'El Sistema Nervioso como Interfaz Cuántica',
+                'metabolismo.html': 'Metabolismo de la Frecuencia',
+                'irradiacion.html': 'El Arte de la Irradiación Pasiva',
+                'sincronicidad.html': 'La Sincronicidad como GPS Multidimensional',
+                'arquitecturadelanuevarealidad.html': 'Construcción de Civilización Post-Consensual',
+                'geometriadelaintencion.html': 'Geometría de la Intención',
+                'protocolodeaceleracion.html': 'Protocolos de Aceleración y Desaceleración Causal',
+                'transmutando.html': 'Alquimia Emocional: Transmutando Veneno en Medicina',
+                'soberania.html': 'Protocolo de Soberanía Resonante',
+                'paradoja.html': 'La Paradoja del Método',
+                'transmisionfinal.html': 'Transmisión Final: Carta a los que Vendrán Después',
+            }
+        };
+        
+        this.init();
+    }
+
+    init() {
+        this.setupEventListeners();
+        this.startBootSequence();
+    }
+
+    setupEventListeners() {
+        this.input.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                this.processCommand(this.input.value.trim());
+                this.input.value = '';
+            }
+        });
+        document.getElementById('window-close').addEventListener('click', () => {
+            this.ontologicalWindow.style.display = 'none';
+            this.windowIframe.src = 'about:blank'; // Detiene la carga del iframe
+        });
+    }
+
+    async startBootSequence() {
+        await this.typeText('logo', 'AxiomaAptymok.dev', 100);
+        await this.delay(500);
+        await this.typeText('subtitle', 'Terminal de Realidades Sostenidas', 50);
+        await this.delay(1000);
+        
+        document.getElementById('content').style.opacity = '1';
+        this.input.focus();
+        
+        this.addOutput(`
+<span class="success">AXIOMA TERMINAL v3.14 - Sistema Operativo de Realidades</span>
+Copyright © 2025 Fragmentos en Despertar.
+
+ADVERTENCIA: Este sistema modifica la estructura cognitiva del usuario.
+
+Escribe <span class="warning">'help'</span> para ver la lista de comandos.
+`);
+    }
+
+    processCommand(command) {
+        const promptText = "axioma@realidad:~$ ";
+        this.addOutput(`<span style="color: var(--color-prompt);">${promptText}</span>${command}`);
+        const [cmd, ...args] = command.toLowerCase().split(' ');
+
+        switch (cmd) {
+            case 'help': this.showHelp(); break;
+            case 'ls': this.listFiles(args[0]); break;
+            case 'cat': this.readFile(args[0]); break;
+            case 'clear': this.clearTerminal(); break;
+            case 'dmesg': this.handleDmesg(command); break;
+            default: this.addOutput(`<span class="error">Comando no reconocido: '${command}'. Escribe 'help'.</span>`);
+        }
+    }
+
+    showHelp() {
+        this.addOutput(`
+<span class="success">COMANDOS DISPONIBLES:</span>
+<span class="filename">help</span>                   - Muestra esta lista de comandos.
+<span class="filename">ls [directorio]</span>        - Lista los artefactos. Opcional: fase_1, fase_2, fase_3.
+<span class="filename">cat [artefacto.html]</span> - Muestra el contenido de un artefacto.
+<span class="filename">clear</span>                  - Limpia la terminal.
+<span class="warning">dmesg | grep -i "panic"</span>  - <span class="file-description">Comando avanzado para diagnóstico del kernel.</span>
+`);
+    }
+
+    listFiles(directory) {
+        let outputText = '';
+        if (!directory) {
+             outputText = 'Listando directorios de Fases:\n';
+             Object.keys(this.fileSystem).forEach(dir => {
+                outputText += `<span class="filename">${dir}/</span>\n`;
+            });
+             this.addOutput(outputText);
+             return;
+        }
+
+        const dirKey = Object.keys(this.fileSystem).find(k => k.toLowerCase().startsWith(directory.toLowerCase()));
+
+        if (dirKey) {
+            outputText = `Contenido de <span class="filename">${dirKey}/</span>:\n`;
+            for (const [file, description] of Object.entries(this.fileSystem[dirKey])) {
+                 outputText += `<span class="success">${file.padEnd(45)}</span> <span class="file-description">- ${description}</span>\n`;
+            }
+        } else {
+            outputText = `<span class="error">Directorio no encontrado: '${directory}'</span>`;
+        }
+        this.addOutput(outputText);
+    }
+
+    readFile(filePath) {
+        if (!filePath) {
+            this.addOutput(`<span class="error">Uso: cat [artefacto.html]</span>`);
+            return;
+        }
+
+        let found = false;
+        let finalPath = '';
+        
+        if (filePath === 'kernel_panic.log.html') {
+             finalPath = filePath;
+             found = true;
+        } else {
+             for (const phase in this.fileSystem) {
+                if (this.fileSystem[phase][filePath]) {
+                    finalPath = `articles/${filePath}`;
+                    found = true;
+                    break;
+                }
+            }
+        }
+
+        if (found) {
+            const title = "Visualizador de Artefactos";
+            this.windowTitle.textContent = `${title} - [${filePath}]`;
+            this.windowIframe.src = finalPath;
+            this.ontologicalWindow.style.display = 'flex';
+            this.addOutput(`Abriendo <span class="filename">${filePath}</span> en ventana ontológica...`);
+        } else {
+            this.addOutput(`<span class="error">Artefacto no encontrado: '${filePath}'</span>`);
+        }
+    }
+
+    handleDmesg(fullCommand) {
+        if (fullCommand.toLowerCase() === 'dmesg | grep -i "panic"') {
+            this.addOutput(`<span class="warning">Buscando registros de pánico del kernel...</span>`);
+            setTimeout(() => {
+                this.addOutput(`<span class="success">Registro encontrado. Cargando volcado de memoria en ventana segura...</span>`);
+                this.readFile('kernel_panic.log.html');
+            }, 1500);
+        } else {
+            this.addOutput(`
+<span class="warning">dmesg:</span>
+[    0.000001] Axioma Kernel v3.14 inicializado.
+[    0.000002] Detectando realidad consensual... <span class="success">HECHO</span>.
+[    1.337000] Cargando protocolos de desubjetivación...
+[    3.141592] <span class="error">ADVERTENCIA:</span> Detectada alta interferencia de matriz de control.
+[   42.000000] Buscando kernel panic logs... no se encontraron.
+`);
+        }
+    }
+
+    clearTerminal() { this.output.innerHTML = ''; }
+    
+    addOutput(text) {
+        const div = document.createElement('div');
+        div.innerHTML = text;
+        this.output.appendChild(div);
+        this.terminal.scrollTop = this.terminal.scrollHeight;
+    }
+    
+    async typeText(elementId, text, speed) {
+        const element = document.getElementById(elementId);
+        element.style.opacity = '1';
+        element.textContent = '';
+        for (let i = 0; i < text.length; i++) {
+            element.textContent += text[i];
+            await this.delay(speed);
+        }
+    }
+    
+    delay(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    window.axiomaTerminal = new AxiomaTerminal();
+});
+</script>
+</body>
+</html>

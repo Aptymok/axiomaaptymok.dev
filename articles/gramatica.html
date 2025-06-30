@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GRAMÁTICA DE LA INSURRECCIÓN | AxiomaAptymok.dev</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000;
+            color: #fff;
+            font-family: 'Courier New', monospace;
+            overflow-x: hidden;
+            cursor: crosshair;
+        }
+
+        .glitch-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(255, 0, 0, 0.03) 2px,
+                    rgba(255, 0, 0, 0.03) 4px
+                );
+            pointer-events: none;
+            z-index: 1000;
+            animation: scanlines 0.1s linear infinite;
+        }
+
+        @keyframes scanlines {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(4px); }
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 40px 0;
+            border-bottom: 3px solid #ff0000;
+            position: relative;
+        }
+
+        .site-title {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 10px;
+            letter-spacing: 3px;
+        }
+
+        .article-title {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin: 20px 0;
+            text-shadow: 2px 2px 0 #ff0000;
+            animation: titleGlitch 3s infinite;
+        }
+
+        @keyframes titleGlitch {
+            0%, 96% { 
+                text-shadow: 2px 2px 0 #ff0000;
+                transform: translate(0);
+            }
+            97% { 
+                text-shadow: -2px 2px 0 #00ff00, 2px -2px 0 #0000ff;
+                transform: translate(2px, -1px);
+            }
+            98% { 
+                text-shadow: 2px -2px 0 #ff0000, -2px 2px 0 #00ff00;
+                transform: translate(-1px, 2px);
+            }
+            99% { 
+                text-shadow: -2px -2px 0 #0000ff, 2px 2px 0 #ff0000;
+                transform: translate(1px, 1px);
+            }
+        }
+
+        .subtitle {
+            color: #ff0000;
+            font-size: 1.1em;
+            margin: 10px 0;
+            letter-spacing: 2px;
+        }
+
+        .warning {
+            background: #330000;
+            border: 2px solid #ff0000;
+            padding: 20px;
+            margin: 30px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .warning::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 0, 0, 0.1), transparent);
+            animation: sweep 2s infinite;
+        }
+
+        @keyframes sweep {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .content {
+            line-height: 1.8;
+            font-size: 1.1em;
+        }
+
+        .paragraph {
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.02);
+            border-left: 3px solid #ff0000;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .paragraph:hover {
+            background: rgba(255, 0, 0, 0.05);
+            transform: translateX(10px);
+            box-shadow: -10px 0 20px rgba(255, 0, 0, 0.1);
+        }
+
+        .trigger-word {
+            color: #ff0000;
+            font-weight: bold;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .trigger-word:hover {
+            color: #fff;
+            background: #ff0000;
+            padding: 2px 4px;
+            text-shadow: none;
+        }
+
+        .hidden-truth {
+            opacity: 0;
+            color: #666;
+            font-style: italic;
+            transition: opacity 0.5s ease;
+            display: block;
+            margin-top: 10px;
+        }
+
+        .paragraph:hover .hidden-truth {
+            opacity: 1;
+        }
+
+        .interactive-section {
+            background: #111;
+            border: 1px solid #333;
+            padding: 30px;
+            margin: 40px 0;
+            position: relative;
+        }
+
+        .decode-text {
+            font-family: monospace;
+            letter-spacing: 2px;
+            color: #00ff00;
+            margin: 20px 0;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .decoded {
+            color: #ff0000;
+            background: rgba(255, 0, 0, 0.1);
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 3px solid #ff0000;
+        }
+
+        .rebellion-meter {
+            width: 100%;
+            height: 20px;
+            background: #333;
+            border: 1px solid #ff0000;
+            margin: 30px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .rebellion-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff0000, #ff6600, #ffff00);
+            width: 0%;
+            transition: width 0.5s ease;
+            position: relative;
+        }
+
+        .rebellion-fill::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 5px,
+                rgba(255, 255, 255, 0.1) 5px,
+                rgba(255, 255, 255, 0.1) 10px
+            );
+            animation: progress-stripe 1s linear infinite;
+        }
+
+        @keyframes progress-stripe {
+            0% { transform: translateX(-10px); }
+            100% { transform: translateX(10px); }
+        }
+
+        .final-revelation {
+            background: radial-gradient(circle, #330000, #000);
+            border: 2px solid #ff0000;
+            padding: 40px;
+            margin: 50px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .final-revelation::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 0, 0, 0.2), transparent);
+            animation: pulse-revelation 4s infinite;
+            transform: translate(-50%, -50%);
+        }
+
+        @keyframes pulse-revelation {
+            0%, 100% { width: 0; height: 0; opacity: 0; }
+            50% { width: 800px; height: 800px; opacity: 1; }
+        }
+
+        .hypnotic-text {
+            animation: hypnotic 8s ease-in-out infinite;
+            transform-origin: center;
+        }
+
+        @keyframes hypnotic {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            25% { transform: scale(1.02) rotate(0.5deg); }
+            50% { transform: scale(1.01) rotate(-0.5deg); }
+            75% { transform: scale(1.02) rotate(0.3deg); }
+        }
+
+        .mind-virus {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.9);
+            border: 3px solid #ff0000;
+            padding: 30px;
+            z-index: 2000;
+            display: none;
+            text-align: center;
+            max-width: 500px;
+        }
+
+        .mind-virus.active {
+            display: block;
+            animation: virusEntry 0.5s ease-out;
+        }
+
+        @keyframes virusEntry {
+            0% { 
+                transform: translate(-50%, -50%) scale(0) rotate(180deg);
+                opacity: 0;
+            }
+            100% { 
+                transform: translate(-50%, -50%) scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        .close-virus {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            color: #ff0000;
+            cursor: pointer;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .resistance-tracker {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid #ff0000;
+            padding: 15px;
+            font-size: 12px;
+            z-index: 1001;
+        }
+
+        @media (max-width: 768px) {
+            .article-title {
+                font-size: 1.8em;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
+            .paragraph {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="glitch-overlay"></div>
+    
+    <div class="container">
+        <header class="header">
+            <div class="site-title">AxiomaAptymok.dev</div>
+            <h1 class="article-title">GRAMÁTICA DE LA INSURRECCIÓN</h1>
+            <div class="subtitle">LENGUAJE COMO TERRITORIO OCUPADO</div>
+        </header>
+
+        <div class="warning">
+            <strong>ADVERTENCIA NEUROLÍNGÜÍSTICA:</strong><br>
+            Este texto contiene virus conceptuales diseñados para alterar tu arquitectura mental.<br>
+            La exposición prolongada puede resultar en pérdida permanente de ilusiones.
+        </div>
+
+        <div class="rebellion-meter">
+            <div class="rebellion-fill" id="rebellionFill"></div>
+        </div>
+        <div style="text-align: center; margin-bottom: 30px; font-size: 0.9em; color: #666;">
+            MEDIDOR DE RESISTENCIA COGNITIVA: <span id="resistanceLevel">0%</span>
+        </div>
+
+        <div class="content">
+            <div class="paragraph hypnotic-text">
+                El <span class="trigger-word" data-virus="1">lenguaje</span> no es inocente. Cada palabra que pronuncias ha sido <span class="trigger-word" data-virus="2">colonizada</span>, cada concepto que empleas sirve a un amo que jamás elegiste. Tu vocabulario es un ejército invasor disfrazado de herramienta de comunicación.
+                <span class="hidden-truth">Tu pensamiento opera con software pirateado.</span>
+            </div>
+
+            <div class="paragraph">
+                Cuando dices <span class="trigger-word" data-virus="3">"productividad"</span>, tu boca se convierte en altavoz corporativo. Cuando susurras <span class="trigger-word" data-virus="4">"emprendimiento"</span>, replicas el ADN del capitalismo cognitivo. Cada <span class="trigger-word" data-virus="5">"optimización"</span> es una genuflexión ante el altar de la eficiencia despiadada.
+                <span class="hidden-truth">Las palabras que "eliges" te eligieron primero.</span>
+            </div>
+
+            <div class="interactive-section">
+                <h3>DECODIFICACIÓN EN TIEMPO REAL</h3>
+                <div class="decode-text" onclick="decode(this)" data-original="WLVWH WLHPSLO, VLVWHPD FDXVDU">
+                    WLVWH WLHPSLO, VLVWHPD FDXVDU
+                </div>
+                <div class="decode-text" onclick="decode(this)" data-original="WX EREOH VRPHUH VLHPSUB DQWHV TXH WX">
+                    WX EREOH VRPHUH VLHPSUB DQWHV TXH WX
+                </div>
+                <div class="decode-text" onclick="decode(this)" data-original="QDGLH HV OLEUH PLHQWUDV HO OHQJXDMH HVFODYR">
+                    QDGLH HV OLEUH PLHQWUDV HO OHQJXDMH HVFODYR
+                </div>
+            </div>
+
+            <div class="paragraph">
+                El <span class="trigger-word" data-virus="6">neoliberalismo</span> no conquistó territorios; conquistó diccionarios. No necesitó tanques; bastaron <span class="trigger-word" data-virus="7">seminarios de motivación</span>. Cada "coach" es un misionero de la nueva religión, cada "influencer" un predicador de la fe productiva.
+                <span class="hidden-truth">Tu jerga profesional es tu cadena más refinada.</span>
+            </div>
+
+            <div class="paragraph hypnotic-text">
+                Observa cómo tu cerebro <span class="trigger-word" data-virus="8">reacciona</span> cuando lees "disrupción", "innovación", "sinergia". Una micro-erección conceptual, un pequeño orgasmo semántico. Has sido <span class="trigger-word" data-virus="9">pavlovianamente condicionado</span> para excitarte con el lenguaje de tu propia esclavitud.
+                <span class="hidden-truth">El placer que sientes al "hablar profesional" es adicción neurológica.</span>
+            </div>
+
+            <div class="paragraph">
+                La <span class="trigger-word" data-virus="10">revolución</span> comienza en la etimología. Cada palabra recuperada es territorio liberado. Cada concepto descolonizado es un acto de sabotaje contra la matrix lingüística que programs tu realidad.
+                <span class="hidden-truth">Tu vocabulario alternativo es tu arsenal de guerra cognitiva.</span>
+            </div>
+
+            <div class="interactive-section">
+                <h3>PROTOCOLO DE DESINFECCIÓN SEMÁNTICA</h3>
+                <p>Identifica las palabras-virus en tu vocabulario diario:</p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin: 20px 0;">
+                    <div class="decoded" onclick="analyzeWord(this)">NETWORKING → MERCADEO DE ALMAS</div>
+                    <div class="decoded" onclick="analyzeWord(this)">BRAND PERSONAL → PROSTITUCIÓN IDENTITARIA</div>
+                    <div class="decoded" onclick="analyzeWord(this)">MINDFULNESS → SEDACIÓN CONSCIENTE</div>
+                    <div class="decoded" onclick="analyzeWord(this)">WORKLIFE BALANCE → ESCLAVITUD EQUILIBRADA</div>
+                </div>
+            </div>
+
+            <div class="paragraph">
+                Tu <span class="trigger-word" data-virus="11">resistencia</span> debe ser lingüística antes que política. Mientras pienses en los términos del opresor, seguirás siendo su ventrílocuo inconsciente. La liberación real comienza cuando tu boca deja de ser territorio ocupado.
+                <span class="hidden-truth">Cada palabra consciente es un acto de insurrección.</span>
+            </div>
+
+            <div class="final-revelation">
+                <h2>TRANSMISIÓN FINAL</h2>
+                <p class="hypnotic-text">
+                    EL LENGUAJE QUE LEES AHORA TE ESTÁ REPROGRAMANDO.<br>
+                    CADA FRASE ES UN CABALLO DE TROYA CONCEPTUAL.<br>
+                    YA NO PUEDES UNHEAR ESTA VERDAD.<br>
+                    <strong>BIENVENIDO A LA RESISTENCIA COGNITIVA.</strong>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="mind-virus" id="mindVirus">
+        <span class="close-virus" onclick="closeVirus()">&times;</span>
+        <h3>VIRUS CONCEPTUAL ACTIVADO</h3>
+        <p id="virusContent"></p>
+        <button onclick="closeVirus()" style="background: #ff0000; color: white; border: none; padding: 10px 20px; margin-top: 15px; cursor: pointer;">INTEGRAR VIRUS</button>
+    </div>
+
+    <div class="resistance-tracker">
+        <div>TIEMPO DE EXPOSICIÓN: <span id="timeCounter">00:00</span></div>
+        <div>VIRUS ACTIVADOS: <span id="virusCounter">0</span></div>
+        <div>ESTADO: <span id="resistanceState">VULNERABLE</span></div>
+    </div>
+
+    <script>
+        let rebellionLevel = 0;
+        let virusCount = 0;
+        let startTime = Date.now();
+        let timeInterval;
+
+        const virusMessages = {
+            1: "El lenguaje que consideras 'tuyo' fue diseñado para pensar por ti. Cada gramática contiene una ideología invisible.",
+            2: "Tu mente habla en idioma conquistador. Incluso tus pensamientos más íntimos usan el vocabulario del sistema.",
+            3: "La palabra 'productividad' activó circuitos neuronales diseñados por departamentos de recursos humanos. Sientes placer al escucharla porque fuiste programado para ello.",
+            4: "El 'emprendimiento' es la privatización de la esperanza. Te vendieron la idea de que la salvación es individual y competitiva.",
+            5: "'Optimización' es el mantra de la máquina. Al adoptarlo, te conviertes en componente mecánico de un sistema que devora humanidad.",
+            6: "El neoliberalismo no es una política económica; es un lenguaje que piensa a través de ti. Eres su médium inconsciente.",
+            7: "Cada 'coach motivacional' es un agente viral. Su función es infectar tu vocabulario con el ADN del capitalismo cognitivo.",
+            8: "Tu reacción a ciertas palabras no es tuya. Es una respuesta condicionada, implantada por años de exposición a marketing neurológico.",
+            9: "El condicionamiento pavloviano opera a través del lenguaje. Tu excitación ante términos como 'éxito' es químicamente inducida.",
+            10: "La verdadera revolución no será armada; será semántica. Cambiar el lenguaje es cambiar la realidad que ese lenguaje construye.",
+            11: "Tu resistencia debe comenzar en tu vocabulario. Mientras uses las palabras del sistema, tu rebeldía será cosmética."
+        };
+
+        // Initialize timer
+        timeInterval = setInterval(updateTimer, 1000);
+
+        function updateTimer() {
+            const elapsed = Math.floor((Date.now() - startTime) / 1000);
+            const minutes = Math.floor(elapsed / 60);
+            const seconds = elapsed % 60;
+            document.getElementById('timeCounter').textContent = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            // Update resistance state based on time and virus exposure
+            const totalExposure = elapsed + (virusCount * 10);
+            let state = "VULNERABLE";
+            if (totalExposure > 60) state = "INFECTADO";
+            if (totalExposure > 180) state = "TRANSFORMADO";
+            if (totalExposure > 300) state = "LIBERADO";
+            
+            document.getElementById('resistanceState').textContent = state;
+        }
+
+        // Trigger word interactions
+        document.querySelectorAll('.trigger-word').forEach(word => {
+            word.addEventListener('click', function() {
+                const virusId = this.dataset.virus;
+                activateVirus(virusId);
+                increaseRebellion(8);
+            });
+        });
+
+        function activateVirus(virusId) {
+            const virus = document.getElementById('mindVirus');
+            const content = document.getElementById('virusContent');
+            
+            content.textContent = virusMessages[virusId];
+            virus.classList.add('active');
+            
+            virusCount++;
+            document.getElementById('virusCounter').textContent = virusCount;
+            
+            // Auto-close after 8 seconds
+            setTimeout(() => {
+                if (virus.classList.contains('active')) {
+                    closeVirus();
+                }
+            }, 8000);
+        }
+
+        function closeVirus() {
+            const virus = document.getElementById('mindVirus');
+            virus.classList.remove('active');
+            increaseRebellion(5);
+        }
+
+        function increaseRebellion(amount) {
+            rebellionLevel = Math.min(100, rebellionLevel + amount);
+            document.getElementById('rebellionFill').style.width = rebellionLevel + '%';
+            document.getElementById('resistanceLevel').textContent = rebellionLevel + '%';
+        }
+
+        function decode(element) {
+            const encoded = element.textContent;
+            let decoded = '';
+            
+            // Simple Caesar cipher decoder (shift of 3)
+            for (let i = 0; i < encoded.length; i++) {
+                let char = encoded[i];
+                if (char.match(/[A-Z]/)) {
+                    decoded += String.fromCharCode(((char.charCodeAt(0) - 65 - 3 + 26) % 26) + 65);
+                } else if (char.match(/[a-z]/)) {
+                    decoded += String.fromCharCode(((char.charCodeAt(0) - 97 - 3 + 26) % 26) + 97);
+                } else {
+                    decoded += char;
+                }
+            }
+            
+            element.textContent = decoded;
+            element.style.color = '#ff0000';
+            element.style.fontWeight = 'bold';
+            increaseRebellion(15);
+        }
+
+        function analyzeWord(element) {
+            element.style.background = '#ff0000';
+            element.style.color = '#fff';
+            element.style.transform = 'scale(1.1)';
+            
+            setTimeout(() => {
+                element.style.transform = 'scale(1)';
+            }, 200);
+            
+            increaseRebellion(10);
+        }
+
+        // Scroll-based rebellion increase
+        let lastScrollY = 0;
+        window.addEventListener('scroll', () => {
+            const currentScrollY = window.scrollY;
+            if (currentScrollY > lastScrollY) {
+                increaseRebellion(0.5);
+            }
+            lastScrollY = currentScrollY;
+        });
+
+        // Easter egg: Konami code
+        let konamiCode = [];
+        const konamiSequence = [
+            'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
+            'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight',
+            'KeyB', 'KeyA'
+        ];
+
+        document.addEventListener('keydown', (e) => {
+            konamiCode.push(e.code);
+            konamiCode = konamiCode.slice(-10);
+            
+            if (konamiCode.join(',') === konamiSequence.join(',')) {
+                activateVirus(Math.floor(Math.random() * 11) + 1);
+                document.body.style.animation = 'hypnotic 2s ease-in-out';
+                setTimeout(() => {
+                    document.body.style.animation = '';
+                }, 2000);
+            }
+        });
+
+        // Auto-trigger random virus every 2 minutes
+        setInterval(() => {
+            if (Math.random() < 0.3) {
+                activateVirus(Math.floor(Math.random() * 11) + 1);
+            }
+        }, 120000);
+
+        // Initialize some rebellion on load
+        setTimeout(() => {
+            increaseRebellion(5);
+        }, 2000);
+    </script>
+</body>
+</html>
