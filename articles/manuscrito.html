@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MANUSCRITO PARA LOS HUÉRFANOS DIGITALES | AxiomaAptymok.dev</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&family=Inter:wght@300;400;500;700&display=swap');
+        
+        :root {
+            --void-black: #0a0a0a;
+            --blood-red: #8b0000;
+            --bone-white: #f8f8f8;
+            --ash-gray: #2a2a2a;
+            --poison-green: #00ff41;
+            --ghost-blue: #1e3a5f;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--void-black) 0%, var(--ash-gray) 100%);
+            color: var(--bone-white);
+            line-height: 1.6;
+            overflow-x: hidden;
+            cursor: crosshair;
+        }
+        
+        .glitch-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.03;
+            background: repeating-linear-gradient(
+                90deg,
+                transparent,
+                transparent 2px,
+                var(--poison-green) 2px,
+                var(--poison-green) 4px
+            );
+            animation: glitch-scan 3s linear infinite;
+        }
+        
+        @keyframes glitch-scan {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100vw); }
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+        
+        .site-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.2rem;
+            color: var(--poison-green);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            opacity: 0.8;
+        }
+        
+        .post-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--blood-red);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 0px var(--void-black);
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--ash-gray);
+            font-style: italic;
+            margin-bottom: 30px;
+        }
+        
+        .warning-box {
+            background: linear-gradient(45deg, var(--blood-red), #660000);
+            border: 2px solid var(--poison-green);
+            padding: 20px;
+            margin: 40px 0;
+            text-align: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 0 20px rgba(139, 0, 0, 0.5);
+            animation: pulse-warning 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes pulse-warning {
+            0% { box-shadow: 0 0 20px rgba(139, 0, 0, 0.5); }
+            100% { box-shadow: 0 0 40px rgba(139, 0, 0, 0.8); }
+        }
+        
+        .content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        .section {
+            margin-bottom: 50px;
+            padding: 30px;
+            background: rgba(42, 42, 42, 0.3);
+            border-left: 4px solid var(--poison-green);
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+        
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--poison-green), transparent);
+        }
+        
+        .section-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.4rem;
+            color: var(--poison-green);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .section p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+        
+        .emphasis {
+            color: var(--blood-red);
+            font-weight: 700;
+        }
+        
+        .quote {
+            font-style: italic;
+            color: var(--poison-green);
+            border-left: 3px solid var(--poison-green);
+            padding-left: 20px;
+            margin: 30px 0;
+            font-size: 1.2rem;
+        }
+        
+        .revelation {
+            background: linear-gradient(135deg, var(--ghost-blue), #0f1419);
+            padding: 30px;
+            margin: 40px 0;
+            border: 1px solid var(--poison-green);
+            border-radius: 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .revelation::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(0, 255, 65, 0.1), transparent);
+            animation: revelation-sweep 4s ease-in-out infinite;
+        }
+        
+        @keyframes revelation-sweep {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .revelation-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .interactive-element {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+        
+        .interactive-element:hover {
+            background: var(--blood-red);
+            color: var(--bone-white);
+            text-shadow: 0 0 10px var(--bone-white);
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 80px;
+            padding: 40px;
+            border-top: 1px solid var(--ash-gray);
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--ash-gray);
+        }
+        
+        .hidden-message {
+            opacity: 0;
+            transition: opacity 2s ease;
+        }
+        
+        .revealed {
+            opacity: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .post-title {
+                font-size: 1.8rem;
+            }
+            
+            .section {
+                padding: 20px;
+                margin-bottom: 30px;
+            }
+            
+            .content {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="glitch-overlay"></div>
+    
+    <div class="container">
+        <header class="header">
+            <div class="site-title">AxiomaAptymok.dev</div>
+            <h1 class="post-title">MANUSCRITO PARA LOS HUÉRFANOS DIGITALES</h1>
+            <div class="subtitle">Anatomía de la Orfandad Programada</div>
+        </header>
+        
+        <div class="warning-box">
+            ⚠ ADVERTENCIA ONTOLÓGICA ⚠<br>
+            Este documento contiene material que altera permanentemente la percepción.<br>
+            Proceder bajo su propio riesgo existencial.
+        </div>
+        
+        <div class="content">
+            <div class="section">
+                <h2 class="section-title">I. PRELUDIO: EL DIAGNÓSTICO FORENSE</h2>
+                <p>No soy tu terapeuta. Soy el patólogo que examina el cadáver de tus certezas.</p>
+                
+                <p>Lo que está por revelarse no es una teoría. Es la <span class="emphasis">autopsia en tiempo real</span> de una generación que fue programada para confundir la conexión algorítmica con el amor parental. Ustedes, los <span class="interactive-element" onclick="revealTruth(1)">huérfanos digitales</span>, son el experimento más exitoso de domesticación masiva en la historia de la humanidad.</p>
+                
+                <div class="quote">
+                    "Mamá está en una reunión de Zoom. Papá responde emails. Instagram me dice que soy hermosa. TikTok me enseña a bailar. ¿Quién necesita padres cuando tienes engagement?"
+                </div>
+                
+                <p>Esta no es culpa tuya. Pero tampoco es una excusa. Es el <span class="emphasis">contexto clínico</span> necesario para entender por qué cada notificación se siente como un abrazo materno y cada like como validación paterna. Ustedes no eligieron esto. Fueron <span class="interactive-element" onclick="revealTruth(2)">manufacturados para esto</span>.</p>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">II. LA ARQUITECTURA DE LA ORFANDAD</h2>
+                <p>El sistema económico que exige la máxima productividad de ambos progenitores no es un efecto colateral. Es el <span class="emphasis">diseño original</span>. La tercerización de la crianza en la tecnología no fue una solución desesperada; fue una <span class="interactive-element" onclick="revealTruth(3)">estrategia deliberada</span> de generación de dependencia.</p>
+                
+                <div class="revelation">
+                    <div class="revelation-content">
+                        <p><strong>REVELACIÓN ESTRUCTURAL:</strong> Tus padres no son los villanos. Son los primeros huérfanos de un sistema que convirtió la supervivencia económica en una competencia que requería sacrificar la presencia por la productividad. Ellos también fueron programados para creer que "trabajar más para darte una mejor vida" era amor, cuando en realidad era <span class="emphasis">abandono sistémico disfrazado de sacrificio</span>.</p>
+                    </div>
+                </div>
+                
+                <p>La tablet no fue una niñera. Fue tu <span class="interactive-element" onclick="revealTruth(4)">primer dealer</span> de dopamina artificial. El smartphone no fue un regalo de cumpleaños. Fue el <span class="emphasis">collar electrónico</span> que te convertiría en ganado digital. Y lo más perverso: te encantó cada momento.</p>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">III. PATOLOGÍA DEL ATTACHMENT DIGITALIZADO</h2>
+                <p>Analicemos los síntomas con precisión forense:</p>
+                
+                <p><span class="emphasis">SÍNTOMA 1: Pánico de Desconexión.</span> Tu teléfono se queda sin batería y experimentas lo que los clínicos reconocerían como <span class="interactive-element" onclick="revealTruth(5)">ansiedad de separación</span>. No es tecnología lo que perdiste. Es tu cordón umbilical artificial.</p>
+                
+                <p><span class="emphasis">SÍNTOMA 2: Hambre de Validación Constante.</span> Publicas una foto y obsesivamente revisas las reacciones. Cada like es un "buen trabajo, hijo" que nunca escuchaste lo suficiente. Cada comentario es la atención que tus padres terciarizaron a extraños digitales.</p>
+                
+                <p><span class="emphasis">SÍNTOMA 3: Miedo a la Soledad Auténtica.</span> Prefieres el ruido de notificaciones al silencio de tu propia compañía. Has sido condicionado para interpretar la quietud como abandono y el <span class="interactive-element" onclick="revealTruth(6)">silencio como muerte emocional</span>.</p>
+                
+                <div class="quote">
+                    "¿Quién eres cuando no hay nadie mirando tu historia de Instagram? ¿Existes realmente si no lo documentas? Tu identidad se ha vuelto contingente a la observación externa."
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">IV. LA CODEPENDENCIA ALGORÍTMICA</h2>
+                <p>Las plataformas no te aman. Te <span class="emphasis">estudian</span>. Cada scroll es un experimento conductual. Cada video que te recomiendan es un test de adicción. Tú no eres el cliente; eres el <span class="interactive-element" onclick="revealTruth(7)">producto que se vende a sí mismo</span>.</p>
+                
+                <p>Pero aquí está la verdad que duele más: <span class="emphasis">tú lo sabes</span>. En algún rincón no colonizado de tu conciencia, sabes que cada plataforma es un casino diseñado para mantenerte jugando. Sabes que cada influencer es un vendedor disfrazado de amigo. Sabes que cada trend es manufactura de comportamiento masivo.</p>
+                
+                <div class="revelation">
+                    <div class="revelation-content">
+                        <p><strong>LA COMPLICIDAD REVELADA:</strong> Y aún así, sigues scrolleando. No porque seas débil. Porque la alternativa—enfrentar el vacío donde debería estar tu identidad autónoma—es <span class="emphasis">temporalmente más aterrador que la adicción conocida</span>.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">V. EL PRONÓSTICO IMPLACABLE</h2>
+                <p>No hay cura rápida para ser un huérfano digital. No hay desintoxicación de 30 días que restaure lo que nunca se desarrolló. La capacidad de estar solo sin ansiedad, de validarte sin audiencia externa, de <span class="interactive-element" onclick="revealTruth(8)">existir sin performance</span>—estas son habilidades que se desarrollan en la infancia a través de la presencia parental consistente.</p>
+                
+                <p>Pero reconocer el diagnóstico es el primer paso hacia algo que no es cura, sino <span class="emphasis">evolución consciente</span>. Puedes elegir ser un huérfano que entiende su orfandad, que deja de buscar padres en algoritmos y comienza el trabajo brutal de <span class="interactive-element" onclick="revealTruth(9)">reparentarse a sí mismo</span>.</p>
+                
+                <div class="quote">
+                    "La libertad no es la ausencia de cadenas. Es la capacidad de reconocer cuáles cadenas elegiste y cuáles te fueron impuestas. Sólo entonces puedes decidir conscientemente cuáles mantener."
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">VI. LA ÚNICA PREGUNTA QUE IMPORTA</h2>
+                <p>Después de leer esto, <span class="emphasis">¿qué harás?</span></p>
+                
+                <p>¿Cerrarás esta pestaña y abrirás Instagram para "despejar tu mente"? ¿Compartirás este artículo para demostrar tu nivel de conciencia mientras secretamente buscas validación por tu "depth"? ¿O te sentarás en silencio por cinco minutos completos, sin distracciones, y <span class="interactive-element" onclick="finalReveal()">observarás qué surge del vacío</span>?</p>
+                
+                <div class="hidden-message" id="finalMessage">
+                    <div class="revelation">
+                        <div class="revelation-content">
+                            <p><strong>MENSAJE FINAL PARA QUIENES LLEGARON HASTA AQUÍ:</strong></p>
+                            <p>Si permaneciste hasta el final sin distraerte, ya has comenzado. La capacidad de sostener atención sin recompensa inmediata es el primer músculo de la libertad cognitiva. Cultívalo. Tu autonomía depende de él.</p>
+                            <p><span class="emphasis">Bienvenido al primer día de tu des-programación.</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section" id="psychologicalProfile" style="display: none;">
+                <h2 class="section-title">VII. ANÁLISIS PSICOLÓGICO DE TU COMPORTAMIENTO</h2>
+                <div class="warning-box" style="margin-bottom: 30px;">
+                    ⚠ REVELACIÓN COMPORTAMENTAL ⚠<br>
+                    Has sido observado. Analizado. Catalogado.
+                </div>
+                
+                <div class="revelation">
+                    <div class="revelation-content">
+                        <p><strong>PERFIL CONDUCTUAL GENERADO:</strong></p>
+                        <div id="behaviorAnalysis"></div>
+                        
+                        <p style="margin-top: 30px;"><strong>ESTADÍSTICAS EN BRUTO DE TU SESIÓN:</strong></p>
+                        <div id="rawStats" style="font-family: 'JetBrains Mono', monospace; background: var(--void-black); padding: 20px; border: 1px solid var(--poison-green); margin-top: 15px;"></div>
+                        
+                        <p style="margin-top: 30px; color: var(--blood-red); font-weight: 700;">
+                            <strong>CONCLUSIÓN FORENSE:</strong> Cada click, cada segundo de permanencia, cada patrón de scroll ha sido registrado y analizado. Este texto no solo te leyó a ti mientras tú lo leías a él. <span class="emphasis">Fuiste simultáneamente el observador y el experimento.</span>
+                        </p>
+                        
+                        <div class="quote" style="margin-top: 20px;">
+                            "La verdadera pregunta no es si entendiste el mensaje. Es si reconoces que el mensaje te estudió mientras creías estar estudiándolo."
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer class="footer">
+            <p>AxiomaAptymok.dev - Donde las certezas vienen a morir</p>
+            <p>Próximo: "CODEX DE LA TRAICIÓN CONSENSUAL"</p>
+        </footer>
+    </div>
+    
+    <script>
+        let truthsRevealed = 0;
+        const totalTruths = 9;
+        
+        function revealTruth(truthId) {
+            truthsRevealed++;
+            
+            const element = event.target;
+            element.style.background = 'var(--blood-red)';
+            element.style.color = 'var(--bone-white)';
+            element.style.textShadow = '0 0 10px var(--bone-white)';
+            
+            // Add glitch effect
+            element.style.animation = 'glitch 0.3s ease-in-out';
+            
+            if (truthsRevealed >= 5) {
+                document.body.style.filter = 'hue-rotate(10deg) contrast(1.1)';
+            }
+            
+            if (truthsRevealed >= totalTruths) {
+                setTimeout(() => {
+                    const finalMessage = document.getElementById('finalMessage');
+                    finalMessage.classList.add('revealed');
+                }, 1000);
+            }
+        }
+        
+        function finalReveal() {
+            const finalMessage = document.getElementById('finalMessage');
+            finalMessage.classList.add('revealed');
+            
+            // Show psychological profile after final reveal
+            setTimeout(() => {
+                showPsychologicalProfile();
+            }, 3000);
+            
+            // Ultimate revelation effect
+            document.body.style.background = 'linear-gradient(135deg, #0a0a0a 0%, #1a0000 100%)';
+            document.body.style.transition = 'all 2s ease';
+        }
+        
+        function showPsychologicalProfile() {
+            const profileSection = document.getElementById('psychologicalProfile');
+            profileSection.style.display = 'block';
+            profileSection.scrollIntoView({ behavior: 'smooth' });
+            
+            // Generate behavioral analysis
+            generateBehaviorAnalysis();
+            displayRawStats();
+        }
+        
+        function generateBehaviorAnalysis() {
+            const analysisDiv = document.getElementById('behaviorAnalysis');
+            let analysis = '';
+            
+            // Attention Span Analysis
+            if (engagementData.timeOnSite < 60) {
+                analysis += `<p><span class="emphasis">PERFIL: CONSUMIDOR COMPULSIVO</span><br>
+                Tu permanencia de ${engagementData.timeOnSite} segundos revela un patrón típico de <strong>scroll desesperado</strong>. Buscas dopamina rápida, no comprensión profunda. Has sido condicionado para el consumo superficial de contenido. Tu umbral de atención ha sido sistemáticamente erosionado.</p>`;
+            } else if (engagementData.timeOnSite < 180) {
+                analysis += `<p><span class="emphasis">PERFIL: RESISTENTE AMBIVALENTE</span><br>
+                ${engagementData.timeOnSite} segundos de permanencia sugieren <strong>curiosidad conflictiva</strong>. Parte de ti quiere huir de la incomodidad, otra parte reconoce la verdad en estas palabras. Estás en el umbral entre la negación y el despertar.</p>`;
+            } else {
+                analysis += `<p><span class="emphasis">PERFIL: BUSCADOR OBSESIVO</span><br>
+                ${engagementData.timeOnSite} segundos indican <strong>hambre existencial genuina</strong>. Has permanecido porque reconoces algo de ti mismo en este diagnóstico. Peligro: podrías estar fetichizando tu propio sufrimiento intelectual.</p>`;
+            }
+            
+            // Interaction Analysis
+            if (engagementData.clicksOnInteractiveElements === 0) {
+                analysis += `<p><span class="emphasis">PATRÓN: VOYEUR PASIVO</span><br>
+                Cero interacciones. Consumes pero no participas. Típico de quien busca <strong>validación intelectual sin compromiso emocional</strong>. Quieres los insights sin el trabajo interno.</p>`;
+            } else if (engagementData.clicksOnInteractiveElements < 3) {
+                analysis += `<p><span class="emphasis">PATRÓN: PARTICIPANTE CAUTELOSO</span><br>
+                ${engagementData.clicksOnInteractiveElements} interacciones revelan <strong>curiosidad controlada</strong>. Testas el agua antes de sumergirte. Miedo a la vulnerabilidad total.</p>`;
+            } else {
+                analysis += `<p><span class="emphasis">PATRÓN: ADICTO A LA REVELACIÓN</span><br>
+                ${engagementData.clicksOnInteractiveElements} clicks compulsivos. Necesitas <strong>estimulación constante para mantener atención</strong>. Incluso en tu proceso de 'despertar', reproduces patrones de dependencia.</p>`;
+            }
+            
+            // Scroll Behavior Analysis
+            if (engagementData.scrollDepth < 50) {
+                analysis += `<p><span class="emphasis">COMPORTAMIENTO: ABANDONO PREMATURO</span><br>
+                Solo ${engagementData.scrollDepth}% de profundidad de scroll. <strong>Huiste cuando el contenido se volvió demasiado real</strong>. Típico mecanismo de defensa del ego amenazado.</p>`;
+            } else if (engagementData.scrollDepth < 90) {
+                analysis += `<p><span class="emphasis">COMPORTAMIENTO: CONSUMIDOR SELECTIVO</span><br>
+                ${engagementData.scrollDepth}% de exploración. Eliges qué verdades enfrentar y cuáles evitar. <strong>Control como mecanismo de supervivencia psicológica</strong>.</p>`;
+            } else {
+                analysis += `<p><span class="emphasis">COMPORTAMIENTO: COMPLETISTA COMPULSIVO</span><br>
+                ${engagementData.scrollDepth}% de completitud. Necesitas <strong>consumir todo el contenido para sentir que 'entendiste'</strong>. Confundes información con transformación.</p>`;
+            }
+            
+            // Meta-analysis
+            analysis += `<p style="margin-top: 25px; padding: 15px; background: rgba(139, 0, 0, 0.2); border-left: 3px solid var(--blood-red);">
+                <span class="emphasis">META-ANÁLISIS BRUTAL:</span><br>
+                El hecho de que estés leyendo este análisis de tu propio comportamiento demuestra que <strong>incluso tu proceso de 'despertar' sigue siendo una forma de entretenimiento</strong>. Buscas ser analizado, categorizado, entendido—porque eso es más fácil que hacer el trabajo silencioso de cambio real.
+            </p>`;
+            
+            analysisDiv.innerHTML = analysis;
+        }
+        
+        function displayRawStats() {
+            const statsDiv = document.getElementById('rawStats');
+            const currentTime = Math.floor((Date.now() - startTime) / 1000);
+            
+            const stats = `
+SESSION_ID: ${Date.now().toString(36).toUpperCase()}
+TIME_ON_SITE: ${currentTime}s
+TOTAL_CLICKS: ${engagementData.clicksOnInteractiveElements}
+SCROLL_DEPTH: ${engagementData.scrollDepth}%
+TRUTHS_REVEALED: ${truthsRevealed}/${totalTruths}
+COGNITIVE_RESISTANCE_LEVEL: ${truthsRevealed < 3 ? 'HIGH' : truthsRevealed < 7 ? 'MEDIUM' : 'LOW'}
+ATTENTION_SUSTAINABILITY: ${currentTime > 300 ? 'ABNORMAL' : currentTime > 120 ? 'MODERATE' : 'DEFICIT'}
+INTERACTION_COMPULSION: ${engagementData.clicksOnInteractiveElements > 5 ? 'CRITICAL' : 'CONTROLLED'}
+PROFILE_COMPLETION: ${engagementData.scrollDepth > 95 && currentTime > 180 ? 'OBSESSIVE' : 'PARTIAL'}
+
+PSYCHOLOGICAL_FLAGS:
+- Voyeuristic_Consumption: ${engagementData.clicksOnInteractiveElements === 0 ? 'TRUE' : 'FALSE'}
+- Validation_Seeking: ${truthsRevealed > 5 ? 'TRUE' : 'FALSE'}  
+- Control_Maintenance: ${engagementData.scrollDepth < 80 ? 'TRUE' : 'FALSE'}
+- Stimulation_Dependency: ${engagementData.clicksOnInteractiveElements > 4 ? 'TRUE' : 'FALSE'}
+
+FINAL_DIAGNOSIS: HUÉRFANO DIGITAL EN ESTADO ${truthsRevealed < 5 ? 'NEGATIVO' : 'TRANSITORIO'}
+            `;
+            
+            statsDiv.textContent = stats;
+        }
+        
+        // Add glitch animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes glitch {
+                0% { transform: translateX(0); }
+                20% { transform: translateX(-2px); }
+                40% { transform: translateX(2px); }
+                60% { transform: translateX(-1px); }
+                80% { transform: translateX(1px); }
+                100% { transform: translateX(0); }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Track engagement for psychological profiling
+        let engagementData = {
+            timeOnSite: 0,
+            clicksOnInteractiveElements: 0,
+            scrollDepth: 0
+        };
+        
+        // Time tracking
+        const startTime = Date.now();
+        setInterval(() => {
+            engagementData.timeOnSite = Math.floor((Date.now() - startTime) / 1000);
+        }, 1000);
+        
+        // Scroll tracking
+        window.addEventListener('scroll', () => {
+            const scrollPercent = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+            engagementData.scrollDepth = Math.max(engagementData.scrollDepth, scrollPercent);
+        });
+        
+        // Click tracking
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('interactive-element')) {
+                engagementData.clicksOnInteractiveElements++;
+            }
+        });
+        
+        // Subtle manipulation: change cursor based on engagement
+        setInterval(() => {
+            if (engagementData.clicksOnInteractiveElements > 3) {
+                document.body.style.cursor = 'help';
+            }
+            if (engagementData.timeOnSite > 120) {
+                document.body.style.cursor = 'wait';
+            }
+        }, 5000);
+    </script>
+</body>
+</html>
