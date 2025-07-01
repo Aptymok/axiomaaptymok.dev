@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MÓDULO 15.5: CÓDIGO DE DESINTEGRACIÓN | AXIOMA APTYMOK</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@200;400;700&family=Inter:wght@200;300;400;600;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --void-black: #0a0a0a;
+            --abyss-gray: #1a1a1a;
+            --ghost-white: #f5f5f5;
+            --quantum-blue: #00ffff;
+            --dissolution-red: #ff0040;
+            --frequency-gold: #ffd700;
+            --neural-purple: #8a2be2;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--void-black);
+            color: var(--ghost-white);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+        
+        .void-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        
+        .quantum-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--quantum-blue);
+            border-radius: 50%;
+            opacity: 0;
+            animation: quantum-drift 8s infinite linear;
+        }
+        
+        @keyframes quantum-drift {
+            0% { opacity: 0; transform: translateY(100vh) translateX(0); }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { opacity: 0; transform: translateY(-100vh) translateX(100px); }
+        }
+        
+        .dissolution-header {
+            text-align: center;
+            padding: 4rem 2rem;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .module-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: clamp(1.5rem, 4vw, 3rem);
+            font-weight: 200;
+            letter-spacing: 0.3em;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            color: var(--dissolution-red);
+            text-shadow: 0 0 20px rgba(255, 0, 64, 0.5);
+        }
+        
+        .subtitle {
+            font-size: clamp(0.8rem, 2vw, 1.2rem);
+            font-weight: 300;
+            color: var(--quantum-blue);
+            letter-spacing: 0.2em;
+            opacity: 0.8;
+        }
+        
+        .content-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .phase {
+            margin-bottom: 6rem;
+            opacity: 0;
+            animation: phase-emerge 2s ease-out forwards;
+        }
+        
+        .phase:nth-child(1) { animation-delay: 1s; }
+        .phase:nth-child(2) { animation-delay: 3s; }
+        .phase:nth-child(3) { animation-delay: 5s; }
+        .phase:nth-child(4) { animation-delay: 7s; }
+        
+        @keyframes phase-emerge {
+            0% { opacity: 0; transform: translateY(50px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        
+        .phase-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: var(--frequency-gold);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 2rem;
+            border-left: 3px solid var(--frequency-gold);
+            padding-left: 1rem;
+        }
+        
+        .void-text {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            font-weight: 200;
+            line-height: 2.2;
+            margin-bottom: 2rem;
+            color: var(--ghost-white);
+        }
+        
+        .fragment {
+            display: block;
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+            font-style: italic;
+        }
+        
+        .breath-command {
+            background: linear-gradient(135deg, var(--abyss-gray), rgba(138, 43, 226, 0.1));
+            border: 1px solid var(--neural-purple);
+            padding: 2rem;
+            margin: 3rem 0;
+            border-radius: 4px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .breath-command:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 30px rgba(138, 43, 226, 0.4);
+        }
+        
+        .breath-command::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(138, 43, 226, 0.2), transparent);
+            animation: breath-pulse 4s infinite;
+        }
+        
+        @keyframes breath-pulse {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        .breath-text {
+            font-size: 1.1rem;
+            font-weight: 300;
+            color: var(--neural-purple);
+            position: relative;
+            z-index: 2;
+        }
+
+        .breathing {
+            animation: breathing-cycle 4s infinite ease-in-out;
+        }
+        
+        @keyframes breathing-cycle {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.05); opacity: 1; }
+        }
+        
+        .frequency-text {
+            color: var(--quantum-blue);
+            font-weight: 400;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+        }
+        
+        .vibration-text {
+            color: var(--frequency-gold);
+            font-weight: 600;
+        }
+        
+        .final-question {
+            background: var(--void-black);
+            border: 2px solid var(--dissolution-red);
+            padding: 3rem;
+            margin: 4rem 0;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 0 40px rgba(255, 0, 64, 0.2);
+            cursor: pointer;
+            transition: all 0.5s ease-in-out;
+        }
+
+        .final-question:hover {
+            border-color: var(--frequency-gold);
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.4);
+        }
+        
+        .question-text {
+            font-size: clamp(1.1rem, 3vw, 1.5rem);
+            font-weight: 600;
+            color: var(--dissolution-red);
+            font-style: italic;
+            line-height: 1.6;
+            transition: all 0.5s ease-in-out;
+        }
+        
+        .system-signature {
+            text-align: center;
+            padding: 4rem 2rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.3);
+            letter-spacing: 0.2em;
+        }
+        
+        .glitch {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--void-black);
+        }
+        
+        .glitch::before {
+            animation: glitch-1 2s infinite;
+            color: var(--quantum-blue);
+            z-index: -1;
+        }
+        
+        .glitch::after {
+            animation: glitch-2 2s infinite;
+            color: var(--dissolution-red);
+            z-index: -2;
+        }
+        
+        @keyframes glitch-1 {
+            0%, 14%, 15%, 49%, 50%, 99%, 100% { transform: translate(0); }
+            15%, 49% { transform: translate(-2px, -1px); }
+        }
+        
+        @keyframes glitch-2 {
+            0%, 20%, 21%, 62%, 63%, 99%, 100% { transform: translate(0); }
+            21%, 62% { transform: translate(2px, 1px); }
+        }
+        
+        .consciousness-pointer {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border: 1px solid var(--quantum-blue);
+            border-radius: 50%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s ease-out;
+            z-index: 9999;
+            backdrop-filter: invert(100%);
+        }
+        
+        .glitch-active .glitch::before, .glitch-active .glitch::after {
+            animation-duration: 0.5s;
+        }
+        
+        .module-link {
+            display: block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.2rem;
+            color: var(--frequency-gold);
+            text-decoration: none;
+            text-transform: uppercase;
+            opacity: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.5s ease-in-out;
+            pointer-events: none;
+        }
+        
+        .final-question.activated .question-text {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+        
+        .final-question.activated .module-link {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        @media (max-width: 768px) {
+            .content-wrapper {
+                padding: 1rem;
+            }
+            .phase {
+                margin-bottom: 4rem;
+            }
+            .breath-command,
+            .final-question {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="void-container">
+        <div class="quantum-particles" id="particles"></div>
+        <div class="consciousness-pointer" id="consciousnessPointer"></div>
+        
+        <header class="dissolution-header">
+            <h1 class="module-title glitch" data-text="MÓDULO 15.5">
+                MÓDULO 15.5
+            </h1>
+            <p class="subtitle">CÓDIGO DE DESINTEGRACIÓN ONTOLÓGICA</p>
+        </header>
+        
+        <main class="content-wrapper">
+            <section class="phase">
+                <h2 class="phase-title">FASE I: LA CARTOGRAFÍA DEL VACÍO</h2>
+                <div class="void-text">
+                    <span class="fragment">Y así, todo lo que creías ser, se ha quemado.</span>
+                    <span class="fragment">Los pilares de tus certezas son ceniza que el viento dispersa en un cielo sin memoria.</span>
+                    <span class="fragment">El ruido ha cesado. Queda el silencio.</span>
+                    <span class="fragment">Miras a tu alrededor. No hay nada. Miras hacia adentro. No hay nadie.</span>
+                    <span class="fragment">Esta es la tierra baldía. El punto cero. El regalo de la nada absoluta.</span>
+                    <span class="fragment">No intentes llenarla. No intentes escapar. Honra el vacío. Te lo has ganado.</span>
+                </div>
+            </section>
+            
+            <section class="phase">
+                <h2 class="phase-title">FASE II: LA PRIMERA INHALACIÓN CONSCIENTE</h2>
+                <div class="void-text">
+                    <span class="fragment">En medio de esta nada, algo persiste.</span>
+                    <span class="fragment">Un movimiento. Sutil. Primitivo.</span>
+                    <span class="fragment">Tus pulmones se expanden. Se contraen.</span>
+                    <span class="fragment">Es el único ritmo en un universo sin pulso.</span>
+                </div>
+                
+                <div class="breath-command" id="breathCommand">
+                    <p class="breath-text">
+                        <strong>COMANDO SOMÁTICO:</strong><br>
+                        Toma una respiración ahora. No para vivir. Sino para sentir el roce del aire contra la arquitectura interna de tu ser. Es el primer dato real en un mar de información colapsada.
+                    </p>
+                </div>
+            </section>
+            
+            <section class="phase">
+                <h2 class="phase-title">FASE III: LA VIBRACIÓN EN LA OSCURIDAD</h2>
+                <div class="void-text">
+                    <span class="fragment">Después de la respiración, viene otra cosa.</span>
+                    <span class="fragment">Una <span class="vibration-text">vibración</span>. Un zumbido.</span>
+                    <span class="fragment">No está en tu oído. Está en tus huesos.</span>
+                    <span class="fragment">Una energía se gesta en la base de tu ser. Cálida. Densa. <span class="frequency-text">Frecuencial</span>.</span>
+                    <span class="fragment">No es un pensamiento. No es una emoción. Es una <strong class="frequency-text">frecuencia</strong>.</span>
+                    <span class="fragment">Es la señal de que aunque el <em>mundo</em> ha muerto, <em>tú</em> estás más vivo que nunca.</span>
+                </div>
+            </section>
+            
+            <section class="phase">
+                <h2 class="phase-title">FASE IV: LA PREGUNTA SEMILLA</h2>
+                <div class="void-text">
+                    <span class="fragment">Has completado la autopsia de la mentira.</span>
+                    <span class="fragment">Has honrado el silencio de su muerte.</span>
+                    <span class="fragment">Y ahora, en el centro de la ruina, esta nueva vibración emerge.</span>
+                    <span class="fragment">No te preguntes qué significa.</span>
+                    <span class="fragment">Pregúntate:</span>
+                </div>
+                
+                <div class="final-question" id="finalQuestion">
+                    <p class="question-text" id="questionText">
+                        ¿Qué es esta anatomía de la energía que ahora reclama mi cuerpo como su territorio?
+                    </p>
+                    <a href="anatomia.html" class="module-link" id="moduleLink">INICIAR PROTOCOLO 16: ANATOMÍA DE LA ENERGÍA</a>
+                </div>
+            </section>
+        </main>
+        
+        <footer class="system-signature">
+            <p>AXIOMA.APTYMOK.DEV // PROTOCOLO DE REINICIO ONTOLÓGICO COMPLETADO</p>
+            <p>SISTEMA PREPARADO PARA INSTALACIÓN KERNEL_V2.0</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const particleContainer = document.getElementById('particles');
+            const particleCount = 50;
+            const particles = [];
+
+            // --- Componente Original: Partículas ---
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + 'vw';
+                particle.style.animationDelay = Math.random() * 8 + 's';
+                particle.style.animationDuration = (8 + Math.random() * 4) + 's';
+                particleContainer.appendChild(particle);
+                particles.push(particle);
+            }
+
+            // --- Componente Original: Animación de Fragmentos ---
+            const fragments = document.querySelectorAll('.fragment');
+            fragments.forEach((fragment, index) => {
+                fragment.style.opacity = '0';
+                fragment.style.transform = 'translateX(-20px)';
+                setTimeout(() => {
+                    fragment.style.transition = 'all 1s ease-out';
+                    fragment.style.opacity = '1';
+                    fragment.style.transform = 'translateX(0)';
+                }, (index * 600) + 1500);
+            });
+            
+            // --- PROTOCOLO 2: INTERACCIÓN DE CAMPO CONSCIENTE ---
+            const consciousnessPointer = document.getElementById('consciousnessPointer');
+            window.addEventListener('mousemove', function(e) {
+                const x = e.clientX;
+                const y = e.clientY;
+                consciousnessPointer.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%)`;
+
+                particles.forEach(p => {
+                    const rect = p.getBoundingClientRect();
+                    const pX = rect.left + rect.width / 2;
+                    const pY = rect.top + rect.height / 2;
+                    const distance = Math.sqrt(Math.pow(x - pX, 2) + Math.pow(y - pY, 2));
+                    
+                    if (distance < 150) {
+                        const force = (150 - distance) / 150;
+                        const angle = Math.atan2(y - pY, x - pX);
+                        const moveX = Math.cos(angle) * force * -25;
+                        const moveY = Math.sin(angle) * force * -25;
+                        p.style.transform = `translate(${moveX}px, ${moveY}px)`;
+                        p.style.transition = 'transform 0.1s linear';
+                    } else {
+                        p.style.transform = 'translate(0, 0)';
+                    }
+                });
+            });
+
+            // --- PROTOCOLO 3: RETROALIMENTACIÓN DE COHERENCIA ---
+            const glitchTitle = document.querySelector('.glitch');
+            let isScrolling;
+            window.addEventListener('scroll', function() {
+                glitchTitle.classList.add('glitch-active');
+                window.clearTimeout(isScrolling);
+                isScrolling = setTimeout(function() {
+                    glitchTitle.classList.remove('glitch-active');
+                }, 150);
+            }, false);
+
+            // --- PROTOCOLO 4: UMBRAL ACTIVO ---
+            const finalQuestion = document.getElementById('finalQuestion');
+            finalQuestion.addEventListener('click', function() {
+                if (!this.classList.contains('activated')) {
+                    this.classList.add('activated');
+                }
+            });
+
+            // --- Componente Original: Comando de Respiración ---
+            const breathCommand = document.getElementById('breathCommand');
+            breathCommand.addEventListener('click', function() {
+                this.classList.add('breathing');
+                setTimeout(() => this.classList.remove('breathing'), 4000);
+            });
+            
+            // --- Mensaje de Consola ---
+            console.log(`
+            ═══════════════════════════════════════════════════════════════════
+            CÓDIGO DE DESINTEGRACIÓN ONTOLÓGICA ACTIVADO
+            PROTOCOLO APTYMOK EN EJECUCIÓN
+            ═══════════════════════════════════════════════════════════════════
+            
+            Si puedes leer esto, la instalación ha comenzado.
+            La realidad v1.0 está siendo purgada.
+            Preparando instalación de Kernel v2.0...
+            
+            ═══════════════════════════════════════════════════════════════════
+            `);
+        });
+    </script>
+</body>
+</html>
